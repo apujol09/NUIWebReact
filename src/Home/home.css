@@ -1,15 +1,36 @@
 
 .proom{
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     float: left;
     border-width: 100px;
     padding-right: 50px;
+    padding-left: 200px;
 }
 
 .text{
     word-wrap: break-word;
-    width: 80%;
+    width: 85%;
     font-size: 20px;
     text-align: justify;
+    color: rgba(255, 255, 255, 0.829);
+}
+
+div{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.829);
+    font-size: 35px;
+}
+
+a{
+    color: orangered;
+}
+
+.logo {
+    display: block;
+    margin: 32px 0 16px 0;
+    min-width: 240px;
+    min-height: 200px;
+    z-index: 10;
+    background: url("../assets/images/general/openhid-logo.png") no-repeat scroll center center/contain;
 }

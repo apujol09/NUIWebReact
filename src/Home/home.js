@@ -7,8 +7,12 @@ class Home extends React.Component{
     render(){
         return(
             <div>
-            
-                <img className= "proom" src = {proom}/>
+            <div className = "logo"></div>
+            <div>
+            <b>NUI</b> Lab <br />
+            <a href="http://www.cs.colostate.edu/cstop/">CSU's</a> Natural User Interaction Lab
+            </div>
+            <img className= "proom" src = {proom}/>
     
             <article className = "text">
                 <h4>What is the NUI Lab?</h4>
