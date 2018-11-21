@@ -1,0 +1,15 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import './Home/home';
+import Home from './Home/home';
+
+class App extends Component {
+  render() {
+    return (
+      <Home className = "Home" />
+    );
+  }
+}
+
+export default App;
