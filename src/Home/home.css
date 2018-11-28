@@ -34,3 +34,18 @@ a{
     z-index: 10;
     background: url("../assets/images/general/openhid-logo.png") no-repeat scroll center center/contain;
 }
+
+.fullscreen-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%); 
+    src: "../assets/videos/background.mp4";
+}
