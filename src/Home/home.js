@@ -1,6 +1,5 @@
 import React from 'react';
 import './home.css'; 
-import './home.html';
 import proom from '../assets/images/general/proom.png';
 
 class Home extends React.Component{
