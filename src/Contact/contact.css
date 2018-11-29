@@ -1,0 +1,10 @@
+.map{
+    align-content: center; 
+    height: 450px;
+}
+
+.text{
+    font-size: 20px;
+    align-content: left;
+    padding-left: 250px;
+}

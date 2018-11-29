@@ -1,7 +1,7 @@
 
 .proom{
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     float: left;
     border-width: 100px;
     padding-right: 50px;
@@ -10,7 +10,7 @@
 
 .text{
     word-wrap: break-word;
-    width: 85%;
+    width: 75%;
     font-size: 20px;
     text-align: justify;
     color: rgba(255, 255, 255, 0.829);
@@ -47,5 +47,4 @@ a{
     -webkit-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%); 
-    src: "../assets/videos/background.mp4";
 }

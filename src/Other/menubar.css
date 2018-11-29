@@ -13,7 +13,7 @@ ul {
     padding: 0;
     top:45px;
     right:0px;
-    width: 200px;
+    width: 150px;
     background-color: white;
     font-weight:bold;
     position: absolute;
@@ -40,7 +40,7 @@ li:hover {
     cursor: pointer;
 }
 .button{
-    width:178px;
+    width:125px;
     height:18px;
     background-color:#ff3232 ;
     padding:12px;
