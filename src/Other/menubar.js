@@ -34,45 +34,18 @@ showDropdownMenu(event) {
         //<nav>
         <div>
           <div className="dropdown" >
-          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Home</div>
-
-            { this.state.displayMenu ? (
-            <ul onMouseLeave={this.hideDropdownMenu}>
-          <li><a className="active" href="#Create Page">Test 1</a></li>
-          <li><a href="#Manage Pages">Test 2</a></li>
-          <li><a href="#Create Ads">Test 3</a></li>
-          <li><a href="#Manage Ads">Test 4</a></li>
-          <li><a href="#Activity Logs">Test 5</a></li>
-          <li><a href="#Setting">Test 6</a></li>
-          <li><a href="#Log Out">Test 7</a></li>
-            </ul>
-          ):
-          (
-            null
-          )
-          }
-
+            <img className="menulogo"/>
           </div>
+
+
           <div className="dropdown" >
-          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>About Us</div>
+            <div className="button">Home</div>
+          </div>
 
-            { this.state.displayMenu ? (
-            <ul onMouseLeave={this.hideDropdownMenu}>
-          <li><a className="active" href="#Create Page">Test 1</a></li>
-          <li><a href="#Manage Pages">Test 2</a></li>
-          <li><a href="#Create Ads">Test 3</a></li>
-          <li><a href="#Manage Ads">Test 4</a></li>
-          <li><a href="#Activity Logs">Test 5</a></li>
-          <li><a href="#Setting">Test 6</a></li>
-          <li><a href="#Log Out">Test 7</a></li>
-            </ul>
-          ):
-          (
-            null
-          )
-          }
+          <div className="dropdown" >
+            <div className="button">About Us</div>
+          </div>
 
-        </div>
         <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Projects</div>
 

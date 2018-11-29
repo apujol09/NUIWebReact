@@ -1,6 +1,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    left: 250px;
 }
 
 nav{
@@ -66,6 +67,15 @@ li:hover {
     cursor: pointer;
     display: block;
     /*animation: load 1s forwards;*/
+}
+
+.menulogo {
+    display: block;
+    margin: 32px 0 16px 0;
+    min-width: 75px;
+    min-height: 75px;
+    z-index: 10;
+    background: url("../assets/images/general/openhid-logo.png") no-repeat scroll center center/contain;
 }
 
 @keyframes load{
