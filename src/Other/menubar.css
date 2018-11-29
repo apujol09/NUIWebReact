@@ -40,16 +40,17 @@ li:hover {
     cursor: pointer;
 }
 .button{
-    width:125px;
+    width:100px;
     height:18px;
-    background-color:#ff3232 ;
+    background-color:#890cd1 ;
     padding:12px;
-    border-radius:10px;
+    border-radius:3px;
     font-weight:bold;
     color:white;
-    font-size: 20px;
+    font-size: 15px;
 }
-.button:before{
+
+/*.button:before{
     content:"";
     position:absolute;
     width:0px;
@@ -58,7 +59,7 @@ li:hover {
     border-color: white transparent transparent transparent;
     right:6px;
     top:18px;
-}
+} */
 
 .button:hover{
     opacity: 0.85;
