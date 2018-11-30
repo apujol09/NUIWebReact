@@ -27,6 +27,8 @@ class Home extends React.Component{
                 <p>NUI Lab was originally founded at Florida International University (with the initial help of FIU's High Performance Database Research Center) and now resides in its new home at Colorado State University in the Computer Science Department.  The lab founder and director is Francisco R. Ortega, Ph.D. </p>
             </article>
             <br />
+            <br />
+            <br />
             </div>
         )
     }
