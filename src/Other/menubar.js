@@ -32,20 +32,24 @@ showDropdownMenu(event) {
   render() {
     return (
         //<nav>
-        <div>
-          <div className="dropdown" >
-            <img className="menulogo"/>
+        
+        <div className="navbar">
+          <div className="dropdown">
+            {/*<img className="menulogo"/>*/}
+            <div className="defaultbutton">NUI LAB</div>
           </div>
 
-
+           {/*Home Menu Button*/}
           <div className="dropdown" >
             <div className="button">Home</div>
           </div>
 
+           {/*About Us Menu Button*/}
           <div className="dropdown" >
             <div className="button">About Us</div>
           </div>
 
+         {/*Projects Menu Button*/}
         <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Projects</div>
 
@@ -66,6 +70,8 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+        {/*Publications Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Publications</div>
 
@@ -86,6 +92,8 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+        {/*Events/Talks Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Events/Talks</div>
 
@@ -106,6 +114,8 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+        {/*Contact Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Contact</div>
 
@@ -126,6 +136,8 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+        {/*Resources Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Resources</div>
 
@@ -146,6 +158,8 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+      {/*Teaching Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Teaching</div>
 
@@ -166,28 +180,15 @@ showDropdownMenu(event) {
         }
 
        </div>
+
+         {/*Books Menu Button*/}
        <div className="dropdown" >
          <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Books</div>
-
-          { this.state.displayMenu ? (
-          <ul onMouseLeave={this.hideDropdownMenu}>
-         <li><a className="active" href="#Create Page">Test 1</a></li>
-         <li><a href="#Manage Pages">Test 2</a></li>
-         <li><a href="#Create Ads">Test 3</a></li>
-         <li><a href="#Manage Ads">Test 4</a></li>
-         <li><a href="#Activity Logs">Test 5</a></li>
-         <li><a href="#Setting">Test 6</a></li>
-         <li><a href="#Log Out">Test 7</a></li>
-          </ul>
-        ):
-        (
-          null
-        )
-        }
-
        </div>
+
+
      </div>
-        //</nav>
+        
 
     );
   }

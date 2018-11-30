@@ -6,7 +6,7 @@ import './Home/home';
 import Home from './Home/home';
 import MenuBar from './Other/menubar';
 import Contact from './Contact/contact';
-import MenuBarTest from './Other/menubartest';
+import Footbar from './Other/footbar';
 
 class App extends Component {
 
@@ -15,6 +15,7 @@ class App extends Component {
       <div>
       <MenuBar />
       <Home className = "Home" /> 
+      <Footbar />
      </div>
     );
   }
