@@ -183,7 +183,7 @@ showDropdownMenu(event) {
 
          {/*Books Menu Button*/}
        <div className="dropdown" >
-         <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Books</div>
+         <div className="button">Books</div>
        </div>
 
 
