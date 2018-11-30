@@ -7,7 +7,7 @@ class Home extends React.Component{
         return(
             <div>
             <div className = "video">
-                <video id="fullscreen-video" autoplay poster="../assets/videos/background.jpg" loop>
+                <video id="fullscreen-video" autoplay="" poster="../assets/videos/background.jpg" loop="">
                     <source src="../assets/videos/background.mp4" type="video/mp4"/>
                     <source src="../assets/videos/background.m4v"/>
                     <source src="../assets/videos/background.webm" type="video/webm"/>
