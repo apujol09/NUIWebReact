@@ -22,8 +22,13 @@ div{
     font-size: 30px;
 }
 
-a{
+.labShort{
+    text-decoration: none;
     color: orangered;
+}
+
+.labShort:hover{
+    text-decoration: underline;
 }
 
 .logo {

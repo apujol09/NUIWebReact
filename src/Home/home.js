@@ -17,7 +17,7 @@ class Home extends React.Component{
             </div>
             <div>
             <b>NUI</b> Lab <br />
-            <a href="http://www.cs.colostate.edu/cstop/">CSU's</a> Natural User Interaction Lab
+            <a className="labShort" href="http://www.cs.colostate.edu/cstop/">CSU's</a> Natural User Interaction Lab
             </div>
             <img className= "proom" src = {proom}/>
     
