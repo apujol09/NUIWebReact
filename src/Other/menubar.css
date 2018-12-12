@@ -33,7 +33,7 @@ ul {
 }
 
 .book:hover{
-    color: greenyellow;
+    color: rgb(41, 41, 243);
 }
 
 li a {
@@ -56,14 +56,14 @@ li:last-child {
 
 li:hover{
     border-style: groove;
-    border-color: greenyellow;
-    color: greenyellow;
+    border-color: rgb(41, 41, 243);
+    color: rgb(41, 41, 243);
 }
 
 li a:hover {
     opacity: 0.8;
     cursor: pointer;
-    color: greenyellow;
+    color: rgb(41, 41, 243);
 }
 
 .button{
@@ -96,8 +96,8 @@ li a:hover {
     cursor: pointer;
     display: block;
     border-style: groove;
-    border-color: greenyellow;
-    color: greenyellow;
+    border-color: rgb(41, 41, 243);
+    color: rgb(41, 41, 243);
     border-radius: 30px;
     /*animation: load 1s forwards;*/
 }
@@ -122,8 +122,8 @@ li a:hover {
     cursor: pointer;
     display: block;
     border-style: ridge;
-    border-color: greenyellow;
-    color: greenyellow;
+    border-color: rgb(41, 41, 243);
+    color: rgb(41, 41, 243);
     border-radius: 30px;
     /*animation: load 1s forwards;*/
 }
