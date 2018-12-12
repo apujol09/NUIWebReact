@@ -70,7 +70,8 @@ li a:hover {
     width:85px;
     height:18px;
     background-color: rgb(189, 184, 184);
-    padding:12px;
+    padding: 12px;
+    margin-left: 12px;
     border-radius:3px;
     font-weight:bold;
     color:black;
