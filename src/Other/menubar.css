@@ -1,6 +1,6 @@
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: table-cell;
     left: 12%;
 }
 
@@ -8,7 +8,7 @@
     position: relative;
     background-color: rgb(189, 184, 184);
     overflow: visible;
-    height: 53px;
+    height: 55px;
     width: 100%;
 }
 
@@ -69,7 +69,7 @@ li a:hover {
 .button{
     width:85px;
     height:18px;
-    background-color: rgb(189, 184, 184);
+    
     padding: 12px;
     margin-left: 12px;
     border-radius:3px;

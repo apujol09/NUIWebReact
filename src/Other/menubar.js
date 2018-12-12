@@ -33,7 +33,7 @@ showDropdownMenu(event) {
     return (
         //<nav>
         
-        <div className="navbar">
+        <div >
           <div className="dropdown">
             {/*<img className="menulogo"/>*/}
             <div className="defaultbutton">NUI LAB</div>
