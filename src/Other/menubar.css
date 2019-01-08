@@ -89,6 +89,15 @@ li a:hover {
     top:18px;
 } */
 
+.lab-title{
+    text-decoration: none;
+    color: black;
+}
+
+.lab-title:hover{
+    color: rgb(41, 41, 243);
+}
+
 .button:hover{
     opacity: 0.85;
     cursor: pointer;
