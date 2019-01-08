@@ -37,7 +37,7 @@ constructor(){
           <div><h3><a className="lab-title" href="#">NUI Lab</a></h3></div>
           <div className="navbar">
           <div className="dropdown">
-            {/*<img className="menulogo"/>*/}
+            {/*<img className="menulogo"/> (THIS SHOULD NOT BE HERE!!!!)*/}
             <div className="defaultbutton">NUI LAB</div>
           </div>
 
