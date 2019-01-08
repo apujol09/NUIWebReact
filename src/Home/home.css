@@ -16,6 +16,8 @@
     color: rgba(0, 0, 0, 0.829);
 }
 
+
+
 div{
     text-align: center;
     color: rgba(0, 0, 0, 0.829);
@@ -31,12 +33,44 @@ div{
     text-decoration: underline;
 }
 
+.parent{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+h3{
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+.background{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-height: 400px;
+
+}
+
+.hero {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
 .logo {
-    display: block;
+    position: absolute;
+    top: 13%;
+    left: 43%;
     margin: 32px 0 16px 0;
     min-width: 240px;
     min-height: 200px;
-    z-index: 10;
+    z-index: 1;
     background: url("../assets/images/general/openhid-logo.png") no-repeat scroll center center/contain;
 }
 

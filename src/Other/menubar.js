@@ -33,8 +33,9 @@ showDropdownMenu(event) {
     return (
         //<nav>
         
-        <div >
+        <div>
           <div><h3><a className="lab-title" href="#">NUI Lab</a></h3></div>
+          <div className="navbar">
           <div className="dropdown">
             {/*<img className="menulogo"/>*/}
             <div className="defaultbutton">NUI LAB</div>
@@ -187,7 +188,7 @@ showDropdownMenu(event) {
          <div className="button"><a className="book" href="http://3dinputbook.com">Books</a></div>
        </div>
 
-
+      </div>
      </div>
         
 

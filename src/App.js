@@ -15,7 +15,6 @@ class App extends Component {
       <div>
       <MenuBar />
       <Home className = "Home" />
-      <Contact /> 
       <Footbar />
      </div>
     );

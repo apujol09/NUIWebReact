@@ -1,23 +1,19 @@
 import React from 'react';
 import './home.css'; 
 import proom from '../assets/images/general/proom.png';
+import background from "../assets/videos/background.jpg";
 
 class Home extends React.Component{
     render(){
         return(
             <div>
-            <div className = "video">
-                <video id="fullscreen-video" autoplay="" poster="../assets/videos/background.jpg" loop="">
-                    <source src="../assets/videos/background.mp4" type="video/mp4"/>
-                    <source src="../assets/videos/background.m4v"/>
-                    <source src="../assets/videos/background.webm" type="video/webm"/>
-                    <source src="../assets/videos/background.ogv" type="video/ogv"/>
-                </video>
-                <div className = "logo"></div>
+            <div className="parent">
+                <img className="logo" />
+                <img className="background" src={background} />
             </div>
-            <div>
-            <b>NUI</b> Lab <br />
-            <a className="labShort" href="http://www.cs.colostate.edu/cstop/">CSU's</a> Natural User Interaction Lab
+            <div className="hero">
+            <b>NUI Lab <br />
+            <a className="labShort" href="http://www.cs.colostate.edu/cstop/">CSU's</a> Natural User Interaction Lab</b>
             </div>
             <img className= "proom" src = {proom}/>
     
