@@ -6,7 +6,7 @@
 
 .navbar {
     position: relative;
-    background-color: rgb(218, 215, 215);
+    background-color: rgb(233, 232, 232);
     overflow: visible;
     height: 55px;
     width: 100%;
@@ -28,7 +28,7 @@ ul {
 }
 
 .book {
-    color: black;
+    color: orangered;
     text-decoration: none;  
 }
 
@@ -67,13 +67,15 @@ li a:hover {
 }
 
 .button{
+    top: 10%;
     width:85px;
-    height:18px;
+    height:16px;
     padding: 12px;
     margin-left: 12px;
     border-radius:3px;
+    border-width: 1px;
     font-weight:bold;
-    color:black;
+    color:orangered;
     font-size: 15px;
     position: inherit;
     top: 3px;
