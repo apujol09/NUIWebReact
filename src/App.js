@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import './App.css';
 import './Home/home';
 import Home from './Home/home';
@@ -8,6 +7,12 @@ import MenuBar from './Other/menubar';
 import Contact from './Contact/contact';
 import Footbar from './Other/footbar';
 import NotFound from './NotFound/NotFound';
+import Projects from './Projects/projects';
+import Publications from './Publications/publications';
+import Events from './Events/events';
+import Resources from './Resources/resources';
+import Teaching from './Teaching/teaching';
+
 
 class App extends Component {
 
@@ -17,8 +22,13 @@ class App extends Component {
         <div>
           <MenuBar />
             <Switch>
-              <Route exact path="/" Component={Home} />
+              <Route exact path="/" component={Home} />
               <Route path="/contact" component={Contact} />
+              <Route path="/projects" component={Projects} />
+              <Route path="/publications" component={Publications} />
+              <Route path="/events" component={Events} />
+              <Route path="/resources" component={Resources} />
+              <Route path="/teaching" component={Teaching} />
               <Route component={NotFound} />
             </Switch>
           <Footbar />
