@@ -1,4 +1,3 @@
-
 .proom{
     width: 400px;
     height: 400px;
@@ -15,8 +14,6 @@
     text-align: justify;
     color: rgba(0, 0, 0, 0.829);
 }
-
-
 
 div{
     text-align: center;
@@ -68,7 +65,7 @@ h3{
     min-width: 240px;
     min-height: 200px;
     z-index: 1;
-    background: url("../assets/images/general/openhid-logo.png") no-repeat scroll center center/contain;
+    background: url("../assets/images/general/openhid-logo.png") no-repeat center/contain;
 }
 
 .fullscreen-video {

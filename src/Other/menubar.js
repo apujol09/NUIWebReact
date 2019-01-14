@@ -1,5 +1,6 @@
 import React from 'react';
 import './menubar.css';
+import { NavLink } from 'react-router-dom';
 
 
 class MenuBar extends React.Component {
@@ -43,7 +44,9 @@ constructor(){
 
            {/*Home Menu Button*/}
           <div className="dropdown" >
-            <div className="button">Home</div>
+            <NavLink className="button" to="/">
+              Home
+            </NavLink>
           </div>
 
            {/*About Us Menu Button*/}
@@ -85,7 +88,9 @@ constructor(){
 
         {/*Contact Menu Button*/}
        <div className="dropdown" >
-         <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Contact</div>
+        <NavLink className="button" to="/contact">
+         Contact
+        </NavLink>
        </div>
 
         {/*Resources Menu Button*/}
@@ -100,7 +105,7 @@ constructor(){
 
          {/*Books Menu Button*/}
        <div className="dropdown" >
-         <div className="button"><a className="book" href="http://3dinputbook.com">Books</a></div>
+       <div className="button"><a className="book" href="http://3dinputbook.com">Books</a></div>
        </div>
 
       </div>
