@@ -7,6 +7,7 @@ import MenuBar from './Other/menubar';
 import Contact from './Contact/contact';
 import Footbar from './Other/footbar';
 import NotFound from './NotFound/NotFound';
+import About from './About/about';
 import Projects from './Projects/projects';
 import Publications from './Publications/publications';
 import Events from './Events/events';
@@ -23,6 +24,7 @@ class App extends Component {
           <MenuBar />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/projects" component={Projects} />
               <Route path="/publications" component={Publications} />

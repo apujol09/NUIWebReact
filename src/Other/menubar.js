@@ -51,17 +51,23 @@ constructor(){
 
            {/*About Us Menu Button*/}
           <div className="dropdown" >
-            <div className="button">About Us</div>
+            <NavLink className="button" to="/about">
+              About Us
+            </NavLink>
           </div>
 
          {/*Projects Menu Button*/}
         <div className="dropdown" >
-         <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Projects</div>
+            <NavLink className="button" to="/projects">
+              Projects
+            </NavLink>
        </div>
 
         {/*Publications Menu Button*/}
        <div className="dropdown" >
-         <div className="button" onMouseEnter={this.showDropdownMenu} onClick={this.showDropdownMenu}>Publications</div>
+            <NavLink className="button" to="/publications">
+              Publications
+            </NavLink>
        </div>
 
         {/*Events/Talks Menu Button*/}
