@@ -39,7 +39,6 @@ constructor(){
           <div className="navbar">
           <div className="dropdown">
             {/*<img className="menulogo"/> (THIS SHOULD NOT BE HERE!!!!)*/}
-            <div className="defaultbutton">NUI LAB</div>
           </div>
 
            {/*Home Menu Button*/}
