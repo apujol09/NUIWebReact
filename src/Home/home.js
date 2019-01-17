@@ -2,13 +2,14 @@ import React from 'react';
 import './home.css'; 
 import proom from '../assets/images/general/proom.png';
 import background from "../assets/videos/background.jpg";
+import logo from '../assets/images/general/openhid-logo.png';
 
 class Home extends React.Component{
     render(){
         return(
             <div>
                 <div className="parent">
-                    <img className="logo" />
+                    <img className="logo" src={logo} />
                     <img className="background" src={background} />
                 </div>
                 <div className="hero">

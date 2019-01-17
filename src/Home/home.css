@@ -61,11 +61,23 @@ h3{
 .logo {
     position: absolute;
     top: 10%;
-    left: 43%;
-    min-width: 240px;
-    min-height: 200px;
+    left: 44%;
+    width: 200px;
+    height: 200px;
     z-index: 1;
-    background: url("../assets/images/general/openhid-logo.png") no-repeat center/contain;
+    animation-name: spin;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(359deg);
+    }
 }
 
 .fullscreen-video {
