@@ -1,9 +1,9 @@
-const { User } = require('../models/user');
+const { Admins } = require('../models/admins');
 
 let auth = (req,res,next) =>{
     let token = req.cookies.w_auth;
 
-    User.findByToken(token, (err,user)=>{
+    Admins.findByToken(token, (err,user)=>{
         if(err) throw err;
         if(!user) return res.json({
             isAuth: false,

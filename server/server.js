@@ -14,9 +14,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Models
-const { User } = require('./models/user');
-const { Brand } = require('./models/brand');
-const { Wood } = require('./models/wood');
+const { Members } = require('./models/members');
+const { Admins } = require('./models/admins');
 const { Product } = require('./models/product');
 
 //Middlewares
@@ -25,26 +24,26 @@ const { admin } = require('./middleware/admin');
 
 
 //=========================================
-//                  BRAND
+//                MEMBERS
 //=========================================
 
-app.post('/api/product/brand',auth,admin,(req,res)=>{
-    const brand = new Brand(req.body);
+app.post('/api/members',auth,admin,(req,res)=>{
+    const members = new Members(req.body);
 
-    brand.save((err,doc)=>{
+    members.save((err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
-            brand: doc
+            members: doc
         })
     })
 })
 
 
-app.get('/api/product/brands',(req,res)=>{
-    Brand.find({},(err,brands)=>{
+app.get('/api/members',(req,res)=>{
+    Members.find({},(err,members)=>{
         if(err) return res.status(400).send(err);
-        res.status(200).send(brands);
+        res.status(200).send(members);
     })
 })
 
@@ -108,28 +107,21 @@ app.post('/api/product/article',auth,admin,(req,res)=>{
 
 
 //=========================================
-//                  WOODS
+//                  ADMINS
 //=========================================
 
-app.post('/api/product/wood',auth,admin,(req,res)=>{
+app.post('/api/admin',auth,admin,(req,res)=>{
     
-    const wood = new Wood(req.body);
+    const admins = new Admins(req.body);
 
-    wood.save((err,doc)=>{
+    admins.save((err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success: true,
-            wood: doc
+            admin: doc
         })
     })
 });
-
-app.get('/api/product/woods',(req,res)=>{
-    Wood.find({},(err,woods)=>{
-        if(err) return res.status(400).send(err);
-        res.status(200).send(woods);
-    })
-})
 
 //=========================================
 //                  USERS
