@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import './App.css';
+import './Styles/styles.css';
 import './Home/home';
 import Home from './Home/home';
 import MenuBar from './Other/menubar';

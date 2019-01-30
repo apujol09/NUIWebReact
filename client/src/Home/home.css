@@ -21,12 +21,12 @@ div{
     font-size: 30px;
 }
 
-.labShort{
+.home-link{
     text-decoration: none;
     color: orangered;
 }
 
-.labShort:hover{
+.home-link:hover{
     text-decoration: underline;
 }
 
@@ -58,7 +58,7 @@ h3{
     color: white;
 }
 
-.logo {
+.nui-logo {
     position: absolute;
     top: 10%;
     left: 44%;
