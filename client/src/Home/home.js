@@ -7,7 +7,7 @@ import logo from '../assets/images/general/openhid-logo.png';
 class Home extends React.Component{
     render(){
         return(
-            <div>
+            <div className="page-wrapper">
                 <div className="parent">
                     <img className="nui-logo" src={logo} />
                     <img className="background" src={background} />

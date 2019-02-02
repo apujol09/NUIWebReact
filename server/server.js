@@ -12,11 +12,17 @@ mongoose.connect(process.env.DATABASE)
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.static(''));
 
 // Models
 const { Members } = require('./models/members');
+const { Affiliated } = require('./models/affiliated');
+const { Former } = require('./models/former');
 const { Admins } = require('./models/admins');
-const { Product } = require('./models/product');
+const { FacultyPHD } = require('./models/facultyPHD');
+const { FacultyCSU } = require('./models/facultyCSU');
+const { FacultyFIU } = require('./models/facultyFIU');
+
 
 //Middlewares
 const { auth } = require('./middleware/auth');
@@ -47,63 +53,130 @@ app.get('/api/members',(req,res)=>{
     })
 })
 
+
 //=========================================
-//               PRODUCTS
+//                AFFILIATED
 //=========================================
 
+app.post('/api/affiliated',auth,admin,(req,res)=>{
+    const affiliated = new Affiliated(req.body);
 
-app.get('/api/product/articles',(req,res)=>{
-
-    let order = req.query.order ? req.query.order : 'asc';
-    let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
-
-    Product.find().
-    populate('brand').
-    populate('wood').
-    sort([[sortBy,order]]).
-    limit(limit).
-    exec((err,articles)=>{
-        if(err) return res.status(400).send(err);
-        res.send(articles);
-    })
-
-})
-
-
-app.get('/api/product/article_by_id',(req,res)=>{
-    let type = req.query.type;
-    let items = req.query.id;
-
-    if(type === "array"){
-        let ids = req.query.id.split(',');
-        items = [];
-        items = ids.map(item=>{
-            return mongoose.Types.ObjectId(item);
-        })
-    }
-
-    Product.
-    find({'_id':{$in:items}}).
-    populate('brand').
-    populate('wood').
-    exec((err,docs)=>{
-        return res.status(200).send(docs)
-    })
-})
-
-app.post('/api/product/article',auth,admin,(req,res)=>{
-    const product = new Product(req.body);
-
-    product.save((err,doc)=>{
+    affiliated.save((err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
-            success: true,
-            article: doc
+            success:true,
+            affiliated: doc
         })
     })
 })
 
+
+app.get('/api/affiliated',(req,res)=>{
+    Affiliated.find({},(err,affiliated)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(affiliated);
+    })
+})
+
+//=========================================
+//                FORMER
+//=========================================
+
+app.post('/api/former',auth,admin,(req,res)=>{
+    const former = new Former(req.body);
+
+    former.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            former: doc
+        })
+    })
+})
+
+
+app.get('/api/former',(req,res)=>{
+    Former.find({},(err,former)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(former);
+    })
+})
+
+
+//=========================================
+//              FACULTY PHD
+//=========================================
+
+app.post('/api/facultyPHD',auth,admin,(req,res)=>{
+    const facultyPHD = new FacultyPHD(req.body);
+
+    facultyPHD.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyPHD: doc
+        })
+    })
+})
+
+
+app.get('/api/facultyPHD',(req,res)=>{
+    FacultyPHD.find({},(err,faculty)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(faculty);
+    })
+})
+
+
+//=========================================
+//              FACULTY CSU
+//=========================================
+
+app.post('/api/facultyCSU',auth,admin,(req,res)=>{
+    const facultyCSU = new FacultyCSU(req.body);
+
+    facultyCSU.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyCSU: doc
+        })
+    })
+})
+
+
+app.get('/api/facultyCSU',(req,res)=>{
+    FacultyCSU.find({},(err,faculty)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(faculty);
+    })
+})
+
+
+
+//=========================================
+//              FACULTY FIU
+//=========================================
+
+app.post('/api/facultyFIU',auth,admin,(req,res)=>{
+    const facultyFIU = new FacultyFIU(req.body);
+
+    facultyFIU.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyFIU: doc
+        })
+    })
+})
+
+
+app.get('/api/facultyFIU',(req,res)=>{
+    FacultyFIU.find({},(err,faculty)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(faculty);
+    })
+})
 
 
 //=========================================

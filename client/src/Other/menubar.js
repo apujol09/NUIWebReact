@@ -37,24 +37,24 @@ constructor(){
                 <div className="container">
                     <div className="left">
                         <div className="logo">
-                            <NavLink to="/">NUI LAB</NavLink>
+                            <NavLink className="nui-big" to="/">NUI LAB</NavLink>
                         </div>
                     </div>
                     <div className="right">
                         <div className="top">
-                            <a href="http://3dinputbook.com">Books</a>
-                            <NavLink to="/teaching">Teaching</NavLink>
-                            <NavLink to="/resources">Resources</NavLink>
-                            <NavLink to="/contact">Contact</NavLink>
-                            <NavLink to="/events">Events/Talks</NavLink>
+                            <a className="menu-link" href="http://3dinputbook.com">Books</a>
+                            <NavLink className="menu-link" to="/teaching">Teaching</NavLink>
+                            <NavLink className="menu-link" to="/resources">Resources</NavLink>
+                            <NavLink className="menu-link" to="/contact">Contact</NavLink>
+                            <NavLink className="menu-link" to="/events">Events/Talks</NavLink>
                         </div>
 
                         <div className="bottom">
-                            <NavLink to="/login">Log in</NavLink>
-                            <NavLink to="/publications">Publications</NavLink>
-                            <NavLink to="/projects">Projects</NavLink>
-                            <NavLink to="/about">About Us</NavLink>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink className="menu-link" to="/login">Log in</NavLink>
+                            <NavLink className="menu-link" to="/publications">Publications</NavLink>
+                            <NavLink className="menu-link" to="/projects">Projects</NavLink>
+                            <NavLink className="menu-link" to="/about">About Us</NavLink>
+                            <NavLink className="menu-link" to="/">Home</NavLink>
                         </div>
                     </div>
                 </div>

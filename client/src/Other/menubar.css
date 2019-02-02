@@ -153,6 +153,15 @@ li a:hover {
     left: 0px;
 }
 
+.nui-big:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.menu-link:hover{
+    text-decoration: none;
+}
+
 @keyframes load{
     0%{
         transform: translateY(25px);

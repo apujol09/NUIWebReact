@@ -106,7 +106,7 @@ input {
     margin: 10px 0px 0px 0px;
 }
 
-button {
+.button {
     cursor: pointer;
     text-transform: uppercase;
     padding: 10px;
