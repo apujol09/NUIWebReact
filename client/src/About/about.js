@@ -1,7 +1,5 @@
 import React from 'react';
 import './about.css';
-import header1 from '../assets/images/people/header_photo.jpg';
-import header2 from '../assets/images/people/header_photo2.jpg';
 import map from '../assets/images/general/map.svg'
 import axios from 'axios';
 import Members from './member';
@@ -10,7 +8,9 @@ import Former from './former';
 import FacultyPHD from './facultyPHD';
 import FacultyCSU from './facultyCSU';
 import FacultyFIU from './facultyFIU';
-import { Container, Row, Col, Button, Spinner } from 'reactstrap';
+import Carousel from './carousel';
+import { Container, Row, Col } from 'reactstrap';
+
 
 class About extends React.Component{
 
@@ -24,6 +24,8 @@ class About extends React.Component{
         toggleSecondImage: false,
         isLoading: true
     };
+
+    
 
     componentDidMount(){
         axios.get(`/api/members`).then(res => {
@@ -137,27 +139,19 @@ class About extends React.Component{
         return(
 
             <Container fluid>
-                <Row>
-                    <Col>
-                        <Button onClick={this.toggleSecondImage} color="secondary">More Info</Button>
-                    </Col>   
-                    <Col>
-                        { this.state.toggleSecondImage ? (
-                            <img className="bigHeader" src={header1} />
-                            ):
-                            (
-                            <img className="bigHeader" src={header2} />
-                            )
-                        }
-                    </Col>
-                    <Col>
-                        <Button onClick={this.toggleSecondImage} color="secondary">&rarr;</Button>
+                <Row> 
+                    <br />
+                    <br />
+                </Row>
+                <Row>  
+                    <Col sm="8" md={{offset: 2}}>
+                        <Carousel className="about-carousel"/>
                     </Col>
                 </Row>
                 <Row>
                 <div className="lab-description">
                         <br />
-                        <img className="map-image" src={map} />
+                        <img className="map-image" src={map} alt="Map"/>
                         <article className="lab-text">
                             <h4>Who are We?</h4>
                             <p>We are a multi-disciplinary group, with our primary site at Colorado State University and with a still active site at Florida International University. We have included a diverse background of knowledge and origins. While CS-centric, former students have included majors, such as Statistics, Mathematics, Biology, Psychology, Engineering, and Architecture, among others. We have had members from multiple places, including USA, Cuba, Chile, Colombia, Jamaica, Dominican Republic, China, Brazil, and Venezuela, among others.</p>
