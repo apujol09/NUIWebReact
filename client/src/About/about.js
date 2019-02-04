@@ -204,8 +204,7 @@ class About extends React.Component{
                         <Row >
                             {formerCards}   
                         </Row>
-                    </Container>
-                    <hr className="line" />     
+                    </Container>     
                     <br />
 
             </Container>

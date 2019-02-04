@@ -160,6 +160,7 @@ li a:hover {
 
 .menu-link:hover{
     text-decoration: none;
+    color: orangered;
 }
 
 @keyframes load{
