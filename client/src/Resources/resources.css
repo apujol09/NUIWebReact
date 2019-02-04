@@ -1,0 +1,32 @@
+.resources-container{
+    font-size: 20px;
+}
+
+.link-list{
+    text-align: left;
+    font-size: 18px;
+}
+
+.res-link{
+    color: orangered;
+}
+.res-link:hover{
+    text-decoration: none;
+    color: rgb(202, 56, 3);
+}
+
+.refImg {
+    max-width: 100%;
+    max-height: 120px;
+    vertical-align: middle;
+}
+
+.res-col{
+    height: 150px;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+

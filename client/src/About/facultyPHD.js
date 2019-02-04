@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './about.css';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+    CardTitle, CardSubtitle, Button, Col, Row } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
   
 
@@ -27,7 +27,14 @@ class FacultyPHD extends Component {
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
                         <CardText>{this.props.person.description_short}</CardText>
-                        <Button outline color={buttonColor} onclick={this.redirect}>More Info</Button>
+                        <Row>
+                            <Col>
+                                <Button outline color={buttonColor} onclick={this.redirect}>More Info</Button>
+                            </Col>
+                            <Col>
+                                <a className="website-link" href={this.props.person.cv}><Button outline color={buttonColor}>CV</Button></a>
+                            </Col>
+                        </Row>
                     </CardBody>
                 </Card>
             </div>

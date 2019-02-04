@@ -5,7 +5,15 @@ const publicationsSchema = mongoose.Schema({
         required: true,
         type: String,
         unique: 1,
-        maxlength: 100
+        maxlength: 5000
+    },
+    links:{
+        type: [],
+        default: []
+    },
+    category:{
+        type: String,
+        required: true
     }
 });
 

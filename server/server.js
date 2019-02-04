@@ -21,6 +21,8 @@ const { Admins } = require('./models/admins');
 const { FacultyPHD } = require('./models/facultyPHD');
 const { FacultyCSU } = require('./models/facultyCSU');
 const { FacultyFIU } = require('./models/facultyFIU');
+const { Publications } = require('./models/publications');
+const { Projects } = require('./models/projects');
 
 
 //Middlewares
@@ -174,6 +176,56 @@ app.get('/api/facultyFIU',(req,res)=>{
     FacultyFIU.find({},(err,faculty)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(faculty);
+    })
+})
+
+
+
+//=========================================
+//                PROJECTS
+//=========================================
+
+app.post('/api/projects',auth,admin,(req,res)=>{
+    const projects = new Projects(req.body);
+
+    projects.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            projects: doc
+        })
+    })
+})
+
+
+app.get('/api/projects',(req,res)=>{
+    Projects.find({},(err,projects)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(projects);
+    })
+})
+
+//=========================================
+//              PUBLICATIONS
+//=========================================
+
+app.post('/api/publications',auth,admin,(req,res)=>{
+    const publications = new Publications(req.body);
+
+    publications.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            publications: doc
+        })
+    })
+})
+
+
+app.get('/api/publications',(req,res)=>{
+    Publications.find({},(err,publications)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(publications);
     })
 })
 

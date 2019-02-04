@@ -139,10 +139,7 @@ class About extends React.Component{
         return(
 
             <Container fluid>
-                <Row> 
-                    <br />
-                    <br />
-                </Row>
+                <Row><br /><br /></Row>
                 <Row>  
                     <Col sm="8" md={{offset: 2}}>
                         <Carousel className="about-carousel"/>
