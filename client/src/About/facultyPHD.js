@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './about.css';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Col, Row } from 'reactstrap';
-import { Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
   
 
 class FacultyPHD extends Component {
@@ -29,7 +29,7 @@ class FacultyPHD extends Component {
                         <CardText>{this.props.person.description_short}</CardText>
                         <Row>
                             <Col>
-                                <Button outline color={buttonColor} onclick={this.redirect}>More Info</Button>
+                                <NavLink className="website-link" to="/francisco-ortega"><Button outline color={buttonColor}>More Info</Button></NavLink>
                             </Col>
                             <Col>
                                 <a className="website-link" href={this.props.person.cv}><Button outline color={buttonColor}>CV</Button></a>

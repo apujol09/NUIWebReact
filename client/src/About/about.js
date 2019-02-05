@@ -21,7 +21,6 @@ class About extends React.Component{
         members: [],
         affiliated: [],
         former: [],
-        toggleSecondImage: false,
         isLoading: true
     };
 
@@ -29,32 +28,28 @@ class About extends React.Component{
 
     componentDidMount(){
         axios.get(`/api/members`).then(res => {
-            console.log(res);
             this.setState({ members: res.data });
         });
 
         axios.get(`/api/facultyPHD`).then(res => {
-            console.log(res);
             this.setState({ facultyPHD: res.data });
+            console.log(this.state.facultyPHD);
         });
 
         axios.get(`/api/facultyCSU`).then(res => {
-            console.log(res);
             this.setState({ facultyCSU: res.data });
+            console.log(this.state.facultyCSU);
         });
 
         axios.get(`/api/facultyFIU`).then(res => {
-            console.log(res);
             this.setState({ facultyFIU: res.data });
         });
 
         axios.get(`/api/affiliated`).then(res => {
-            console.log(res);
             this.setState({ affiliated: res.data });
         });
 
         axios.get(`/api/former`).then(res => {
-            console.log(res);
             this.setState({ former: res.data });
         });
 
@@ -65,17 +60,10 @@ class About extends React.Component{
         super();
 };
 
-    toggleSecondImage = () => {
-        const {toggleSecondImage} = this.state.toggleSecondImage;
-        this.setState({toggleSecondImage: !toggleSecondImage})
-    }
-
-
-
     render(){
         let memberCards = this.state.members.map(person =>{
             return( 
-                <Col sm="4">
+                <Col key={person._id} sm="4">
                     <Members person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -84,7 +72,7 @@ class About extends React.Component{
 
         let facultyPHDCard = this.state.facultyPHD.map(person =>{
             return( 
-                <Col sm="4" md={{ size: 6, offset: 3 }}>
+                <Col key={person._id} sm="4" md={{ size: 6, offset: 3 }}>
                     <FacultyPHD person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -93,7 +81,7 @@ class About extends React.Component{
 
         let facultyCSUCards = this.state.facultyCSU.map(person =>{
             return( 
-                <Col sm="4">
+                <Col key={person._id} sm="4">
                     <FacultyCSU person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -102,7 +90,7 @@ class About extends React.Component{
 
         let facultyFIUCards = this.state.facultyFIU.map(person =>{
             return( 
-                <Col sm="4">
+                <Col key={person._id} sm="4">
                     <FacultyFIU person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -111,7 +99,7 @@ class About extends React.Component{
 
         let affiliatedCards = this.state.affiliated.map(person =>{
             return( 
-                <Col sm="4">
+                <Col key={person._id} sm="4">
                     <Affiliated person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -120,7 +108,7 @@ class About extends React.Component{
 
         let formerCards = this.state.former.map(person =>{
             return( 
-                <Col sm="4">
+                <Col key={person._id} sm="4">
                     <Former person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -142,7 +130,7 @@ class About extends React.Component{
                 <Row><br /><br /></Row>
                 <Row>  
                     <Col sm="8" md={{offset: 2}}>
-                        <Carousel className="about-carousel"/>
+                        <Carousel />
                     </Col>
                 </Row>
                 <Row>

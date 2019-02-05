@@ -3,7 +3,6 @@ import './about.css';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import andy from '../assets/images/people/andy-pujol.jpg';
-import { Redirect } from 'react-router-dom'
   
 
 class FacultyCSU extends Component {
@@ -26,7 +25,7 @@ class FacultyCSU extends Component {
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
                         <CardText>{this.props.person.description_short}</CardText>
-                        <a className="website-link" href={this.props.person.website}><Button outline color="success" onclick={this.redirect}>Website</Button></a>
+                        <a className="website-link" href={this.props.person.website}><Button outline color="success">Website</Button></a>
                     </CardBody>
                 </Card>
             </div>

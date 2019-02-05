@@ -29,7 +29,7 @@ class Affiliated extends Component {
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
                         <CardText>{this.props.person.description}</CardText>
-                        <a className="website-link" href={this.props.person.website}><Button outline color={buttonColor} onclick={this.redirect}>Website</Button></a>
+                        <a className="website-link" href={this.props.person.website}><Button outline color={buttonColor}>Website</Button></a>
                     </CardBody>
                 </Card>
             </div>

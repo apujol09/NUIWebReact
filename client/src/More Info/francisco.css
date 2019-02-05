@@ -1,0 +1,20 @@
+.francisco-img{
+    float: left;
+    padding: 1px;
+    border: 2px solid #024208;
+    background-color: orangered;
+}
+
+.francisco-description{
+    font-size: 23px;
+    text-align: justify;
+    float: none;
+}
+
+.francisco-university{
+    color: rgb(34, 104, 45);
+}
+
+.francisco-email{
+    color: orangered;
+}

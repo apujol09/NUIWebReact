@@ -12,6 +12,7 @@ import Publications from './Publications/publications';
 import Events from './Events/events';
 import Resources from './Resources/resources';
 import Teaching from './Teaching/teaching';
+import FranciscoInfo from './More Info/francisco';
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route path="/events" component={Events} />
               <Route path="/resources" component={Resources} />
               <Route path="/teaching" component={Teaching} />
+              <Route path="/francisco-ortega" component={FranciscoInfo} />
               <Route component={NotFound} />
             </Switch>
           <Footbar />
