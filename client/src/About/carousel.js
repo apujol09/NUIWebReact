@@ -16,6 +16,6 @@ const items = [
   }
 ];
 
-const AboutCarousel = () => <UncontrolledCarousel indicators={false} items={items} />;
+const AboutCarousel = () => <UncontrolledCarousel items={items} />;
 
 export default AboutCarousel;

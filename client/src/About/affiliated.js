@@ -24,7 +24,7 @@ class Affiliated extends Component {
                 <Card>
                     <CardImg top src={this.props.image} alt="Card image cap" />
                     <CardBody>
-                        <CardTitle className="title"><b>{this.props.person.name}</b>, {this.props.person.major} - {this.props.person.education}</CardTitle>
+                        <CardTitle className="title"><b>{this.props.person.name}</b>, {this.props.person.education} - {this.props.person.major}</CardTitle>
                         <CardSubtitle className={universityColor}>{this.props.person.university}</CardSubtitle>
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>

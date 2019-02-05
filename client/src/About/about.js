@@ -191,7 +191,7 @@ class About extends React.Component{
                         </Row>
                     </Container>     
                     <br />
-
+                
             </Container>
         )
     }
