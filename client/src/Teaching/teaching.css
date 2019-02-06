@@ -1,0 +1,24 @@
+.teaching-line{
+    width: 100%;
+}
+
+.course-title{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.course-description{
+    font-size: 21px;
+    text-align: justify;
+}
+
+.course-link{
+    color: orangered;
+    font-size: 18px;
+    text-align: left;
+}
+
+.course-link:hover{
+    text-decoration: none;
+    color: rgb(165, 53, 13);
+}

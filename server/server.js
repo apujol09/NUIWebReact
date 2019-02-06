@@ -23,6 +23,7 @@ const { FacultyCSU } = require('./models/facultyCSU');
 const { FacultyFIU } = require('./models/facultyFIU');
 const { Publications } = require('./models/publications');
 const { Projects } = require('./models/projects');
+const { Teaching } = require('./models/teaching');
 
 
 //Middlewares
@@ -226,6 +227,31 @@ app.get('/api/publications',(req,res)=>{
     Publications.find({},(err,publications)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(publications);
+    })
+})
+
+
+//=========================================
+//              TEACHING
+//=========================================
+
+app.post('/api/teaching',auth,admin,(req,res)=>{
+    const teaching = new Teaching(req.body);
+
+    teaching.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            teaching: doc
+        })
+    })
+})
+
+
+app.get('/api/teaching',(req,res)=>{
+    Teaching.find({},(err,teaching)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(teaching);
     })
 })
 

@@ -38,7 +38,6 @@ class About extends React.Component{
 
         axios.get(`/api/facultyCSU`).then(res => {
             this.setState({ facultyCSU: res.data });
-            console.log(this.state.facultyCSU);
         });
 
         axios.get(`/api/facultyFIU`).then(res => {

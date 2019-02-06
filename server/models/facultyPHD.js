@@ -42,6 +42,6 @@ const facultyPHDSchema = mongoose.Schema({
     }
 })
 
-const FacultyPHD = mongoose.model('FacultyPHD', facultyPHDSchema);
+const FacultyPHD = mongoose.model('FacultyPHD', facultyPHDSchema, 'FacultyPHD');
 
 module.exports = { FacultyPHD }

@@ -9,7 +9,9 @@ class Projects extends React.Component{
                 <Container>
                     <Row><br /><br /></Row>
                     <Row>
+                        <Col md={{size: 6, offset: 3}}>
                         <h1>Projects</h1>
+                        </Col>
                     </Row>
                 </Container>
             </div>

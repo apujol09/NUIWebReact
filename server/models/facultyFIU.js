@@ -46,6 +46,6 @@ const facultyFIUSchema = mongoose.Schema({
     }
 })
 
-const FacultyFIU = mongoose.model('FacultyFIU', facultyFIUSchema);
+const FacultyFIU = mongoose.model('FacultyFIU', facultyFIUSchema, 'FacultyFIU');
 
 module.exports = { FacultyFIU }

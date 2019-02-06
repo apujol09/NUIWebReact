@@ -43,6 +43,6 @@ const affiliatedSchema = mongoose.Schema({
     }
 })
 
-const Affiliated = mongoose.model('Affiliated', affiliatedSchema);
+const Affiliated = mongoose.model('Affiliated', affiliatedSchema, 'affiliated');
 
 module.exports = { Affiliated }

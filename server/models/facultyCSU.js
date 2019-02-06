@@ -46,6 +46,6 @@ const facultyCSUSchema = mongoose.Schema({
     }
 })
 
-const FacultyCSU = mongoose.model('FacultyCSU', facultyCSUSchema);
+const FacultyCSU = mongoose.model('FacultyCSU', facultyCSUSchema, 'FacultyCSU');
 
 module.exports = { FacultyCSU }
