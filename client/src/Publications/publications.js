@@ -9,7 +9,9 @@ class Publications extends React.Component{
                 <Container>
                     <Row><br /><br /></Row>
                     <Row>
-                        <h1>Publications</h1>
+                        <Col md={{size: 6, offset: 3}}>
+                            <h1>Publications</h1>
+                        </Col>
                     </Row>
                 </Container>
             </div>

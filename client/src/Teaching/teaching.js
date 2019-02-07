@@ -1,6 +1,6 @@
 import React from 'react';
 import './teaching.css'; 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Jumbotron } from 'reactstrap';
 import axios from 'axios';
 
 class Teaching extends React.Component{
@@ -10,17 +10,12 @@ class Teaching extends React.Component{
         this.state = {
             courses: []
         }
-        this.separateBySemester = this.separateBySemester.bind(this);
       }
 
     componentDidMount(){
         axios.get(`/api/teaching`).then(res => {
             this.setState({ courses: res.data });
         });
-    }
-
-    separateBySemester(){
-        
     }
 
     //TRY TO USE JUMBOTRONS
@@ -39,19 +34,21 @@ class Teaching extends React.Component{
                         if(course.link === ''){
                             render.push( 
                                 <div key={course.code}>
-                                    <Row>
-                                        <h2>{semester}</h2>
+                                    <Jumbotron>
+                                        <Row>
+                                            <h2>{semester}</h2>
+                                            <br />
+                                            <hr className="teaching-line" />
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                            <p className="course-title">{course.code}: {course.name}</p>
+                                            <p className="course-description"><b>Description:</b> {course.description}</p>
+                                            </Col>
+                                            <br />
+                                        </Row>
                                         <br />
-                                        <hr className="teaching-line" />
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                        <p className="course-title">{course.code}: {course.name}</p>
-                                        <p className="course-description"><b>Description:</b> {course.description}</p>
-                                        </Col>
-                                        <br />
-                                    </Row>
-                                    <br />
+                                    </Jumbotron>
                                 </div>)
                         }
                         else{

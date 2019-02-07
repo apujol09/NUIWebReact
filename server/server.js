@@ -24,6 +24,7 @@ const { FacultyFIU } = require('./models/facultyFIU');
 const { Publications } = require('./models/publications');
 const { Projects } = require('./models/projects');
 const { Teaching } = require('./models/teaching');
+const { Events } = require('./models/events');
 
 
 //Middlewares
@@ -252,6 +253,31 @@ app.get('/api/teaching',(req,res)=>{
     Teaching.find({},(err,teaching)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(teaching);
+    })
+})
+
+
+//=========================================
+//                EVENTS
+//=========================================
+
+app.post('/api/events',auth,admin,(req,res)=>{
+    const events = new Events(req.body);
+
+    events.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            events: doc
+        })
+    })
+})
+
+
+app.get('/api/events',(req,res)=>{
+    Events.find({},(err,events)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(events);
     })
 })
 

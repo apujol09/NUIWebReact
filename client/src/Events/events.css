@@ -1,0 +1,32 @@
+.event-jumbotron{
+    background-color: rgba(217, 120, 45, 0.75);
+}
+
+.event-line{
+    width: 100%;
+}
+
+.event-name{
+    text-align: justify;
+    font-size: 45px;
+}
+
+.event-date{
+    text-align: justify;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.event-time{
+    text-align: justify;
+}
+
+.event-location{
+    text-align: justify;
+}
+
+.event-presentation{
+    text-align: justify;
+    font-size: 25px;
+    font-weight: bold;
+}
