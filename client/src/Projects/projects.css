@@ -1,3 +1,43 @@
 .pub-title{
     text-align: center;
 }
+
+.project-jumbotron-blue{
+    background-color: rgba(39, 39, 243, 0.719);
+}
+
+.project-jumbotron-green{
+    background-color: rgba(0, 128, 0, 0.726);
+}
+
+.project-jumbotron-red{
+    background-color: rgba(248, 56, 56, 0.795);
+}
+
+.project-jumbotron-violet{
+    background-color: rgba(238, 130, 238, 0.836);
+}
+
+.project-jumbotron-gray{
+    background-color: rgba(128, 128, 128, 0.815);
+}
+
+.project-name{
+    text-align: justify;
+    font-size: 40px;
+}
+
+.project-status{
+    text-align: justify;
+    font-weight: bold;
+}
+
+.project-labs{
+    text-align: justify;
+    font-size: 25px;
+}
+
+.project-description{
+    text-align: justify;
+    font-size: 28px;
+}

@@ -16,7 +16,6 @@ import FranciscoInfo from './More Info/francisco';
 
 
 class App extends Component {
-
   render() {
     return (
       <BrowserRouter>

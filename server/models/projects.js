@@ -5,8 +5,40 @@ const projectsSchema = mongoose.Schema({
         required: true,
         type: String,
         unique: 1,
-        maxlength: 100
+        maxlength: 150
+    },
+    status:{
+        type: String,
+        required: true,
+    },
+    labs:{
+        type: String,
+        required: true
+    },
+    description:{
+        type: String,
+        default: "TBA"
+    },
+    publication:{
+        type: String,
+        default: ""
+    },
+    github:{
+        type: String,
+        default: ""
+    },
+    paper:{
+        type: String,
+        default: ""
+    },
+    website:{
+        type: String,
+        default: ""
+    },
+    image:{
+        type: String
     }
+
 });
 
 const Projects = mongoose.model('Projects', projectsSchema);

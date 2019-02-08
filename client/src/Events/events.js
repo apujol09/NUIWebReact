@@ -23,7 +23,7 @@ class Events extends React.Component{
         if(this.state.events){
             this.state.events.forEach(event => {
                 render.push(
-                    <Jumbotron className="event-jumbotron">
+                    <Jumbotron key={event._id} className="event-jumbotron">
                         <Container>
                             <Row>
                                 <Col sm="5">
