@@ -1,0 +1,27 @@
+.publications-line{
+    width: 100%;
+}
+
+.publication-text{
+    font-size: 23px;
+    text-align: justify;
+}
+
+.publication-jumbotron{
+    margin-top: 0;
+}
+
+.publication-div{
+    margin-bottom: 0;
+    padding: 100px 0 0 0;
+}
+
+.publication-link{
+    color: orangered;
+    font-size: 28px;
+}
+
+.publication-link:hover{
+    text-decoration: none;
+    color: orange;
+}

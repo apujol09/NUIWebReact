@@ -17,7 +17,7 @@ class Contact extends React.Component{
                             <br />1100 Center Avenue Mall
                             <br />Fort Collins, CO 80523
                             <br /><b>Email:</b> fortega@colostate.edu 
-                            <br /><b>Computer Science Phone Number Phone:</b> (970) 491-5792
+                            <br /><b>Computer Science Number Phone:</b> (970) 491-5792
                             <br /><b>Computer Science FAX:</b> (970) 491-2466
                         </Col>
                     </Row>

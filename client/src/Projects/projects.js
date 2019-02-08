@@ -20,7 +20,6 @@ class Projects extends React.Component{
 
 
     render(){
-        console.log(process.env.DOMAIN)
         let render = []
         let backgrounds = ["project-jumbotron-blue", "project-jumbotron-green", "project-jumbotron-red", "project-jumbotron-violet", "project-jumbotron-gray"]
         if(this.state.projects){
