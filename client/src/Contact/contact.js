@@ -18,7 +18,7 @@ class Contact extends React.Component{
                             <br />Fort Collins, CO 80523
                             <br /><b>Email:</b> fortega@colostate.edu 
                             <br /><b>Computer Science Phone Number Phone:</b> (970) 491-5792
-                            <br /><b>Computer Science FAX: (970) 491-2466</b>
+                            <br /><b>Computer Science FAX:</b> (970) 491-2466
                         </Col>
                     </Row>
                 </Container>
