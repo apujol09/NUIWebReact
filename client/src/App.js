@@ -13,7 +13,7 @@ import Events from './Events/events';
 import Resources from './Resources/resources';
 import Teaching from './Teaching/teaching';
 import FranciscoInfo from './More Info/francisco';
-
+import LoginForm from './Forms/login';
 
 class App extends Component {
   render() {
@@ -31,6 +31,7 @@ class App extends Component {
               <Route path="/resources" component={Resources} />
               <Route path="/teaching" component={Teaching} />
               <Route path="/francisco-ortega" component={FranciscoInfo} />
+              <Route path="/login" component={LoginForm} />
               <Route component={NotFound} />
             </Switch>
           <Footbar />
