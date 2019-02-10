@@ -14,6 +14,7 @@ import Resources from './Resources/resources';
 import Teaching from './Teaching/teaching';
 import FranciscoInfo from './More Info/francisco';
 import LoginForm from './Forms/login';
+import MemberForm from './Forms/member';
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
               <Route path="/teaching" component={Teaching} />
               <Route path="/francisco-ortega" component={FranciscoInfo} />
               <Route path="/login" component={LoginForm} />
+              <Route path="/add-member" component={MemberForm} />
               <Route component={NotFound} />
             </Switch>
           <Footbar />

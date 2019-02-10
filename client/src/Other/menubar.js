@@ -50,6 +50,7 @@ constructor(){
                         </div>
 
                         <div className="bottom">
+                            <NavLink className="menu-link" to="/add-member">Add Member</NavLink>
                             <NavLink className="menu-link" to="/login">Log in</NavLink>
                             <NavLink className="menu-link" to="/publications">Publications</NavLink>
                             <NavLink className="menu-link" to="/projects">Projects</NavLink>

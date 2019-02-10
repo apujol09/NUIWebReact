@@ -1,0 +1,19 @@
+.form-label{
+    float: left;
+}
+
+.form-text{
+    text-align: left;
+    font-size: 15px;
+}
+
+.form-radio-div{
+    font-size: 20px;
+    text-align: left;
+}
+
+.form-radio-div-custom{
+    font-size: 20px;
+    text-align: left;
+    padding-top: 20px;
+}

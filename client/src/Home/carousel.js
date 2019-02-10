@@ -1,5 +1,5 @@
 import React from 'react';
-import { UncontrolledCarousel, Button, Row, Col } from 'reactstrap';
+import { UncontrolledCarousel } from 'reactstrap';
 import './home.css';
 
 
