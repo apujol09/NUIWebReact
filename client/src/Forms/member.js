@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import './member.css';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron, CustomInput } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron, CustomInput, CardImg } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faFileImage } from '@fortawesome/fontawesome-free-solid';
 
 class MemberForm extends Component {
+
+    state={
+        selectedImage: null
+    }
+
+    fileInputChange = event =>{
+        this.setState({ selectedImage: URL.createObjectURL(event.target.files[0]) });
+    }
+
+    fileInputClick = () =>{
+        document.getElementById('memberImage').click();
+    }
+
+    validateFormAndSubmit(){
+
+    }
+
     render() {
         return (
             <div>
@@ -76,17 +93,21 @@ class MemberForm extends Component {
                                              </div>
                                         </FormGroup>
                                     </FormGroup>
-
                                     <FormGroup>
                                         <Label className="form-label" for="memberImage">Member Image</Label>
                                         <br />
-                                        <Input style={{display: 'none'}} type="file" name="file" id="exampleFile" ref={fileInput => this.fileInput = fileInput}/>
+                                        <Input style={{display: 'none'}} type="file" id="memberImage" ref="fileInput" onChange={this.fileInputChange} />
                                         <br />
-                                        <Col md={{size: 2}}>
-                                            <Button className="form-image-button" outline color="success" onClick={this.fileInput}><FontAwesomeIcon icon={faFileImage} size="9x" /></Button>
-                                        </Col>
+                                        <Row>
+                                            <Col md={{size: 2}}>
+                                                <Button outline color="success" onClick={this.fileInputClick}><FontAwesomeIcon icon={faFileImage} size="7x" /></Button>
+                                            </Col>
+                                            <Col md={{size: 3}}>
+                                                <CardImg src={this.state.selectedImage} />
+                                            </Col>
+                                        </Row>
                                     </FormGroup>
-                                    <Button outline color="primary">Submit</Button>
+                                    <Button outline color="primary" onClick={this.validateFormAndSubmit}>Submit</Button>
                                 </Form>
                             </Jumbotron>
                         </Col>
