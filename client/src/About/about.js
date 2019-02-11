@@ -9,7 +9,8 @@ import FacultyPHD from './facultyPHD';
 import FacultyCSU from './facultyCSU';
 import FacultyFIU from './facultyFIU';
 import Carousel from './carousel';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 
 class About extends React.Component{
@@ -21,7 +22,8 @@ class About extends React.Component{
         members: [],
         affiliated: [],
         former: [],
-        isLoading: true
+        isLoading: true,
+        isAdmin: false
     };
 
     
@@ -143,16 +145,20 @@ class About extends React.Component{
                     <hr className="line" />
                 </Row>
                 
-              
-                <h1>Faculty</h1>
-                    <br />
-                    <Container>
-                        <Row >
-                            {facultyPHDCard}   
-                        </Row>
-                    </Container>
-                    <hr className="line" />     
-                    <br />
+                <Row>
+                    <Col md={{size: 6, offset: 3}}>
+                        <h1>Faculty</h1>
+                            <br />
+                            <Container>
+                                <Row >
+                                    {facultyPHDCard}   
+                                </Row>
+                            </Container>     
+                            <br />
+                    </Col>
+                    {this.state.isAdmin ? (<Col sm={{offset: -1}}><NavLink to="/add-member"><Button outline color="info">Add New Member</Button></NavLink></Col>) : null}
+                </Row>
+                <hr className="line" />
 
                 <h1>Affiliated Faculty</h1>
                     <br />

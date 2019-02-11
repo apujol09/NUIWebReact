@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './Home/home';
 import MenuBar from './Other/menubar';
@@ -15,8 +15,14 @@ import Teaching from './Teaching/teaching';
 import FranciscoInfo from './More Info/francisco';
 import LoginForm from './Forms/login';
 import MemberForm from './Forms/member';
+import axios from 'axios';
 
 class App extends Component {
+
+  state={
+    isAdmin: true
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -33,7 +39,7 @@ class App extends Component {
               <Route path="/teaching" component={Teaching} />
               <Route path="/francisco-ortega" component={FranciscoInfo} />
               <Route path="/login" component={LoginForm} />
-              <Route path="/add-member" component={MemberForm} />
+              {this.state.isAdmin ? <Route path="/add-member" component={MemberForm} /> : null}
               <Route component={NotFound} />
             </Switch>
           <Footbar />
