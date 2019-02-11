@@ -1,13 +1,73 @@
 import React, { Component } from 'react';
 import './member.css';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron, CustomInput, CardImg } from 'reactstrap';
+import { AvForm, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
+import { Container, Row, Col, Button, FormGroup, Label, Input, FormText, Jumbotron, CardImg } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faFileImage } from '@fortawesome/fontawesome-free-solid';
+import axios from 'axios';
 
 class MemberForm extends Component {
 
     state={
+        memberName: "",
+        memberEmail: "",
+        memberPosition: "",
+        memberUniversity: "",
+        memberMajor: "",
+        memberEducation: "",
+        memberWebsite: "",
+        memberDescription: "",
+        memberCategory: "",
+        memberCategoryChecked: "",
         selectedImage: null
+    }
+
+    nameChange = event =>{
+        event.preventDefault();
+        this.setState({ memberName: event.target.value });
+        console.log(this.state.memberName);
+    }
+
+    emailChange = event =>{
+        event.preventDefault();
+        this.setState({ memberEmail: event.target.value });
+        console.log(this.state.memberEmail);
+    }
+
+    positionChange = event =>{
+        event.preventDefault();
+        this.setState({ memberPosition: event.target.value });
+        console.log(this.state.memberPosition);
+    }
+
+    universityChange = event =>{
+        event.preventDefault();
+        this.setState({ memberUniversity: event.target.value });
+        console.log(this.state.memberUniversity);
+    }
+
+    majorChange = event =>{
+        event.preventDefault();
+        this.setState({ memberMajor: event.target.value });
+        console.log(this.state.memberMajor);
+    }
+
+    educationChange = event =>{
+        event.preventDefault();
+        this.setState({ memberEducation: event.target.value });
+        console.log(this.state.memberEducation);
+    }
+
+    websiteChange = event =>{
+        event.preventDefault();
+        this.setState({ memberWebsite: event.target.value });
+        console.log(this.state.memberWebsite);
+    }
+
+    descriptionChange = event =>{
+        event.preventDefault();
+        this.setState({ memberDescription: event.target.value });
+        console.log(this.state.memberDescription);
     }
 
     fileInputChange = event =>{
@@ -18,9 +78,62 @@ class MemberForm extends Component {
         document.getElementById('memberImage').click();
     }
 
-    validateFormAndSubmit(){
+    validateFormAndSubmit = event =>{
+        event.preventDefault();
 
+        const member = {
+                name: this.state.memberName,
+                education: this.state.memberEducation,
+                major: this.state.memberMajor,
+                position: this.state.memberPosition,
+                email: this.state.memberEmail,
+                university: this.state.memberUniversity,
+                website: this.state.memberWebsite,
+                image: "",
+                description: this.state.memberDescription 
+        }
+
+        if(this.state.memberCategoryChecked === "facultyCSU"){
+            axios.post(`/api/facultyCSU`, { member })
+                .then(res =>{
+                    console.log(res);
+                    console.log(res.data);
+                });
+        }
+
+        else if(this.state.memberCategoryChecked === "facultyFIU"){
+            axios.post(`/api/facultyFIU`, { member })
+                .then(res =>{
+                    console.log(res);
+                    console.log(res.data);
+                });
+        }
+        
+        else if(this.state.memberCategoryChecked === "current"){
+            axios.post(`/api/members`, { member })
+                .then(res =>{
+                    console.log(res);
+                    console.log(res.data);
+                });
+        }
+
+        else if(this.state.memberCategoryChecked === "affiliated"){
+            axios.post(`/api/affiliated`, { member })
+                .then(res =>{
+                    console.log(res);
+                    console.log(res.data);
+                });
+        }
+
+        else if(this.state.memberCategoryChecked === "former"){
+            axios.post(`/api/former`, { member })
+                .then(res =>{
+                    console.log(res);
+                    console.log(res.data);
+                });
+        }
     }
+
 
     render() {
         return (
@@ -36,63 +149,69 @@ class MemberForm extends Component {
                     <Row>
                         <Col>
                             <Jumbotron>
-                                <Form>
-                                    <FormGroup>
-                                        <Label className="form-label" for="memberName">Name and Last Name *</Label>
-                                        <Input type="text" placeholder="Enter Member Name here" />
-                                    </FormGroup>
-                                    <FormGroup>
+                                <AvForm onSubmit={this.validateFormAndSubmit}>
+                                    <AvGroup>
+                                        <Label className="form-label" for="example">Name *</Label>
+                                        <AvInput name="name" id="memberName" placeholder="Enter Member Name Here" required onChange={this.nameChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                    </AvGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberEmail">Email *</Label>
-                                        <Input type="email" placeholder="Enter Member Email here" />
-                                    </FormGroup>
-                                    <FormGroup>
+                                        <AvInput name="email" id="memberEmail" placeholder="Enter Member Email here" required onChange={this.emailChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                    </AvGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberPosition">Position *</Label>
-                                        <Input type="text" placeholder="Enter Member Position here" />
-                                    </FormGroup>
-                                    <FormGroup>
+                                        <AvInput name="position" id="memberPosition" placeholder="Enter Member Position here" required onChange={this.positionChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                    </AvGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberUniversity">University *</Label>
-                                        <Input type="text" placeholder="Enter Member University here" />
+                                        <AvInput name="university" id="memberUniversity" placeholder="Enter Member University here" required onChange={this.universityChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please refer to About Us page to see the format of the University Field. Keep data 
                                             as uniform as possible.
                                         </FormText>
-                                    </FormGroup>
-                                    <FormGroup>
+                                    </AvGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberMajor">Major *</Label>
-                                        <Input type="text" placeholder="Enter Member Major here" />
-                                    </FormGroup>
-                                    <FormGroup>
+                                        <AvInput name="major" type="text" id="memberMajor" placeholder="Enter Member Major here" required onChange={this.majorChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                    </AvGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberEducation">Education Level *</Label>
-                                        <Input type="text" placeholder="Enter Member Education Level here" />
+                                        <AvInput name="education" type="text" id="memberEducation" placeholder="Enter Member Education Level here" required onChange={this.educationChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please refer to About Us page to see the format of the Education Field. It sould be
                                             in the format of "MS.,BS." Keep data as uniform as possible.
                                         </FormText>
-                                    </FormGroup>
+                                    </AvGroup>
                                     <FormGroup>
                                         <Label className="form-label" for="memberWebsite">Website</Label>
-                                        <Input type="text" placeholder="Enter Member Website here" />
+                                        <Input type="text" id="memberWebsite" placeholder="Enter Member Website here" onChange={this.websiteChange}/>
                                         <FormText className="form-text" color="muted">
                                             Only enter a URL in this field. This is not required for all members.
                                         </FormText>
                                     </FormGroup>
-                                    <FormGroup>
+                                    <AvGroup>
                                         <Label className="form-label" for="memberDescription">Description *</Label>
-                                        <Input style={{height: "200px"}} type="textarea" name="text" id="exampleText" />
-                                    </FormGroup>
-                                    <FormGroup tag="fieldset">
-                                        <Label className="form-label" for="memberType">Member Category *</Label>
-                                        <br />
-                                        <FormGroup>
-                                            <div>
-                                                <CustomInput className="form-radio-div-custom" type="radio" id="exampleCustomRadio" name="customRadio" label="Faculty from Colorado State University" />
-                                                <CustomInput className="form-radio-div" type="radio" id="exampleCustomRadio2" name="customRadio" label="Faculty from Florida International University" />
-                                                <CustomInput className="form-radio-div" type="radio" id="exampleCustomRadio3" name="customRadio" label="Current Member" />
-                                                <CustomInput className="form-radio-div" type="radio" id="exampleCustomRadio4" name="customRadio" label="Affiliated Member" />
-                                                <CustomInput className="form-radio-div" type="radio" id="exampleCustomRadio5" name="customRadio" label="Former Member" />
-                                             </div>
-                                        </FormGroup>
-                                    </FormGroup>
+                                        <AvInput style={{height: "200px"}} type="textarea" name="description" id="memberDescription" required onChange={this.descriptionChange}/>
+                                        <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                    </AvGroup>
+                                    <AvRadioGroup className="av-radio-group" name="memberCategoryRadioGroup" label="Member Category *" required>
+                                        <AvRadio className="form-radio-div" customInput label="Faculty from Colorado State University" value="facultyCSU" 
+                                            onChange={() => this.setState({ memberCategoryChecked: "facultyCSU" })}/>
+                                        <AvRadio className="form-radio-div" customInput label="Faculty from Florida International University" value="facultyFIU" 
+                                            onChange={() => this.setState({ memberCategoryChecked: "facultyFIU" })}/>
+                                        <AvRadio className="form-radio-div" customInput label="Current Member" value="current" 
+                                            onChange={() => this.setState({ memberCategoryChecked: "current" })}/>
+                                        <AvRadio className="form-radio-div" customInput label="Affiliated Member" value="affiliated" 
+                                            onChange={() => this.setState({ memberCategoryChecked: "affiliated" })}/>
+                                        <AvRadio className="form-radio-div" customInput label="Former Member" value="former" 
+                                            onChange={() => this.setState({ memberCategoryChecked: "former" })}/>
+                                    </AvRadioGroup>
                                     <FormGroup>
                                         <Label className="form-label" for="memberImage">Member Image</Label>
                                         <br />
@@ -107,8 +226,8 @@ class MemberForm extends Component {
                                             </Col>
                                         </Row>
                                     </FormGroup>
-                                    <Button outline color="primary" onClick={this.validateFormAndSubmit}>Submit</Button>
-                                </Form>
+                                    <Button outline color="primary" size="lg" block>Submit</Button>
+                                </AvForm>
                             </Jumbotron>
                         </Col>
                     </Row>

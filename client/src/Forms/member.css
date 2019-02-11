@@ -2,6 +2,11 @@
     float: left;
 }
 
+.form-label-invalid{
+    float: left;
+    color: rgb(199, 10, 10);
+}
+
 .form-text{
     text-align: left;
     font-size: 15px;
@@ -10,10 +15,36 @@
 .form-radio-div{
     font-size: 20px;
     text-align: left;
+    background-color: rgb(233,236,239);
 }
 
 .form-radio-div-custom{
     font-size: 20px;
     text-align: left;
     padding-top: 20px;
+    background-color: rgb(233,236,239);
+}
+
+.form-feedback{
+    font-size: 17px;
+    text-align: left;
+}
+
+.av-label{
+    float: left;
+}
+
+.av-feedback{
+    text-align: left;
+    font-size: 17px;
+}
+
+.av-radio-group legend{
+    text-align: left;
+    font-size: 30px;
+}
+
+.av-radio-group .invalid-feedback{
+    text-align: left;
+    font-size: 17px;
 }
