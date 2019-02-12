@@ -64,6 +64,7 @@ class MenuBar extends React.Component {
                         </div>
 
                         <div className="bottom">
+                            {this.state.isLoggedIn ? <NavLink className="menu-link" to="/register-admin">Register Admin</NavLink> : null}
                             {this.state.isLoggedIn ? <NavLink className="menu-link" to="/logout">Log Out</NavLink> : <NavLink className="menu-link" to="/login">Log in</NavLink>}
                             <NavLink className="menu-link" to="/publications">Publications</NavLink>
                             <NavLink className="menu-link" to="/projects">Projects</NavLink>
@@ -73,9 +74,6 @@ class MenuBar extends React.Component {
                     </div>
                 </div>
             </header>
-            
-        
-
     );
   }
 }

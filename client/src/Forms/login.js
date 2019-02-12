@@ -5,7 +5,6 @@ import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalH
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash} from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 class LoginForm extends Component {
 
@@ -84,13 +83,13 @@ class LoginForm extends Component {
                     <Row><br /><br /></Row>
                     <Row>
                         <Col md={{size: 6, offset: 3}}>
-                            <h2>Administrator Log In</h2>
+                            <h1>Administrator Log In</h1>
                             <br />
                         </Col>
                     </Row>
                      <Row>
                          <Col sm="6">
-                            <h1>Note:</h1>
+                            <h2>Note:</h2>
                             <p className="login-note">THIS PAGE IS ONLY FOR ADMINISTRATORS, IT IS NOT FOR COMMON USERS. IF YOU HAVE AN ADMINISTRATOR ACCOUNT
                                PLEASE USE THE FORM NEXT TO THIS TEXT TO LOG IN WITH YOUR GIVEN CREDENTIALS. OTHERWISE, GO AWAY!
                             </p>
