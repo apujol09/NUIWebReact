@@ -7,10 +7,6 @@ import { NavLink } from 'react-router-dom';
 
 class FacultyPHD extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
 
     render() {
         let personColor = (this.props.person.university === "Colorado State University (Fort Collins, CO)") ? "member-card-separator-csu" : "member-card-separator-fiu";

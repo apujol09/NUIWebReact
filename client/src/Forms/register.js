@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './login.css';
 import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter, FormText, Alert } from 'reactstrap';
+import { Container, Row, Col, Button, Label, Jumbotron, Alert } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash} from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';
@@ -102,8 +102,8 @@ class RegisterAdmin extends Component {
                      <Row>
                          <Col sm="6">
                             <h2>Note:</h2>
-                            <p className="login-note">THIS PAGE IS FOR REGISTERING ADMINISTRATORS THAT WILL HAVE ACCESS TO ADDING NEW MEMBERS 
-                                                    AMONG OTHER PRIVILEGES. IF YOU DO NOT WANT TO GIVE ACCESS PLEASE CLICK AWAY NOW!
+                            <p className="login-note">THIS PAGE IS FOR REGISTERING ADMINISTRATORS THAT WILL HAVE ACCESS TO ADDING NEW MEMBERS, 
+                                                     PROJECTS, PUBLICATIONS, AMONG OTHER PRIVILEGES. IF YOU DO NOT WANT TO GIVE ACCESS PLEASE CLICK AWAY NOW!
                             </p>
                          </Col>
                          <Col>

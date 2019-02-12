@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Modal, ModalBody, ModalHeader, ModalFooter, Button } from 'reactstrap';
+import { Container, Row, Modal, ModalBody, ModalHeader, ModalFooter, Button } from 'reactstrap';
 import axios from 'axios';
 
 class Logout extends Component {

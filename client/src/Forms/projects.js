@@ -7,7 +7,6 @@ import { faFileImage } from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';
 
 
-require('dotenv').config();
 class ProjectsForm extends Component {
 
     state={
@@ -179,7 +178,7 @@ class ProjectsForm extends Component {
                                             </Col>
                                         </Row>
                                     </FormGroup>
-                                    <Button outline color="primary" size="lg" block>Submit</Button>
+                                    <Button outline color="warning" size="lg" block>Submit</Button>
                                 </AvForm>
                             </Jumbotron>
                         </Col>

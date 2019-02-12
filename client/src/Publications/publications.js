@@ -1,14 +1,16 @@
 import React from 'react';
 import './publications.css';
-import { Container, Row, Col, Jumbotron } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 class Publications extends React.Component{
 
     constructor(props) {
         super(props)
         this.state = {
-            publications: []
+            publications: [],
+            isloggedIn: false
         }
       }
 
@@ -16,6 +18,16 @@ class Publications extends React.Component{
         axios.get(`/api/publications`).then(res => {
             this.setState({ publications: res.data });
         });
+
+        axios.get(`/api/auth`).then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isloggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
+        });
+
     }
 
     render(){
@@ -91,6 +103,9 @@ class Publications extends React.Component{
                     <Row>
                         <Col md={{size: 6, offset: 3}}>
                             <h1>Publications</h1>
+                        </Col>
+                        <Col>
+                            {this.state.isloggedIn ? <NavLink to="/add-publication"><Button outline color="info">Add new Publication</Button></NavLink> : null}
                         </Col>
                     </Row>
                     <Row>

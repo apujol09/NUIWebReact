@@ -77,7 +77,7 @@ class Projects extends React.Component{
                         <Col md={{size: 6, offset: 3}}>
                             <h1>Projects</h1>
                         </Col>
-                        <Col>{this.state.isloggedIn ? <NavLink to="/add-project"><Button color="info">Add New Project</Button></NavLink> : null}</Col>
+                        <Col>{this.state.isloggedIn ? <NavLink to="/add-project"><Button outline color="info">Add New Project</Button></NavLink> : null}</Col>
                     </Row>
                     <Row>
                         <hr className="event-line" />

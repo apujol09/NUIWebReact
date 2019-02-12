@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './login.css';
 import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter, Alert } from 'reactstrap';
+import { Container, Row, Col, Button, Label, Jumbotron, Alert } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash} from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';

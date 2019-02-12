@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import './about.css';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
-import andy from '../assets/images/people/andy-pujol.jpg';
-import { Redirect } from 'react-router-dom'
   
 
 class Member extends Component {
-
-    constructor(props){
-        super(props);
-    }
 
 
     render() {
