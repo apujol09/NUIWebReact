@@ -23,51 +23,43 @@ class MemberForm extends Component {
     }
 
     nameChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberName: event.target.value });
-        console.log(this.state.memberName);
     }
 
     emailChange = event =>{
         event.preventDefault();
         this.setState({ memberEmail: event.target.value });
-        console.log(this.state.memberEmail);
     }
 
     positionChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberPosition: event.target.value });
-        console.log(this.state.memberPosition);
     }
 
     universityChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberUniversity: event.target.value });
-        console.log(this.state.memberUniversity);
     }
 
     majorChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberMajor: event.target.value });
-        console.log(this.state.memberMajor);
     }
 
     educationChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberEducation: event.target.value });
-        console.log(this.state.memberEducation);
     }
 
     websiteChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberWebsite: event.target.value });
-        console.log(this.state.memberWebsite);
     }
 
     descriptionChange = event =>{
-        event.preventDefault();
+        event.persist();
         this.setState({ memberDescription: event.target.value });
-        console.log(this.state.memberDescription);
     }
 
     fileInputChange = event =>{
@@ -78,10 +70,11 @@ class MemberForm extends Component {
         document.getElementById('memberImage').click();
     }
 
-    validateFormAndSubmit = event =>{
-        event.preventDefault();
+    handleSubmit = event =>{
+        event.persist();
 
-        const member = {
+        if(this.state.memberCategoryChecked === "facultyCSU"){
+            axios.post(`/api/facultyCSU`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -89,47 +82,114 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "",
+                image: "a",
                 description: this.state.memberDescription 
-        }
-
-        if(this.state.memberCategoryChecked === "facultyCSU"){
-            axios.post(`/api/facultyCSU`, { member })
+             })
                 .then(res =>{
-                    console.log(res);
-                    console.log(res.data);
+                    if(res.data.success === true){
+                        this.props.history.push('/about');
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Adding Member Failed!");
+                        console.log(res);
+                    }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "facultyFIU"){
-            axios.post(`/api/facultyFIU`, { member })
+            axios.post(`/api/facultyFIU`, { 
+                name: this.state.memberName,
+                education: this.state.memberEducation,
+                major: this.state.memberMajor,
+                position: this.state.memberPosition,
+                email: this.state.memberEmail,
+                university: this.state.memberUniversity,
+                website: this.state.memberWebsite,
+                image: "a",
+                description: this.state.memberDescription 
+             })
                 .then(res =>{
-                    console.log(res);
-                    console.log(res.data);
+                    if(res.data.success === true){
+                        this.props.history.push('/about');
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Adding Member Failed!");
+                        console.log(res);
+                    }
                 });
         }
         
         else if(this.state.memberCategoryChecked === "current"){
-            axios.post(`/api/members`, { member })
+            axios.post(`/api/members`, { 
+                name: this.state.memberName,
+                education: this.state.memberEducation,
+                major: this.state.memberMajor,
+                position: this.state.memberPosition,
+                email: this.state.memberEmail,
+                university: this.state.memberUniversity,
+                website: this.state.memberWebsite,
+                image: "a",
+                description: this.state.memberDescription 
+             })
                 .then(res =>{
-                    console.log(res);
-                    console.log(res.data);
+                    if(res.data.success === true){
+                        this.props.history.push('/about');
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Adding Member Failed!");
+                        console.log(res);
+                    }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "affiliated"){
-            axios.post(`/api/affiliated`, { member })
+            axios.post(`/api/affiliated`, { 
+                name: this.state.memberName,
+                education: this.state.memberEducation,
+                major: this.state.memberMajor,
+                position: this.state.memberPosition,
+                email: this.state.memberEmail,
+                university: this.state.memberUniversity,
+                website: this.state.memberWebsite,
+                image: "a",
+                description: this.state.memberDescription 
+             })
                 .then(res =>{
-                    console.log(res);
-                    console.log(res.data);
+                    if(res.data.success === true){
+                        this.props.history.push('/about');
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Adding Member Failed!");
+                        console.log(res);
+                    }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "former"){
-            axios.post(`/api/former`, { member })
+            axios.post(`/api/former`, { 
+                name: this.state.memberName,
+                education: this.state.memberEducation,
+                major: this.state.memberMajor,
+                position: this.state.memberPosition,
+                email: this.state.memberEmail,
+                university: this.state.memberUniversity,
+                website: this.state.memberWebsite,
+                image: "a",
+                description: this.state.memberDescription 
+             })
                 .then(res =>{
-                    console.log(res);
-                    console.log(res.data);
+                    if(res.data.success === true){
+                        this.props.history.push('/about');
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Adding Member Failed!");
+                        console.log(res);
+                    }
                 });
         }
     }
@@ -149,7 +209,7 @@ class MemberForm extends Component {
                     <Row>
                         <Col>
                             <Jumbotron>
-                                <AvForm onSubmit={this.validateFormAndSubmit}>
+                                <AvForm onSubmit={this.handleSubmit}>
                                     <AvGroup>
                                         <Label className="form-label" for="example">Name *</Label>
                                         <AvInput name="name" id="memberName" placeholder="Enter Member Name Here" required onChange={this.nameChange}/>

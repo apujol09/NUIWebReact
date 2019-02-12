@@ -24,8 +24,8 @@ class FacultyFIU extends Component {
                         <CardSubtitle className="university-fiu">{this.props.person.university}</CardSubtitle>
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
-                        <CardText>{this.props.person.description_short}</CardText>
-                        <a className="website-link" href={this.props.person.website}><Button outline color="primary">Website</Button></a>
+                        <CardText className="description">{this.props.person.description}</CardText>
+                        {this.props.person.website === "website" || this.props.person.website === "" ? null : <a className="website-link" href={this.props.person.website}><Button outline color="primary">Website</Button></a>}
                     </CardBody>
                 </Card>
             </div>

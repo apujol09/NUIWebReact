@@ -15,12 +15,25 @@ import Teaching from './Teaching/teaching';
 import FranciscoInfo from './More Info/francisco';
 import LoginForm from './Forms/login';
 import MemberForm from './Forms/member';
+import Logout from './Logout/logout';
 import axios from 'axios';
 
 class App extends Component {
 
   state={
-    isAdmin: true
+    isLoggedIn: false,
+  }
+
+  componentDidMount(){
+    axios.get(`/api/auth`)
+    .then(res => {
+      if(res.data.isAuth === true){
+        this.setState({ isLoggedIn: true });
+      }
+      else{
+        this.setState({ isloggedIn: false });
+      }
+    })
   }
 
   render() {
@@ -38,8 +51,8 @@ class App extends Component {
               <Route path="/resources" component={Resources} />
               <Route path="/teaching" component={Teaching} />
               <Route path="/francisco-ortega" component={FranciscoInfo} />
-              <Route path="/login" component={LoginForm} />
-              {this.state.isAdmin ? <Route path="/add-member" component={MemberForm} /> : null}
+              {this.state.isLoggedIn ? <Route path="/logout" component={Logout} /> : <Route path="/login" component={LoginForm} />}
+              {this.state.isLoggedIn ? <Route path="/add-member" component={MemberForm} /> : null}
               <Route component={NotFound} />
             </Switch>
           <Footbar />

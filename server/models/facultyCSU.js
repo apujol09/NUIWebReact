@@ -34,7 +34,6 @@ const facultyCSUSchema = mongoose.Schema({
     },
     website:{
         type: String,
-        required: true
     },
     image:{
         type: String,

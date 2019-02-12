@@ -23,7 +23,7 @@ class About extends React.Component{
         affiliated: [],
         former: [],
         isLoading: true,
-        isAdmin: false
+        isloggedIn: true
     };
 
     
@@ -53,6 +53,15 @@ class About extends React.Component{
             this.setState({ former: res.data });
         });
 
+        axios.get(`/api/auth`).then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isloggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
+        });
+
         //this.setState({isLoading: false})
     }
 
@@ -72,7 +81,7 @@ class About extends React.Component{
 
         let facultyPHDCard = this.state.facultyPHD.map(person =>{
             return( 
-                <Col key={person._id} sm="4" md={{ size: 6, offset: 3 }}>
+                <Col key={person._id} sm="5" md={{ size: 6, offset: 3 }}>
                     <FacultyPHD person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -156,7 +165,7 @@ class About extends React.Component{
                             </Container>     
                             <br />
                     </Col>
-                    {this.state.isAdmin ? (<Col sm={{offset: -1}}><NavLink to="/add-member"><Button outline color="info">Add New Member</Button></NavLink></Col>) : null}
+                    {this.state.isloggedIn ? (<Col sm={{offset: -1}}><NavLink to="/add-member"><Button outline color="info">Add New Member</Button></NavLink></Col>) : null}
                 </Row>
                 <hr className="line" />
 

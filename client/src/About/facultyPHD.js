@@ -26,7 +26,7 @@ class FacultyPHD extends Component {
                         <CardSubtitle className={universityColor}>{this.props.person.university}</CardSubtitle>
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
-                        <CardText>{this.props.person.description_short}</CardText>
+                        <CardText className="description">{this.props.person.description_short}</CardText>
                         <Row>
                             <Col>
                                 <NavLink className="website-link" to="/francisco-ortega"><Button outline color={buttonColor}>More Info</Button></NavLink>

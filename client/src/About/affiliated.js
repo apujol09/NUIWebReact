@@ -28,8 +28,8 @@ class Affiliated extends Component {
                         <CardSubtitle className={universityColor}>{this.props.person.university}</CardSubtitle>
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
-                        <CardText>{this.props.person.description}</CardText>
-                        <a className="website-link" href={this.props.person.website}><Button outline color={buttonColor}>Website</Button></a>
+                        <CardText className="description">{this.props.person.description}</CardText>
+                        {this.props.person.website === "website" || this.props.person.website === "" ? null : <a className="website-link" href={this.props.person.website}><Button outline color={buttonColor}>Website</Button></a>}
                     </CardBody>
                 </Card>
             </div>

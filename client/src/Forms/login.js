@@ -1,26 +1,83 @@
 import React, { Component } from 'react';
 import './login.css';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, Jumbotron } from 'reactstrap';
+import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash} from '@fortawesome/fontawesome-free-solid';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class LoginForm extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            passwordVisible: false
+            passwordVisible: false,
+            username: "",
+            password: "",
+            modal: false
         }
         this.toggleVisiblePassword = this.toggleVisiblePassword.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-      toggleVisiblePassword(){
+    toggleVisiblePassword(){
             this.setState({ passwordVisible: !this.state.passwordVisible});
+      }
+
+    usernameChange = event =>{
+        event.persist();
+        this.setState({ username: event.target.value });
+      }
+
+    passwordChange = event =>{
+        event.persist();
+        this.setState({ password: event.target.value });
+    }
+
+    
+    toggle(){
+        this.setState({ modal: !this.state.modal });
+    }
+
+
+    handleSubmit = event => {
+        event.preventDefault();
+
+        document.getElementById('LoginFormEmail').value = null;
+        document.getElementById('LoginFormPassword').value = null;
+
+        axios.post(`api/login`, { 
+            username: this.state.username,
+            password: this.state.password
+         })
+        .then(res => {
+            if(res.data.loginSuccess === true){
+                console.log("Success!")
+                this.props.history.push('/');
+                window.location.reload();
+            }
+            else{
+                this.render(
+                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <ModalHeader toggle={this.toggle}>Login Attempt Falied</ModalHeader>
+                        <ModalBody>
+                            Your Username or Password are Incorrect. Please try Again!
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Close</Button>
+                        </ModalFooter>
+                    </Modal>
+                )
+                console.log(res);
+                console.log(res.data);
+            }
+        })
       }
 
     render() {
         let icon = this.state.passwordVisible ? faEyeSlash : faEye;
-        let input_type = this.state.passwordVisible ? "email" : "password";
+        let input_type = this.state.passwordVisible ? "text" : "password";
         return (
             <div>
                 <Container>
@@ -40,32 +97,37 @@ class LoginForm extends Component {
                          </Col>
                          <Col>
                             <Jumbotron>
-                                <Form>
+                                <AvForm onSubmit={this.handleSubmit}>
                                     <Row>
                                         <Col sm="10">
-                                            <FormGroup>
+                                            <AvGroup>
                                                 <Label className="form-label" for="Email">Email</Label>
-                                                <Input type="email" name="email" id="LoginFormEmail" placeholder="Type your Email Here" />
-                                            </FormGroup>
+                                                <AvInput type="email" name="email" id="LoginFormEmail" placeholder="Type your Email Here" onChange={this.usernameChange} required />
+                                                <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                            </AvGroup>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col sm="10">
-                                            <FormGroup>
+                                            <AvGroup>
                                                 <Label className="form-label" for="Password">Password</Label>
-                                                <Input type={input_type} name="password" id="LoginFormPassword" placeholder="Type your Password Here" />
-                                            </FormGroup>
+                                                <AvInput type={input_type} name="password" id="LoginFormPassword" placeholder="Type your Password Here"  onChange={this.passwordChange} required />
+                                                <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
+                                            </AvGroup>
                                         </Col> 
                                         <Col md={{offset: -2}}>
                                             <br />
                                             <Button outline onClick={this.toggleVisiblePassword}><FontAwesomeIcon icon={icon} /></Button>
                                         </Col>
                                     </Row>
-                                    <Button outline color="info">Log In</Button>
-                                </Form>
+                                    <Button outline color="info" type="submit">Log In</Button>
+                                </AvForm>
                             </Jumbotron>
                          </Col> 
                      </Row>
+                     <br />
+                     <br />
+                     <br />
                      <br />
                 </Container>
             </div>

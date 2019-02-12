@@ -6,3 +6,8 @@
 .form-label{
     float: left;
 }
+
+.av-feedback{
+    text-align: left;
+    font-size: 17px;
+}

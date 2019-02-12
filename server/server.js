@@ -36,7 +36,7 @@ const { admin } = require('./middleware/admin');
 //                MEMBERS
 //=========================================
 
-app.post('/api/members',auth,admin,(req,res)=>{
+app.post('/api/members',auth,(req,res)=>{
     const members = new Members(req.body);
 
     members.save((err,doc)=>{
@@ -61,7 +61,7 @@ app.get('/api/members',(req,res)=>{
 //                AFFILIATED
 //=========================================
 
-app.post('/api/affiliated',auth,admin,(req,res)=>{
+app.post('/api/affiliated',(req,res)=>{
     const affiliated = new Affiliated(req.body);
 
     affiliated.save((err,doc)=>{
@@ -85,7 +85,7 @@ app.get('/api/affiliated',(req,res)=>{
 //                FORMER
 //=========================================
 
-app.post('/api/former',auth,admin,(req,res)=>{
+app.post('/api/former',auth,(req,res)=>{
     const former = new Former(req.body);
 
     former.save((err,doc)=>{
@@ -110,7 +110,7 @@ app.get('/api/former',(req,res)=>{
 //              FACULTY PHD
 //=========================================
 
-app.post('/api/facultyPHD',auth,admin,(req,res)=>{
+app.post('/api/facultyPHD',auth,(req,res)=>{
     const facultyPHD = new FacultyPHD(req.body);
 
     facultyPHD.save((err,doc)=>{
@@ -135,7 +135,7 @@ app.get('/api/facultyPHD',(req,res)=>{
 //              FACULTY CSU
 //=========================================
 
-app.post('/api/facultyCSU',auth,admin,(req,res)=>{
+app.post('/api/facultyCSU',auth,(req,res)=>{
     const facultyCSU = new FacultyCSU(req.body);
 
     facultyCSU.save((err,doc)=>{
@@ -161,7 +161,7 @@ app.get('/api/facultyCSU',(req,res)=>{
 //              FACULTY FIU
 //=========================================
 
-app.post('/api/facultyFIU',auth,admin,(req,res)=>{
+app.post('/api/facultyFIU',auth,(req,res)=>{
     const facultyFIU = new FacultyFIU(req.body);
 
     facultyFIU.save((err,doc)=>{
@@ -187,7 +187,7 @@ app.get('/api/facultyFIU',(req,res)=>{
 //                PROJECTS
 //=========================================
 
-app.post('/api/projects',auth,admin,(req,res)=>{
+app.post('/api/projects',auth,(req,res)=>{
     const projects = new Projects(req.body);
 
     projects.save((err,doc)=>{
@@ -211,7 +211,7 @@ app.get('/api/projects',(req,res)=>{
 //              PUBLICATIONS
 //=========================================
 
-app.post('/api/publications',auth,admin,(req,res)=>{
+app.post('/api/publications',auth,(req,res)=>{
     const publications = new Publications(req.body);
 
     publications.save((err,doc)=>{
@@ -236,7 +236,7 @@ app.get('/api/publications',(req,res)=>{
 //              TEACHING
 //=========================================
 
-app.post('/api/teaching',auth,admin,(req,res)=>{
+app.post('/api/teaching',auth,(req,res)=>{
     const teaching = new Teaching(req.body);
 
     teaching.save((err,doc)=>{
@@ -261,7 +261,7 @@ app.get('/api/teaching',(req,res)=>{
 //                EVENTS
 //=========================================
 
-app.post('/api/events',auth,admin,(req,res)=>{
+app.post('/api/events',auth,(req,res)=>{
     const events = new Events(req.body);
 
     events.save((err,doc)=>{
@@ -286,7 +286,7 @@ app.get('/api/events',(req,res)=>{
 //                  ADMINS
 //=========================================
 
-app.post('/api/admin',auth,admin,(req,res)=>{
+app.post('/api/admins',auth,(req,res)=>{
     
     const admins = new Admins(req.body);
 
@@ -299,51 +299,50 @@ app.post('/api/admin',auth,admin,(req,res)=>{
     })
 });
 
+
 //=========================================
-//                  USERS
+//                  ADMINS
 //=========================================
 
-
-app.get('/api/users/auth', auth, (req,res)=>{
+app.get('/api/auth', auth, (req,res)=>{
 
     res.status(200).json({
-        isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
-        name: req.user.name,
-        lastname: req.user.lastname,
-        role: req.user.role,
-        cart: req.user.cart,
-        history: req.user.history
-
     })
 
 })
 
-app.post('/api/users/register',(req,res)=>{
-    const user = new User(req.body);
 
-    user.save((err,doc)=>{
+app.post('/api/register',(req,res)=>{
+    const admin = new Admins(req.body);
+
+    admin.save((err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success: true,
-            userdata: doc
+            admindata: doc
         })
     })
-
 })
 
-app.post('/api/users/login',(req,res)=>{
 
-    User.findOne({'email':req.body.email},(err,user)=>{
-        if(!user) return res.json({loginSuccess:false, message:'Auth failed, email not found'})
+//=========================================
+//            LOGIN AND LOGOUT
+//=========================================
 
-        user.comparePassword(req.body.password,(err,isMatch)=>{
+
+app.post('/api/login',(req,res)=>{
+
+    Admins.findOne({'username':req.body.username},(err,admin)=>{
+        if(!admin) return res.json({loginSuccess:false, message:'Auth failed, username not found'})
+
+        admin.comparePassword(req.body.password,(err,isMatch)=>{
             if(!isMatch) return res.json({loginSuccess:false, message:'Wrong Password'})
 
-            user.generateToken((err,user)=>{
+            admin.generateToken((err,admin)=>{
                 if(err) return res.status(400).send(err);
-                res.cookie('w_auth', user.token).status(200).json({
+                res.cookie('w_auth', admin.token).status(200).json({
                     loginSuccess: true
                 })
             })
@@ -352,9 +351,9 @@ app.post('/api/users/login',(req,res)=>{
 })
 
 
-app.get('/api/users/logout',auth,(req,res)=>{
+app.get('/api/logout',auth,(req,res)=>{
 
-    User.findOneAndUpdate(
+    Admins.findOneAndUpdate(
         { _id:req.user._id },
         { token: '' },
         (err,doc)=>{
@@ -365,6 +364,8 @@ app.get('/api/users/logout',auth,(req,res)=>{
         }
     )
 })
+
+
 
 const port = process.env.PORT || 3002; 
 

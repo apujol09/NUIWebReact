@@ -10,6 +10,7 @@
     "availity-reactstrap-validation": "^2.5.0",
     "axios": "0.18.0",
     "bootstrap": "^4.2.1",
+    "dotenv": "^6.2.0",
     "mdbootstrap": "^4.5.15",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",

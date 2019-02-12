@@ -1,33 +1,47 @@
 import React from 'react';
 import './menubar.css';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 
 class MenuBar extends React.Component {
-constructor(){
- super();
+    constructor(){
+    super();
 
- this.state = {
-       displayMenu: false,
-     };
+    this.state = {
+        displayMenu: false,
+        isLoggedIn: false
+        };
 
-  this.showDropdownMenu = this.showDropdownMenu.bind(this);
-  this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
+    this.showDropdownMenu = this.showDropdownMenu.bind(this);
+    this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
 
-};
+    };
 
-  showDropdownMenu(event) {
-    event.preventDefault();
-    this.setState({ displayMenu: true }, () => {
-    document.addEventListener('click', this.hideDropdownMenu);
-    });
-  }
+    componentDidMount(){
+        axios.get(`/api/auth`)
+        .then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isLoggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
+        })
+    }
 
-  hideDropdownMenu() {
-    this.setState({ displayMenu: false }, () => {
-      document.removeEventListener('click', this.hideDropdownMenu);
-    });
-  }
+    showDropdownMenu(event) {
+        event.preventDefault();
+        this.setState({ displayMenu: true }, () => {
+        document.addEventListener('click', this.hideDropdownMenu);
+        });
+    }
+
+    hideDropdownMenu() {
+        this.setState({ displayMenu: false }, () => {
+        document.removeEventListener('click', this.hideDropdownMenu);
+        });
+    }
 
 
   render() {
@@ -50,7 +64,7 @@ constructor(){
                         </div>
 
                         <div className="bottom">
-                            <NavLink className="menu-link" to="/login">Log in</NavLink>
+                            {this.state.isLoggedIn ? <NavLink className="menu-link" to="/logout">Log Out</NavLink> : <NavLink className="menu-link" to="/login">Log in</NavLink>}
                             <NavLink className="menu-link" to="/publications">Publications</NavLink>
                             <NavLink className="menu-link" to="/projects">Projects</NavLink>
                             <NavLink className="menu-link" to="/about">About Us</NavLink>

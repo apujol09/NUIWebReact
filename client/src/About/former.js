@@ -16,6 +16,7 @@ class Former extends Component {
     render() {
         let personColor = (this.props.person.university === "Colorado State University (Fort Collins, CO)") ? "member-card-separator-csu" : "member-card-separator-fiu";
         let universityColor = (this.props.person.university === "Colorado State University (Fort Collins, CO)") ? "university-csu" : "university-fiu";
+        let buttonColor = (this.props.person.university === "Colorado State University (Fort Collins, CO)") ? "success" : "primary";
         //let image = require(`${this.props.image}`);
         return (
             <div>
@@ -26,7 +27,8 @@ class Former extends Component {
                         <CardSubtitle className={universityColor}>{this.props.person.university}</CardSubtitle>
                         <hr className={personColor} />
                         <CardSubtitle className="email">{this.props.person.email}</CardSubtitle>
-                        <CardText>{this.props.person.description}</CardText>
+                        <CardText className="description">{this.props.person.description}</CardText>
+                        {this.props.person.website === "website" || this.props.person.website === "" ? null : <a className="website-link" href={this.props.person.website}><Button outline color={buttonColor}>Website</Button></a>}
                     </CardBody>
                 </Card>
             </div>
