@@ -1,20 +1,31 @@
 import React from 'react';
 import './teaching.css'; 
-import { Container, Row, Col, Jumbotron } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 class Teaching extends React.Component{
     
     constructor(props) {
         super(props)
         this.state = {
-            courses: []
+            courses: [],
+            isloggedIn: false
         }
       }
 
     componentDidMount(){
         axios.get(`/api/teaching`).then(res => {
             this.setState({ courses: res.data });
+        });
+
+        axios.get(`/api/auth`).then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isloggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
         });
     }
 
@@ -81,6 +92,9 @@ class Teaching extends React.Component{
                     <Row>
                         <Col md={{size: 6, offset: 3}}>
                             <h1>Courses</h1>
+                        </Col>
+                        <Col>
+                            {this.state.isloggedIn ? <NavLink to="/add-class"><Button outline color="info">Add new Class</Button></NavLink> : null}
                         </Col>
                     </Row>
                     <Row>

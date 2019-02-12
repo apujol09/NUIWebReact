@@ -15,7 +15,6 @@ const teachingsSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: 1
-
     },
     description:{
         type: String,

@@ -17,6 +17,7 @@ import LoginForm from './Forms/login';
 import MemberForm from './Forms/member';
 import ProjectForm from './Forms/projects';
 import PublicationForm from './Forms/publication';
+import TeachingForm from './Forms/teaching';
 import Logout from './Logout/logout';
 import RegisterAdmin from './Forms/register';
 import axios from 'axios';
@@ -59,6 +60,7 @@ class App extends Component {
               {this.state.isLoggedIn ? <Route path="/add-member" component={MemberForm} /> : null}
               {this.state.isLoggedIn ? <Route path="/add-project" component={ProjectForm} /> : null}
               {this.state.isLoggedIn ? <Route path="/add-publication" component={PublicationForm} /> : null}
+              {this.state.isLoggedIn ? <Route path="/add-class" component={TeachingForm} /> : null}
               {this.state.isLoggedIn ? <Route path="/register-admin" component={RegisterAdmin} /> : null}
               <Route component={NotFound} />
             </Switch>
