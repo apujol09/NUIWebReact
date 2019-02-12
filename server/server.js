@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 
 const app = express();
 const mongoose = require("mongoose");
@@ -25,12 +26,32 @@ const { Publications } = require('./models/publications');
 const { Projects } = require('./models/projects');
 const { Teaching } = require('./models/teaching');
 const { Events } = require('./models/events');
+const { Images } = require('./models/images');
 
 
 //Middlewares
 const { auth } = require('./middleware/auth');
 const { admin } = require('./middleware/admin');
 
+
+app.post('/api/images',auth,(req,res)=>{
+    const images = new Images(req.body);
+
+    images.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            images: doc
+        })
+    })
+})
+
+app.get('/api/images',(req,res)=>{
+    Images.find({},(err,members)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(members);
+    })
+})
 
 //=========================================
 //                MEMBERS
@@ -307,11 +328,10 @@ app.post('/api/admins',auth,(req,res)=>{
 app.get('/api/auth', auth, (req,res)=>{
 
     res.status(200).json({
-        isAuth: true,
-        email: req.user.email,
+        isAuth: true
     })
-
 })
+
 
 
 app.post('/api/register',(req,res)=>{

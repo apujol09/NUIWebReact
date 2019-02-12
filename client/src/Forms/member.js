@@ -6,6 +6,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faFileImage } from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';
 
+
 class MemberForm extends Component {
 
     state={
@@ -64,6 +65,7 @@ class MemberForm extends Component {
 
     fileInputChange = event =>{
         this.setState({ selectedImage: URL.createObjectURL(event.target.files[0]) });
+        console.log(this.state.selectedImage);
     }
 
     fileInputClick = () =>{

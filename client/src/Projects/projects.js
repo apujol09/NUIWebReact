@@ -2,13 +2,17 @@ import React from 'react';
 import './projects.css';
 import { Container, Row, Col, Jumbotron, CardImg, Button } from 'reactstrap';
 import axios from 'axios';
+import Domain from '../Utils/misc';
+import { NavLink } from 'react-router-dom';
 
+require('dotenv').config({path: '../../.env'})
 class Projects extends React.Component{
 
     constructor(props) {
         super(props)
         this.state = {
-            projects: []
+            projects: [],
+            isloggedIn: false
         }
       }
 
@@ -16,10 +20,21 @@ class Projects extends React.Component{
         axios.get(`/api/projects`).then(res => {
             this.setState({ projects: res.data });
         });
+
+        axios.get(`/api/auth`).then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isloggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
+        });
     }
 
 
     render(){
+        
+        console.log(process.env.DOMAIN);
         let render = []
         let backgrounds = ["project-jumbotron-blue", "project-jumbotron-green", "project-jumbotron-red", "project-jumbotron-violet", "project-jumbotron-gray"]
         if(this.state.projects){
@@ -45,7 +60,7 @@ class Projects extends React.Component{
                             <Row>
                                 {project.website ? (<Col><a href={project.website}><Button color="info">Website</Button></a></Col>) : null}
                                 {project.publication ? (<Col><a href={project.publication}><Button color="success">Publication</Button></a></Col>) : null}
-                                {project.paper ? (<Col><a href={project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
+                                {project.paper ? (<Col><a href={Domain + project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
                                 {project.github ? (<Col><a href={project.github}><Button color="secondary">Github</Button></a></Col>) : null}
                             </Row>
                         </Container>
@@ -62,6 +77,7 @@ class Projects extends React.Component{
                         <Col md={{size: 6, offset: 3}}>
                             <h1>Projects</h1>
                         </Col>
+                        <Col>{this.state.isloggedIn ? <NavLink to="/add-project"><Button color="info">Add New Project</Button></NavLink> : null}</Col>
                     </Row>
                     <Row>
                         <hr className="event-line" />

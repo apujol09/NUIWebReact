@@ -23,7 +23,7 @@ class About extends React.Component{
         affiliated: [],
         former: [],
         isLoading: true,
-        isloggedIn: true
+        isloggedIn: false
     };
 
     

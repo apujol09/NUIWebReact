@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import './login.css';
 import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
+import { Container, Row, Col, Button, Label, Jumbotron, Modal, ModalBody, ModalHeader, ModalFooter, Alert } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash} from '@fortawesome/fontawesome-free-solid';
 import axios from 'axios';
 
 class LoginForm extends Component {
-
+    
     constructor(props) {
         super(props)
         this.state = {
             passwordVisible: false,
             username: "",
             password: "",
-            modal: false
+            modal: false,
+            displayWrongAlert: false,
+            displayNotFoundAlert: false
         }
         this.toggleVisiblePassword = this.toggleVisiblePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +43,7 @@ class LoginForm extends Component {
 
 
     handleSubmit = event => {
-        event.preventDefault();
+        event.persist();
 
         document.getElementById('LoginFormEmail').value = null;
         document.getElementById('LoginFormPassword').value = null;
@@ -55,21 +57,16 @@ class LoginForm extends Component {
                 console.log("Success!")
                 this.props.history.push('/');
                 window.location.reload();
+                this.setState({ displayWrongAlert: false });
+                this.setState({ displayNotFoundAlert: false });
+            }
+            else if(res.data.message === 'Auth failed, username not found'){
+                this.setState({ displayNotFoundAlert: true });
+                this.setState({ displayWrongAlert: false });
             }
             else{
-                this.render(
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        <ModalHeader toggle={this.toggle}>Login Attempt Falied</ModalHeader>
-                        <ModalBody>
-                            Your Username or Password are Incorrect. Please try Again!
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="primary" onClick={this.toggle}>Close</Button>
-                        </ModalFooter>
-                    </Modal>
-                )
-                console.log(res);
-                console.log(res.data);
+                this.setState({ displayWrongAlert: true });
+                this.setState({ displayNotFoundAlert: false });
             }
         })
       }
@@ -117,6 +114,12 @@ class LoginForm extends Component {
                                         <Col md={{offset: -2}}>
                                             <br />
                                             <Button outline onClick={this.toggleVisiblePassword}><FontAwesomeIcon icon={icon} /></Button>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="10">
+                                            {this.state.displayWrongAlert ? <Alert className="admin-form-alert" color="danger">Your Username or Password is incorrect! Please Try Again.</Alert> : null}
+                                            {this.state.displayNotFoundAlert ? <Alert className="admin-form-alert" color="danger">These credentials are not associated with NUI Lab!</Alert> : null}
                                         </Col>
                                     </Row>
                                     <Button outline color="info" type="submit">Log In</Button>
