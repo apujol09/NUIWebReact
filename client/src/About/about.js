@@ -81,7 +81,7 @@ class About extends React.Component{
 
         let facultyPHDCard = this.state.facultyPHD.map(person =>{
             return( 
-                <Col key={person._id} sm="5" md={{ size: 6, offset: 3 }}>
+                <Col key={person._id}>
                     <FacultyPHD person={person} image={person.image}/>
                     <br />
                 </Col>
@@ -152,7 +152,7 @@ class About extends React.Component{
                         <h1>Faculty</h1>
                             <br />
                             <Container>
-                                <Row >
+                                <Row>
                                     {facultyPHDCard}   
                                 </Row>
                             </Container>     

@@ -60,7 +60,7 @@ class Projects extends React.Component{
                             <Row>
                                 {project.website ? (<Col><a href={project.website}><Button color="info">Website</Button></a></Col>) : null}
                                 {project.publication ? (<Col><a href={project.publication}><Button color="success">Publication</Button></a></Col>) : null}
-                                {project.paper ? (<Col><a href={Domain + project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
+                                {project.paper ? (<Col><a href={project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
                                 {project.github ? (<Col><a href={project.github}><Button color="secondary">Github</Button></a></Col>) : null}
                             </Row>
                         </Container>

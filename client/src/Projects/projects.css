@@ -4,6 +4,7 @@
 
 .project-jumbotron-blue{
     background-color: rgba(39, 39, 243, 0.719);
+    color: white;
 }
 
 .project-jumbotron-green{
@@ -25,6 +26,7 @@
 .project-name{
     text-align: justify;
     font-size: 40px;
+    
 }
 
 .project-status{
