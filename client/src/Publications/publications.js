@@ -1,5 +1,6 @@
 import React from 'react';
 import './publications.css';
+import Domain from '../Utils/misc';
 import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
@@ -70,11 +71,21 @@ class Publications extends React.Component{
                     else if(publication.category === type && publication.links !== []){
                         let publicationLinks = []
                         publication.links.forEach(link =>{
-                            publicationLinks.push(
-                                <Col>
-                                    [<a className="publication-link" href={link.url}>{link.from}</a>]
-                                </Col>
-                            )
+                            if(link.from === "PDF"){
+                                publicationLinks.push(
+                                    <Col>
+                                        [<a className="publication-link" href={Domain + link.url}>{link.from}</a>]
+                                    </Col>
+                                )
+                            }
+                            else{
+                                publicationLinks.push(
+                                    <Col>
+                                        [<a className="publication-link" href={link.url}>{link.from}</a>]
+                                    </Col>
+                                )
+                            }
+                            
                         })
                         render.push(
                             <div>
