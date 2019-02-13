@@ -27,7 +27,7 @@ class Contact extends React.Component{
                 <div className="map">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.5918001318782!2d-105.08558228430793!3d40.57269075406271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87694a56c0fe863d%3A0x34cdac708b647feb!2s1100+Center+Ave+Mall%2C+Fort+Collins%2C+CO+80521!5e0!3m2!1sen!2sus!4v1531095678017" 
-                        width="65%" 
+                        width="80%" 
                         height="100%" 
                         title="Location"
                         frameborder="0"  

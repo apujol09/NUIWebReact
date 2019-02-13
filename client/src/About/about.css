@@ -4,7 +4,7 @@
 }
 
 .lab-text{
-    width: 80%;
+    width: 100%;
     word-wrap: break-word;
     font-size: 20px;
     text-align: justify;
@@ -45,7 +45,7 @@
 }
 
 .line{
-    width: 80%;
+    width: 100%;
 }
 
 .member-card-separator-csu{

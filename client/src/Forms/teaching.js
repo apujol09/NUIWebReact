@@ -115,7 +115,7 @@ class TeachingForm extends Component {
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberDescription">Description *</Label>
-                                        <AvInput style={{height: "200px"}} type="textarea" name="description" required onChange={this.descriptionChange}/>
+                                        <AvInput style={{height: "200px"}} type="textarea" name="description" placeholder="Enter Class Description here" required onChange={this.descriptionChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>

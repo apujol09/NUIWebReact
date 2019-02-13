@@ -158,7 +158,7 @@ class ProjectsForm extends Component {
                                     </FormGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberDescription">Description</Label>
-                                        <AvInput style={{height: "200px"}} type="textarea" name="description" id="memberDescription" onChange={this.descriptionChange}/>
+                                        <AvInput style={{height: "200px"}} type="textarea" name="description" placeholder="Enter Project Description here" onChange={this.descriptionChange}/>
                                         <FormText className="form-text" color="muted">
                                             If you don't have a project description you don't have to enter anything in this field. 
                                             In that case the Description of the project will be 'TBA'

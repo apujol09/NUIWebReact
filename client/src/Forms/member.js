@@ -259,7 +259,7 @@ class MemberForm extends Component {
                                     </FormGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberDescription">Description *</Label>
-                                        <AvInput style={{height: "200px"}} type="textarea" name="description" id="memberDescription" required onChange={this.descriptionChange}/>
+                                        <AvInput style={{height: "200px"}} type="textarea" name="description" placeholder="Enter Member Description here" required onChange={this.descriptionChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvRadioGroup className="av-radio-group" name="memberCategoryRadioGroup" label="Member Category *" required>

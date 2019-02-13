@@ -1,6 +1,5 @@
 import React from 'react';
 import './about.css';
-import map from '../assets/images/general/map.svg'
 import axios from 'axios';
 import Members from './member';
 import Affiliated from './affiliated';
@@ -9,7 +8,8 @@ import FacultyPHD from './facultyPHD';
 import FacultyCSU from './facultyCSU';
 import FacultyFIU from './facultyFIU';
 import Carousel from './carousel';
-import { Container, Row, Col, Button } from 'reactstrap';
+import Domain from '../Utils/misc';
+import { Container, Row, Col, Button, CardImg } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 
@@ -123,35 +123,28 @@ class About extends React.Component{
                 </Col>
             )
         })
-
-
-       /* var MongoClient = require("mongoose").MongoClient;
-        var url = 'mongodb://localhost/nuidb';
-        
-        MongoClient.connect(url, function(err, db){
-            console.log("Connected");
-            db.close();
-        }); */
         
         return(
 
-            <Container fluid>
+            <Container >
                 <Row><br /><br /></Row>
                 <Row>  
-                    <Col sm="8" md={{offset: 2}}>
+                    <Col sm="12">
                         <Carousel />
                     </Col>
                 </Row>
                 <Row>
-                <div className="lab-description">
+                    <Col md={{size: 4}}>
+                        <CardImg style={{width: "90%"}} src={Domain + "assets/images/general/map.svg"} alt="Map"/>
+                    </Col>
+                    <Col>
                         <br />
-                        <img className="map-image" src={map} alt="Map"/>
                         <article className="lab-text">
                             <h4>Who are We?</h4>
                             <p>We are a multi-disciplinary group, with our primary site at Colorado State University and with a still active site at Florida International University. We have included a diverse background of knowledge and origins. While CS-centric, former students have included majors, such as Statistics, Mathematics, Biology, Psychology, Engineering, and Architecture, among others. We have had members from multiple places, including USA, Cuba, Chile, Colombia, Jamaica, Dominican Republic, China, Brazil, and Venezuela, among others.</p>
                         </article>
-                    </div>
-                    <hr className="line" />
+                    </Col>
+                <hr className="line" />
                 </Row>
                 
                 <Row>
@@ -165,7 +158,7 @@ class About extends React.Component{
                             </Container>     
                             <br />
                     </Col>
-                    {this.state.isloggedIn ? (<Col sm={{offset: -1}}><NavLink to="/add-member"><Button outline color="info">Add New Member</Button></NavLink></Col>) : null}
+                    {this.state.isloggedIn ? (<Col sm={{offset: 1}}><NavLink to="/add-member"><Button outline color="info">Add New Member</Button></NavLink></Col>) : null}
                 </Row>
                 <hr className="line" />
 
