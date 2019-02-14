@@ -9,24 +9,27 @@
 .event-name{
     text-align: justify;
     font-size: 45px;
+    color: rgba(255, 255, 255, 0.843);
 }
 
 .event-date{
     text-align: justify;
     font-size: 35px;
-    font-weight: bold;
+    color: rgba(255, 255, 255, 0.843);
 }
 
 .event-time{
     text-align: justify;
+    color: rgba(255, 255, 255, 0.843);
 }
 
 .event-location{
     text-align: justify;
+    color: rgba(255, 255, 255, 0.843);
 }
 
 .event-presentation{
     text-align: justify;
     font-size: 25px;
-    font-weight: bold;
+    color: rgba(255, 255, 255, 0.843);
 }

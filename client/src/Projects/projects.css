@@ -3,43 +3,45 @@
 }
 
 .project-jumbotron-blue{
-    background-color: rgba(39, 39, 243, 0.719);
-    color: white;
+    background-color: rgba(16, 16, 88, 0.925);
 }
 
 .project-jumbotron-green{
-    background-color: rgba(0, 128, 0, 0.726);
+    background-color: rgba(11, 76, 11, 0.726);
 }
 
 .project-jumbotron-red{
-    background-color: rgba(248, 56, 56, 0.795);
+    background-color: rgba(144, 17, 17, 0.795);
 }
 
 .project-jumbotron-violet{
-    background-color: rgba(238, 130, 238, 0.836);
+    background-color: rgba(93, 7, 93, 0.836);
 }
 
 .project-jumbotron-gray{
-    background-color: rgba(128, 128, 128, 0.815);
+    background-color: rgba(88, 87, 87, 0.815);
 }
 
 .project-name{
     text-align: justify;
     font-size: 40px;
-    
+    color: rgba(255, 255, 255, 0.802);
 }
 
 .project-status{
     text-align: justify;
     font-weight: bold;
+    color: rgba(255, 255, 255, 0.802);
 }
 
 .project-labs{
     text-align: justify;
     font-size: 25px;
+    color: rgba(255, 255, 255, 0.802);
 }
 
 .project-description{
     text-align: justify;
     font-size: 28px;
+    color: rgba(255, 255, 255, 0.802);
 }

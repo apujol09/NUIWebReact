@@ -54,20 +54,18 @@ class Publications extends React.Component{
                 )
                 this.state.publications.forEach(publication =>{
                     let text = publication.name.split("'");
-                    console.log(text);
+                    let bold = text[1]
                     if(publication.category === type && publication.links === []){
                         render.push(
                             <div className="publication-div">
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + publication.name}</p>
+                                            <p className="publication-text">{number + '. ' + text[0] + bold + text[2]}</p>
                                         </Row>
                                     </Container>
                                 </Jumbotron>
-                                <br />
                             </div>
-
                         )
                         number++;
                     }
@@ -95,7 +93,7 @@ class Publications extends React.Component{
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + publication.name}</p>
+                                            <p className="publication-text">{number + '. ' + text[0] + bold + text[2]}</p>
                                         </Row>
                                         <Row>
                                             {publicationLinks}

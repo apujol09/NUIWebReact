@@ -35,22 +35,26 @@ class Teaching extends React.Component{
         let render = []
 
         this.state.courses.map(course =>{
-            semesters.push(course.semester);
+            if(!semesters.includes(course.semester)){
+                semesters.push(course.semester);
+            }
         })
+        console.log(semesters)
 
         semesters.forEach(semester => {
             if(semesters !== null){
+                render.push(
+                    <Row>
+                        <h2>{semester}</h2>
+                        <br />
+                        <hr className="teaching-line" />
+                    </Row>
+                )
                 this.state.courses.forEach(course =>{
                     if(course.semester === semester){
                         if(course.link === ''){
                             render.push( 
                                 <div key={course.code}>
-                                    <Jumbotron>
-                                        <Row>
-                                            <h2>{semester}</h2>
-                                            <br />
-                                            <hr className="teaching-line" />
-                                        </Row>
                                         <Row>
                                             <Col>
                                             <p className="course-title">{course.code}: {course.name}</p>
@@ -59,20 +63,15 @@ class Teaching extends React.Component{
                                             <br />
                                         </Row>
                                         <br />
-                                    </Jumbotron>
                                 </div>)
                         }
                         else{
                             render.push( 
                                 <div key={course.code}>
                                     <Row>
-                                        <h2>{semester}</h2>
-                                        <br />
-                                        <hr className="teaching-line" />
-                                    </Row>
-                                    <Row>
                                         <Col>
                                         <p className="course-title">{course.code}: {course.name}</p>
+                                        <p className="course-time"><b>Time:</b> {course.time}</p>
                                         <p className="course-description"><b>Description:</b> {course.description}</p>
                                         <a className="course-link" href={course.link}>{course.code} Website</a>
                                         </Col>
