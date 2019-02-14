@@ -320,11 +320,6 @@ app.post('/api/admins',auth,(req,res)=>{
     })
 });
 
-
-//=========================================
-//                  ADMINS
-//=========================================
-
 app.get('/api/auth', auth, (req,res)=>{
 
     res.status(200).json({

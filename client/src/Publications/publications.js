@@ -4,6 +4,7 @@ import Domain from '../Utils/misc';
 import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import PublicationForm from '../Forms/publication';
 
 class Publications extends React.Component{
 
@@ -61,7 +62,7 @@ class Publications extends React.Component{
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + text[0] + bold + text[2]}</p>
+                                            <p className="publication-text">{number + '. ' + publication.name}</p>
                                         </Row>
                                     </Container>
                                 </Jumbotron>
@@ -93,10 +94,11 @@ class Publications extends React.Component{
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + text[0] + bold + text[2]}</p>
+                                            <p className="publication-text">{number + '. ' + publication.name} </p>
+                                            
                                         </Row>
                                         <Row>
-                                            {publicationLinks}
+                                        {publicationLinks}
                                         </Row>
                                     </Container>
                                 </Jumbotron>
