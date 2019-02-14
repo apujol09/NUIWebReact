@@ -43,7 +43,6 @@ class Publications extends React.Component{
         })
 
         if(publicationTypes !== []){
-            console.log(this.state.publications)
             publicationTypes.forEach(type =>{
                 render.push(
                     <Row>
@@ -54,6 +53,8 @@ class Publications extends React.Component{
                     </Row>
                 )
                 this.state.publications.forEach(publication =>{
+                    let text = publication.name.split("'");
+                    console.log(text);
                     if(publication.category === type && publication.links === []){
                         render.push(
                             <div className="publication-div">
@@ -64,7 +65,9 @@ class Publications extends React.Component{
                                         </Row>
                                     </Container>
                                 </Jumbotron>
+                                <br />
                             </div>
+
                         )
                         number++;
                     }

@@ -80,6 +80,10 @@ class PublicationForm extends Component {
                                         <FormText className="form-text" color="muted">
                                             Please be careful which citation you use for this field. Whatever you 
                                             input here will be shown on the Publications Page.
+                                            <br /> 
+                                            <b>NOTE:</b> Please wrap
+                                            Ortega's name within single quotation marks like so: 'Ortega, F.' so his name will
+                                            show in Bold.
                                         </FormText>
                                     </AvGroup>
                                     <AvGroup>
@@ -89,7 +93,7 @@ class PublicationForm extends Component {
                                         <FormText className="form-text" color="muted">
                                             If you have any links to provide for this Publication, please type the
                                             URLs separated by a space specifying also where the link comes from 
-                                            in the following way: [Name_of_Source]:[URL]. Please DO NOT INCLUDE "http://"
+                                            in the following way: <b>Name_of_Source:URL</b>. Please <b>DO NOT INCLUDE</b> the "http://"
                                             part of the URL, doing so will result in an error of storing the URL.
                                         </FormText>
                                     </AvGroup>
