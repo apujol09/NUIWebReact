@@ -8,7 +8,6 @@
 }
 
 .publication-jumbotron{
-    margin-top: 0;
     padding-bottom: 0;
     padding-top: 10px;
 }
@@ -26,4 +25,8 @@
 .publication-link:hover{
     text-decoration: none;
     color: orange;
+}
+
+.links-row{
+    padding-top: 3px;
 }

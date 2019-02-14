@@ -62,7 +62,7 @@ class Publications extends React.Component{
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + publication.name}</p>
+                                            <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
                                         </Row>
                                     </Container>
                                 </Jumbotron>
@@ -94,10 +94,10 @@ class Publications extends React.Component{
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
-                                            <p className="publication-text">{number + '. ' + publication.name} </p>
+                                            <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
                                             
                                         </Row>
-                                        <Row>
+                                        <Row className="links-row">
                                         {publicationLinks}
                                         </Row>
                                     </Container>
