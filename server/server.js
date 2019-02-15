@@ -252,6 +252,16 @@ app.get('/api/publications',(req,res)=>{
     })
 })
 
+app.put('/api/publications/:id',auth,(req,res)=>{
+    Publications.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            publications: doc
+        })
+    })
+})
+
 
 //=========================================
 //              TEACHING

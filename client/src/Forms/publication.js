@@ -1,35 +1,61 @@
 import React, { Component } from 'react';
 import './member.css';
-import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback, Alert } from 'availity-reactstrap-validation';
 import { Container, Row, Col, Button, Label, FormText, Jumbotron } from 'reactstrap';
 import axios from 'axios';
 
 
 class PublicationForm extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            publicationCitation: this.props.publication ? this.props.publication.name : "",
+            publicationLinks: [],
+            publicationCategory: this.props.publication ? this.props.publication.category : "",
+            citationValue: this.props.publication ? this.props.publication.name : null,
+            linksValue: null,
+            categoryValue: this.props.publication ? this.props.publication.category : null
+        }
 
-    state={
-        publicationCitation: "",
-        publicationLinks: [],
-        publicationCategory: "",
+      }
+
+    componentDidMount(){
+        if(this.props.publication){
+            let links = this.props.publication.links.map(link =>{
+                return link.from + ":" + link.url
+            })
+
+            let text = links.join(' ');
+            if(text !== ""){
+                this.setState({ linksValue: text })
+            }
+            else{
+                this.setState({ linksValue: [] })
+            }
+        }
     }
 
     citationChange = event =>{
         event.persist();
         this.setState({ publicationCitation: event.target.value });
+        this.setState({ citationValue: event.target.value });
     }
 
     linksChange = event =>{
         event.preventDefault();
 
         let info = event.target.value.split(' ');
+        console.log(info)
         let sources = info.map(link =>{
             return link.split(':')
         })
         let links = sources.map(link =>{
             return {"from": link[0], "url": "http://" + link[1]}
         })
+        console.log(links);
         this.setState({ publicationLinks: links });
     }
+
 
     categoryChange = event =>{
         event.preventDefault();
@@ -57,34 +83,55 @@ class PublicationForm extends Component {
             });
     }
 
+    handleUpdate = event =>{
+        event.persist();
+
+        axios.put(`/api/publications/${this.props.publication._id}`, { 
+            name: this.state.publicationCitation,
+            links: this.state.publicationLinks,
+            category: this.state.publicationCategory,
+                 
+            })
+            .then(res =>{
+                if(res.data.success === true){
+                    window.location.reload();
+                }
+                else{
+                    console.log("Updating Publication Failed!");
+                    console.log(res);
+                }
+            });
+    }
+
 
     render() {
         return (
             <div>
                 <Container>
-                    <Row><br /><br /></Row>
+                    {this.props.publication ? null : <Row><br /><br /></Row>}
                     <Row>
                         <Col md={{size: 6, offset: 3}}>
-                            <h1>Add New Project</h1>
+                            {this.props.publication ? <h1>Update Publication</h1> : <h1>Add New Publication</h1>}
                             <br />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <Jumbotron>
-                                <AvForm onSubmit={this.handleSubmit}>
+                                <AvForm onSubmit={this.props.publication ? this.handleUpdate : this.handleSubmit}>
                                     <AvGroup>
                                         <Label className="form-label" for="example">Citation for Publication *</Label>
-                                        <AvInput name="citation" placeholder="Enter Publication Citation Here" required onChange={this.citationChange}/>
+                                        <AvInput name="citation" id="citation" value={this.state.citationValue} placeholder="Enter Publication Citation Here" required onChange={this.citationChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please be careful which citation you use for this field. Whatever you 
-                                            input here will be shown on the Publications Page.
+                                            input here will be shown on the Publications Page. Please encase anything
+                                            you want Bold within HTML "b" tags and for Italics within "i" tags.
                                         </FormText>
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberEmail">Links</Label>
-                                        <AvInput name="links" placeholder="Enter Member Email here" onChange={this.linksChange}/>
+                                        <AvInput name="links" id="links" value={this.state.linksValue} placeholder="Enter Publication Links here" onChange={this.linksChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             If you have any links to provide for this Publication, please type the
@@ -95,7 +142,7 @@ class PublicationForm extends Component {
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberPosition">Category *</Label>
-                                        <AvInput name="category" placeholder="Enter Publication Category here" required onChange={this.categoryChange}/>
+                                        <AvInput name="category" id="category" value={this.state.categoryValue} placeholder="Enter Publication Category here" required onChange={this.categoryChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Categories are the different sections in the Publiactions Page. This is required! 
@@ -103,7 +150,8 @@ class PublicationForm extends Component {
                                             and it will be created.
                                         </FormText>
                                     </AvGroup>
-                                    <Button outline color="danger" size="lg" block>Submit</Button>
+                                    {this.props.publication ? <Button outline color="danger" size="lg" block>Update</Button>
+                                    : <Button outline color="danger" size="lg" block>Submit</Button> }
                                 </AvForm>
                             </Jumbotron>
                         </Col>

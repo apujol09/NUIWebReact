@@ -3,23 +3,23 @@
 }
 
 .publication-text{
-    font-size: 18px;
+    font-size: 19px;
     text-align: justify;
 }
 
 .publication-jumbotron{
     padding-bottom: 0;
     padding-top: 10px;
+    width: 100%;
 }
 
 .publication-div{
-    margin-bottom: 0;
-    padding: 100px 0 0 0;
+
 }
 
 .publication-link{
     color: orangered;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .publication-link:hover{
@@ -29,4 +29,8 @@
 
 .links-row{
     padding-top: 3px;
+}
+
+.links{
+    font-size: 19px;
 }

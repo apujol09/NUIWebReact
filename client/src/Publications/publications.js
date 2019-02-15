@@ -1,10 +1,12 @@
 import React from 'react';
 import './publications.css';
 import Domain from '../Utils/misc';
-import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import PublicationForm from '../Forms/publication';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/fontawesome-free-solid';
 
 class Publications extends React.Component{
 
@@ -12,7 +14,7 @@ class Publications extends React.Component{
         super(props)
         this.state = {
             publications: [],
-            isloggedIn: false
+            isloggedIn: false,
         }
       }
 
@@ -54,11 +56,10 @@ class Publications extends React.Component{
                     </Row>
                 )
                 this.state.publications.forEach(publication =>{
-                    let text = publication.name.split("'");
-                    let bold = text[1]
                     if(publication.category === type && publication.links === []){
                         render.push(
                             <div className="publication-div">
+                                <br />
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
                                         <Row>
@@ -76,14 +77,14 @@ class Publications extends React.Component{
                             if(link.from === "PDF"){
                                 publicationLinks.push(
                                     <Col>
-                                        [<a className="publication-link" href={Domain + link.url}>{link.from}</a>]
+                                        <p className="links">[<a className="publication-link" href={Domain + link.url}>{link.from}</a>]</p>
                                     </Col>
                                 )
                             }
                             else{
                                 publicationLinks.push(
                                     <Col>
-                                        [<a className="publication-link" href={link.url}>{link.from}</a>]
+                                        <p className="links">[<a className="publication-link" href={link.url}>{link.from}</a>]</p>
                                     </Col>
                                 )
                             }
@@ -93,15 +94,26 @@ class Publications extends React.Component{
                             <div>
                                 <Jumbotron className="publication-jumbotron">
                                     <Container>
-                                        <Row>
+                                        <Row md={{size: 12}}>
                                             <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
-                                            
                                         </Row>
                                         <Row className="links-row">
-                                        {publicationLinks}
+                                            {publicationLinks}
+                                        </Row>
+                                        <Row>
+                                            <Col md={{size: 2, offset: 11}}>
+                                            {this.state.isloggedIn ? <Button color="danger" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                                            </Col>
                                         </Row>
                                     </Container>
                                 </Jumbotron>
+                                {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <PublicationForm publication={publication} />
+                                </UncontrolledCollapse>
+                                :null
+                                }
+                                
                             </div>
                         )
                         number++;
