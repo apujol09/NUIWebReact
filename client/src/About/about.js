@@ -9,22 +9,30 @@ import FacultyCSU from './facultyCSU';
 import FacultyFIU from './facultyFIU';
 import Carousel from './carousel';
 import Domain from '../Utils/misc';
-import { Container, Row, Col, Button, CardImg } from 'reactstrap';
+import MemberForm from '../Forms/member';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/fontawesome-free-solid';
+import { Container, Row, Col, Button, CardImg, UncontrolledCollapse } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 
 class About extends React.Component{
-
-    state={
-        facultyPHD: [],
-        facultyCSU: [],
-        facultyFIU: [],
-        members: [],
-        affiliated: [],
-        former: [],
-        isLoading: true,
-        isloggedIn: false
+    constructor( props ){
+        super();
+        this.state={
+            facultyPHD: [],
+            facultyCSU: [],
+            facultyFIU: [],
+            members: [],
+            affiliated: [],
+            former: [],
+            isLoading: true,
+            isloggedIn: false,
+            isFormOpen: false
+        }
+        this.toggle = this.toggle.bind(this);
     };
+    
 
     
 
@@ -65,21 +73,33 @@ class About extends React.Component{
         //this.setState({isLoading: false})
     }
 
-    constructor( props ){
-        super();
-};
+    toggle(){
+        this.setState({ isFormOpen: !this.state.isFormOpen })
+    }
+
+
 
     render(){
+        let number = 0;
         let memberCards = this.state.members.map(person =>{
+            number++;
             return( 
                 <Col key={person._id} sm="4">
+                    {this.state.isloggedIn ? <Button id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
                     <Members person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <MemberForm member={person} />
+                        </UncontrolledCollapse>
+                    : null
+                    }
                     <br />
                 </Col>
             )
         })
 
         let facultyPHDCard = this.state.facultyPHD.map(person =>{
+            number++;
             return( 
                 <Col key={person._id}>
                     <FacultyPHD person={person} image={person.image}/>
@@ -89,6 +109,7 @@ class About extends React.Component{
         })
 
         let facultyCSUCards = this.state.facultyCSU.map(person =>{
+            number++;
             return( 
                 <Col key={person._id} sm="4">
                     <FacultyCSU person={person} image={person.image}/>
@@ -98,6 +119,7 @@ class About extends React.Component{
         })
 
         let facultyFIUCards = this.state.facultyFIU.map(person =>{
+            number++;
             return( 
                 <Col key={person._id} sm="4">
                     <FacultyFIU person={person} image={person.image}/>
@@ -107,6 +129,7 @@ class About extends React.Component{
         })
 
         let affiliatedCards = this.state.affiliated.map(person =>{
+            number++;
             return( 
                 <Col key={person._id} sm="4">
                     <Affiliated person={person} image={person.image}/>
@@ -116,6 +139,7 @@ class About extends React.Component{
         })
 
         let formerCards = this.state.former.map(person =>{
+            number++;
             return( 
                 <Col key={person._id} sm="4">
                     <Former person={person} image={person.image}/>

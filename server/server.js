@@ -31,8 +31,12 @@ const { Images } = require('./models/images');
 
 //Middlewares
 const { auth } = require('./middleware/auth');
-const { admin } = require('./middleware/admin');
 
+
+
+//=========================================
+//                IMAGES
+//=========================================
 
 app.post('/api/images',auth,(req,res)=>{
     const images = new Images(req.body);
@@ -77,6 +81,15 @@ app.get('/api/members',(req,res)=>{
     })
 })
 
+app.put('/api/members/:id',auth,(req,res)=>{
+    Members.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            members: doc
+        })
+    })
+})
 
 //=========================================
 //                AFFILIATED
@@ -99,6 +112,16 @@ app.get('/api/affiliated',(req,res)=>{
     Affiliated.find({},(err,affiliated)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(affiliated);
+    })
+})
+
+app.put('/api/affiliated/:id',auth,(req,res)=>{
+    Affiliated.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            affiliated: doc
+        })
     })
 })
 
@@ -126,6 +149,15 @@ app.get('/api/former',(req,res)=>{
     })
 })
 
+app.put('/api/former/:id',auth,(req,res)=>{
+    Former.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            former: doc
+        })
+    })
+})
 
 //=========================================
 //              FACULTY PHD
@@ -151,6 +183,15 @@ app.get('/api/facultyPHD',(req,res)=>{
     })
 })
 
+app.put('/api/facultyPHD/:id',auth,(req,res)=>{
+    facultyPHD.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyPHD: doc
+        })
+    })
+})
 
 //=========================================
 //              FACULTY CSU
@@ -176,7 +217,15 @@ app.get('/api/facultyCSU',(req,res)=>{
     })
 })
 
-
+app.put('/api/facultyCSU/:id',auth,(req,res)=>{
+    FacultyCSU.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyCSU: doc
+        })
+    })
+})
 
 //=========================================
 //              FACULTY FIU
@@ -202,7 +251,15 @@ app.get('/api/facultyFIU',(req,res)=>{
     })
 })
 
-
+app.put('/api/facultyFIU/:id',auth,(req,res)=>{
+    FacultyFIU.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyFIU: doc
+        })
+    })
+})
 
 //=========================================
 //                PROJECTS
@@ -225,6 +282,16 @@ app.get('/api/projects',(req,res)=>{
     Projects.find({},(err,projects)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(projects);
+    })
+})
+
+app.put('/api/projects/:id',auth,(req,res)=>{
+    Projects.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            projects: doc
+        })
     })
 })
 
@@ -284,6 +351,16 @@ app.get('/api/teaching',(req,res)=>{
     Teaching.find({},(err,teaching)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(teaching);
+    })
+})
+
+app.put('/api/teaching/:id',auth,(req,res)=>{
+    Teaching.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            teaching: doc
+        })
     })
 })
 

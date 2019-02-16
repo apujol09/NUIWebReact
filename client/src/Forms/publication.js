@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './member.css';
-import { AvForm, AvGroup, AvInput, AvFeedback, Alert } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
 import { Container, Row, Col, Button, Label, FormText, Jumbotron } from 'reactstrap';
 import axios from 'axios';
 
@@ -22,7 +22,7 @@ class PublicationForm extends Component {
     componentDidMount(){
         if(this.props.publication){
             let links = this.props.publication.links.map(link =>{
-                return link.from + ":" + link.url
+                return link.from + ";" + link.url
             })
 
             let text = links.join(' ');
@@ -38,22 +38,20 @@ class PublicationForm extends Component {
     citationChange = event =>{
         event.persist();
         this.setState({ publicationCitation: event.target.value });
-        this.setState({ citationValue: event.target.value });
     }
 
     linksChange = event =>{
         event.preventDefault();
-
-        let info = event.target.value.split(' ');
-        console.log(info)
-        let sources = info.map(link =>{
-            return link.split(':')
-        })
-        let links = sources.map(link =>{
-            return {"from": link[0], "url": "http://" + link[1]}
-        })
-        console.log(links);
-        this.setState({ publicationLinks: links });
+        if(event.target.value !== ""){
+            let info = event.target.value.split(' ');
+            let sources = info.map(link =>{
+                return link.split(';')
+            })
+            let links = sources.map(link =>{
+                return {"from": link[0], "url": link[1]}
+            })
+            this.setState({ publicationLinks: links });
+        }
     }
 
 
@@ -136,8 +134,7 @@ class PublicationForm extends Component {
                                         <FormText className="form-text" color="muted">
                                             If you have any links to provide for this Publication, please type the
                                             URLs separated by a space specifying also where the link comes from 
-                                            in the following way: [Name_of_Source]:[URL]. Please DO NOT INCLUDE "http://"
-                                            part of the URL, doing so will result in an error of storing the URL.
+                                            in the following way: [Name_of_Source];[URL].
                                         </FormText>
                                     </AvGroup>
                                     <AvGroup>

@@ -2,10 +2,25 @@ import React, { Component } from 'react';
 import './about.css';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
+import axios from 'axios';
   
 
 class Affiliated extends Component {
 
+    state={
+        isloggedIn: false
+    }    
+
+    componentDidMount(){
+        axios.get(`/api/auth`).then(res => {
+            if(res.data.isAuth === true){
+                this.setState({ isloggedIn: true });
+            }
+            else{
+                this.setState({ isloggedIn: false });
+            }
+        });
+    }
 
     render() {
         let personColor = (this.props.person.university === "Colorado State University (Fort Collins, CO)") ? "member-card-separator-csu" : "member-card-separator-fiu";

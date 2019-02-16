@@ -8,20 +8,32 @@ import axios from 'axios';
 
 
 class MemberForm extends Component {
-
-    state={
-        memberName: "",
-        memberEmail: "",
-        memberPosition: "",
-        memberUniversity: "",
-        memberMajor: "",
-        memberEducation: "",
-        memberWebsite: "",
-        memberDescription: "",
-        memberCategory: "",
-        memberCategoryChecked: "",
-        selectedImage: null
+    constructor(props){
+        super(props)
+        this.state={
+            memberName: this.props.member ? this.props.member.name : "",
+            nameValue: this.props.member ? this.props.member.name : null,
+            memberEmail: this.props.member ? this.props.member.email : "",
+            emailValue: this.props.member ? this.props.member.email : null,
+            memberPosition: this.props.member ? this.props.member.position : "",
+            positionValue: this.props.member ? this.props.member.position : null,
+            memberUniversity: this.props.member ? this.props.member.university : "",
+            universityValue: this.props.member ? this.props.member.university : null,
+            memberMajor: this.props.member ? this.props.member.major : "",
+            majorValue: this.props.member ? this.props.member.major : null,
+            memberEducation: this.props.member ? this.props.member.education : "",
+            educationValue: this.props.member ? this.props.member.education : null,
+            memberWebsite: this.props.member ? this.props.member.website : "",
+            websiteValue: this.props.member ? this.props.member.website : null,
+            memberDescription: this.props.member ? this.props.member.description : "",
+            descriptionValue: this.props.member ? this.props.member.description : null,
+            memberCategory: this.props.member ? this.props.member.category : "",
+            categoryValue: this.props.member ? this.props.member.category : null,
+            memberCategoryChecked: this.props.category ? this.props.category : "",
+            selectedImage: null
+        }
     }
+    
 
     nameChange = event =>{
         event.persist();
@@ -75,8 +87,34 @@ class MemberForm extends Component {
     handleSubmit = event =>{
         event.persist();
 
+        axios.post(`/api/${this.state.memberCategoryChecked}`, { 
+            name: this.state.memberName,
+            education: this.state.memberEducation,
+            major: this.state.memberMajor,
+            position: this.state.memberPosition,
+            email: this.state.memberEmail,
+            university: this.state.memberUniversity,
+            website: this.state.memberWebsite,
+            image: "a",
+            description: this.state.memberDescription 
+            })
+            .then(res =>{
+                if(res.data.success === true){
+                    this.props.history.push('/about');
+                    window.location.reload();
+                }
+                else{
+                    console.log("Adding Member Failed!");
+                    console.log(res);
+                }
+        });
+    }
+
+    handleUpdate = event =>{
+        event.persist();
+
         if(this.state.memberCategoryChecked === "facultyCSU"){
-            axios.post(`/api/facultyCSU`, { 
+            axios.put(`/api/facultyCSU/${this.props.member._id}`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -84,23 +122,22 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "a",
+                image: this.props.member.image,
                 description: this.state.memberDescription 
              })
                 .then(res =>{
                     if(res.data.success === true){
-                        this.props.history.push('/about');
                         window.location.reload();
                     }
                     else{
-                        console.log("Adding Member Failed!");
+                        console.log("Updating Member Failed!");
                         console.log(res);
                     }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "facultyFIU"){
-            axios.post(`/api/facultyFIU`, { 
+            axios.put(`/api/facultyFIU/${this.props.member._id}`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -108,23 +145,22 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "a",
+                image: this.props.member.image,
                 description: this.state.memberDescription 
              })
                 .then(res =>{
                     if(res.data.success === true){
-                        this.props.history.push('/about');
                         window.location.reload();
                     }
                     else{
-                        console.log("Adding Member Failed!");
+                        console.log("Updating Member Failed!");
                         console.log(res);
                     }
                 });
         }
         
         else if(this.state.memberCategoryChecked === "current"){
-            axios.post(`/api/members`, { 
+            axios.put(`/api/members/${this.props.member._id}`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -132,23 +168,22 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "a",
+                image: this.props.member.image,
                 description: this.state.memberDescription 
              })
                 .then(res =>{
                     if(res.data.success === true){
-                        this.props.history.push('/about');
                         window.location.reload();
                     }
                     else{
-                        console.log("Adding Member Failed!");
+                        console.log("Updating Member Failed!");
                         console.log(res);
                     }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "affiliated"){
-            axios.post(`/api/affiliated`, { 
+            axios.put(`/api/affiliated/${this.props.member._id}`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -156,23 +191,22 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "a",
+                image: this.props.member.image,
                 description: this.state.memberDescription 
              })
                 .then(res =>{
                     if(res.data.success === true){
-                        this.props.history.push('/about');
                         window.location.reload();
                     }
                     else{
-                        console.log("Adding Member Failed!");
+                        console.log("Updating Member Failed!");
                         console.log(res);
                     }
                 });
         }
 
         else if(this.state.memberCategoryChecked === "former"){
-            axios.post(`/api/former`, { 
+            axios.put(`/api/former/${this.props.member._id}`, { 
                 name: this.state.memberName,
                 education: this.state.memberEducation,
                 major: this.state.memberMajor,
@@ -180,56 +214,54 @@ class MemberForm extends Component {
                 email: this.state.memberEmail,
                 university: this.state.memberUniversity,
                 website: this.state.memberWebsite,
-                image: "a",
+                image: this.props.member.image,
                 description: this.state.memberDescription 
              })
                 .then(res =>{
                     if(res.data.success === true){
-                        this.props.history.push('/about');
                         window.location.reload();
                     }
                     else{
-                        console.log("Adding Member Failed!");
+                        console.log("Updating Member Failed!");
                         console.log(res);
                     }
                 });
         }
     }
 
-
     render() {
         return (
             <div>
                 <Container>
-                    <Row><br /><br /></Row>
+                    {this.props.member ? null : <Row><br /><br /></Row>}
                     <Row>
                         <Col md={{size: 6, offset: 3}}>
-                            <h1>Add New Member</h1>
+                            {this.props.member ? <h1>Update Member</h1> : <h1>Add New Member</h1>}
                             <br />
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <Jumbotron>
-                                <AvForm onSubmit={this.handleSubmit}>
+                                <AvForm onSubmit={this.props.member ? this.handleUpdate : this.handleSubmit}>
                                     <AvGroup>
                                         <Label className="form-label" for="example">Name *</Label>
-                                        <AvInput name="name" id="memberName" placeholder="Enter Member Name Here" required onChange={this.nameChange}/>
+                                        <AvInput name="name" id="memberName" value={this.state.nameValue} placeholder="Enter Member Name Here" required onChange={this.nameChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberEmail">Email *</Label>
-                                        <AvInput name="email" id="memberEmail" placeholder="Enter Member Email here" required onChange={this.emailChange}/>
+                                        <AvInput name="email" id="memberEmail" value={this.state.emailValue} placeholder="Enter Member Email here" required onChange={this.emailChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberPosition">Position *</Label>
-                                        <AvInput name="position" id="memberPosition" placeholder="Enter Member Position here" required onChange={this.positionChange}/>
+                                        <AvInput name="position" id="memberPosition" value={this.state.positionValue} placeholder="Enter Member Position here" required onChange={this.positionChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberUniversity">University *</Label>
-                                        <AvInput name="university" id="memberUniversity" placeholder="Enter Member University here" required onChange={this.universityChange}/>
+                                        <AvInput name="university" id="memberUniversity" value={this.state.universityValue} placeholder="Enter Member University here" required onChange={this.universityChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please refer to About Us page to see the format of the University Field. Keep data 
@@ -238,12 +270,12 @@ class MemberForm extends Component {
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberMajor">Major *</Label>
-                                        <AvInput name="major" type="text" id="memberMajor" placeholder="Enter Member Major here" required onChange={this.majorChange}/>
+                                        <AvInput name="major" type="text" id="memberMajor" value={this.state.majorValue} placeholder="Enter Member Major here" required onChange={this.majorChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberEducation">Education Level *</Label>
-                                        <AvInput name="education" type="text" id="memberEducation" placeholder="Enter Member Education Level here" required onChange={this.educationChange}/>
+                                        <AvInput name="education" type="text" id="memberEducation" value={this.state.educationValue} placeholder="Enter Member Education Level here" required onChange={this.educationChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please refer to About Us page to see the format of the Education Field. It sould be
@@ -252,14 +284,14 @@ class MemberForm extends Component {
                                     </AvGroup>
                                     <FormGroup>
                                         <Label className="form-label" for="memberWebsite">Website</Label>
-                                        <Input type="text" id="memberWebsite" placeholder="Enter Member Website here" onChange={this.websiteChange}/>
+                                        <Input type="text" id="memberWebsite" value={this.state.websiteValue} placeholder="Enter Member Website here" onChange={this.websiteChange}/>
                                         <FormText className="form-text" color="muted">
                                             Only enter a URL in this field. This is not required for all members.
                                         </FormText>
                                     </FormGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberDescription">Description *</Label>
-                                        <AvInput style={{height: "200px"}} type="textarea" name="description" placeholder="Enter Member Description here" required onChange={this.descriptionChange}/>
+                                        <AvInput style={{height: "200px"}} type="textarea" value={this.state.descriptionValue} name="description" placeholder="Enter Member Description here" required onChange={this.descriptionChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvRadioGroup className="av-radio-group" name="memberCategoryRadioGroup" label="Member Category *" required>
@@ -271,7 +303,7 @@ class MemberForm extends Component {
                                             onChange={() => this.setState({ memberCategoryChecked: "current" })}/>
                                         <AvRadio className="form-radio-div" customInput label="Affiliated Member" value="affiliated" 
                                             onChange={() => this.setState({ memberCategoryChecked: "affiliated" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Former Member" value="former" 
+                                        <AvRadio className="form-radio-div" customInput label="Former Member" checked="true" value="former" 
                                             onChange={() => this.setState({ memberCategoryChecked: "former" })}/>
                                     </AvRadioGroup>
                                     <FormGroup>
@@ -288,7 +320,7 @@ class MemberForm extends Component {
                                             </Col>
                                         </Row>
                                     </FormGroup>
-                                    <Button outline color="primary" size="lg" block>Submit</Button>
+                                    {this.props.member ? <Button outline color="primary" size="lg" block>Update</Button> : <Button outline color="primary" size="lg" block>Submit</Button>}
                                 </AvForm>
                             </Jumbotron>
                         </Col>

@@ -1,8 +1,11 @@
 import React from 'react';
 import './teaching.css'; 
-import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import TeachingForm from '../Forms/teaching';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/fontawesome-free-solid';
 
 class Teaching extends React.Component{
     
@@ -33,13 +36,13 @@ class Teaching extends React.Component{
     render(){
         let semesters = []
         let render = []
+        let number = 0
 
         this.state.courses.map(course =>{
             if(!semesters.includes(course.semester)){
                 semesters.push(course.semester);
             }
         })
-        console.log(semesters)
 
         semesters.forEach(semester => {
             if(semesters !== null){
@@ -74,12 +77,26 @@ class Teaching extends React.Component{
                                         <p className="course-time"><b>Time:</b> {course.time}</p>
                                         <p className="course-description"><b>Description:</b> {course.description}</p>
                                         <a className="course-link" href={course.link}>{course.code} Website</a>
+                                        {this.state.isloggedIn ? 
+                                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                                <TeachingForm teaching={course} />
+                                            </UncontrolledCollapse>
+                                            : null
+                                        }
                                         </Col>
+                                        {this.state.isloggedIn ?
+                                        (
+                                        <Col md={{size: 1}}>
+                                             <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x" /></Button>
+                                        </Col>
+                                        ) : null}
+                                        
                                         <br />
                                     </Row>
                                     <br />
                                 </div>)
                         }
+                    number++;
                     }  
                 })  
             }
