@@ -113,120 +113,26 @@ class MemberForm extends Component {
     handleUpdate = event =>{
         event.persist();
 
-        if(this.state.memberCategoryChecked === "facultyCSU"){
-            axios.put(`/api/facultyCSU/${this.props.member._id}`, { 
-                name: this.state.memberName,
-                education: this.state.memberEducation,
-                major: this.state.memberMajor,
-                position: this.state.memberPosition,
-                email: this.state.memberEmail,
-                university: this.state.memberUniversity,
-                website: this.state.memberWebsite,
-                image: this.props.member.image,
-                description: this.state.memberDescription 
-             })
-                .then(res =>{
-                    if(res.data.success === true){
-                        window.location.reload();
-                    }
-                    else{
-                        console.log("Updating Member Failed!");
-                        console.log(res);
-                    }
-                });
-        }
-
-        else if(this.state.memberCategoryChecked === "facultyFIU"){
-            axios.put(`/api/facultyFIU/${this.props.member._id}`, { 
-                name: this.state.memberName,
-                education: this.state.memberEducation,
-                major: this.state.memberMajor,
-                position: this.state.memberPosition,
-                email: this.state.memberEmail,
-                university: this.state.memberUniversity,
-                website: this.state.memberWebsite,
-                image: this.props.member.image,
-                description: this.state.memberDescription 
-             })
-                .then(res =>{
-                    if(res.data.success === true){
-                        window.location.reload();
-                    }
-                    else{
-                        console.log("Updating Member Failed!");
-                        console.log(res);
-                    }
-                });
-        }
-        
-        else if(this.state.memberCategoryChecked === "current"){
-            axios.put(`/api/members/${this.props.member._id}`, { 
-                name: this.state.memberName,
-                education: this.state.memberEducation,
-                major: this.state.memberMajor,
-                position: this.state.memberPosition,
-                email: this.state.memberEmail,
-                university: this.state.memberUniversity,
-                website: this.state.memberWebsite,
-                image: this.props.member.image,
-                description: this.state.memberDescription 
-             })
-                .then(res =>{
-                    if(res.data.success === true){
-                        window.location.reload();
-                    }
-                    else{
-                        console.log("Updating Member Failed!");
-                        console.log(res);
-                    }
-                });
-        }
-
-        else if(this.state.memberCategoryChecked === "affiliated"){
-            axios.put(`/api/affiliated/${this.props.member._id}`, { 
-                name: this.state.memberName,
-                education: this.state.memberEducation,
-                major: this.state.memberMajor,
-                position: this.state.memberPosition,
-                email: this.state.memberEmail,
-                university: this.state.memberUniversity,
-                website: this.state.memberWebsite,
-                image: this.props.member.image,
-                description: this.state.memberDescription 
-             })
-                .then(res =>{
-                    if(res.data.success === true){
-                        window.location.reload();
-                    }
-                    else{
-                        console.log("Updating Member Failed!");
-                        console.log(res);
-                    }
-                });
-        }
-
-        else if(this.state.memberCategoryChecked === "former"){
-            axios.put(`/api/former/${this.props.member._id}`, { 
-                name: this.state.memberName,
-                education: this.state.memberEducation,
-                major: this.state.memberMajor,
-                position: this.state.memberPosition,
-                email: this.state.memberEmail,
-                university: this.state.memberUniversity,
-                website: this.state.memberWebsite,
-                image: this.props.member.image,
-                description: this.state.memberDescription 
-             })
-                .then(res =>{
-                    if(res.data.success === true){
-                        window.location.reload();
-                    }
-                    else{
-                        console.log("Updating Member Failed!");
-                        console.log(res);
-                    }
-                });
-        }
+        axios.post(`/api/${this.state.memberCategoryChecked}/${this.props.member._id}`, { 
+            name: this.state.memberName,
+            education: this.state.memberEducation,
+            major: this.state.memberMajor,
+            position: this.state.memberPosition,
+            email: this.state.memberEmail,
+            university: this.state.memberUniversity,
+            website: this.state.memberWebsite,
+            image: this.props.member.image,
+            description: this.state.memberDescription 
+            })
+            .then(res =>{
+                if(res.data.success === true){
+                    window.location.reload();
+                }
+                else{
+                    console.log("Updating Member Failed!");
+                    console.log(res);
+                }
+        });
     }
 
     render() {
@@ -303,7 +209,7 @@ class MemberForm extends Component {
                                             onChange={() => this.setState({ memberCategoryChecked: "current" })}/>
                                         <AvRadio className="form-radio-div" customInput label="Affiliated Member" value="affiliated" 
                                             onChange={() => this.setState({ memberCategoryChecked: "affiliated" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Former Member" checked="true" value="former" 
+                                        <AvRadio className="form-radio-div" customInput label="Former Member" value="former" 
                                             onChange={() => this.setState({ memberCategoryChecked: "former" })}/>
                                     </AvRadioGroup>
                                     <FormGroup>

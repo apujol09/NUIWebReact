@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './francisco.css';
 import { Container, Row, Col, CardImg, Button, UncontrolledCollapse } from 'reactstrap';
-import { Image } from 'react-bootstrap';
 import axios from 'axios';
 
 class FranciscoInfo extends Component {

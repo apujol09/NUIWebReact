@@ -91,6 +91,7 @@ app.put('/api/members/:id',auth,(req,res)=>{
     })
 })
 
+
 //=========================================
 //                AFFILIATED
 //=========================================
@@ -277,9 +278,15 @@ app.post('/api/projects',auth,(req,res)=>{
     })
 })
 
-
 app.get('/api/projects',(req,res)=>{
     Projects.find({},(err,projects)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(projects);
+    })
+})
+
+app.get('/api/projects/:id',(req,res)=>{
+    Projects.findOne({_id: req.params.id},(err,projects)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(projects);
     })

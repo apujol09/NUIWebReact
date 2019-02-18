@@ -1,0 +1,16 @@
+.p-img{
+    float: left;
+    padding: 1px;
+    border: 2px solid #024208;
+    background-color: orangered;
+}
+
+.p-description{
+    font-size: 23px;
+    text-align: justify;
+    float: none;
+}
+
+.p-labs{
+    color: orangered;
+}

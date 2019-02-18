@@ -8,6 +8,7 @@ import Footbar from './Other/footbar';
 import NotFound from './NotFound/NotFound';
 import About from './About/about';
 import Projects from './Projects/projects';
+import ProjectInfo from './More Info/project';
 import Publications from './Publications/publications';
 import Events from './Events/events';
 import Resources from './Resources/resources';
@@ -50,7 +51,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              <Route path="/projects" component={Projects} />
+              <Route exact path="/projects" component={Projects} />
+              <Route exact path="/projects/:id" render={(props) => <ProjectInfo {...props} />}/>
               <Route path="/publications" component={Publications} />
               <Route path="/events" component={Events} />
               <Route path="/resources" component={Resources} />
