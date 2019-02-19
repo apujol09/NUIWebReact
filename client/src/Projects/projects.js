@@ -71,10 +71,10 @@ class Projects extends React.Component{
                                     </Col>
                                     {this.state.isloggedIn ?
                                     <Col>
-                                         <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> 
+                                         <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> 
                                     </Col>
                                     : null}
-                                    
+
                                     {this.state.isloggedIn ?
                                     <Col>
                                          <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> 

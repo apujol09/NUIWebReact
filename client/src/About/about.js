@@ -10,8 +10,9 @@ import FacultyFIU from './facultyFIU';
 import Carousel from './carousel';
 import Domain from '../Utils/misc';
 import MemberForm from '../Forms/member';
+import Delete from '../Forms/delete';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/fontawesome-free-solid';
+import { faEdit, faTrashAlt } from '@fortawesome/fontawesome-free-solid';
 import { Container, Row, Col, Button, CardImg, UncontrolledCollapse } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -85,8 +86,17 @@ class About extends React.Component{
             number++;
             return( 
                 <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {'    '}
+                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
                     <Members person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete member={person} toggle={"del_toggler_" + number} category={"members"}/>
+                        </UncontrolledCollapse>
+                    : null
+                    }
+
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
                             <MemberForm member={person} />
@@ -112,7 +122,23 @@ class About extends React.Component{
             number++;
             return( 
                 <Col key={person._id} sm="4">
+                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {'    '}
+                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
                     <FacultyCSU person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete member={person} toggle={"del_toggler_" + number} category={"facultyCSU"}/>
+                        </UncontrolledCollapse>
+                    : null
+                    }
+
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <MemberForm member={person} />
+                        </UncontrolledCollapse>
+                    : null
+                    }
                     <br />
                 </Col>
             )
@@ -122,7 +148,23 @@ class About extends React.Component{
             number++;
             return( 
                 <Col key={person._id} sm="4">
+                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {'    '}
+                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
                     <FacultyFIU person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete member={person} toggle={"del_toggler_" + number} category={"facultyFIU"}/>
+                        </UncontrolledCollapse>
+                    : null
+                    }
+
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <MemberForm member={person} />
+                        </UncontrolledCollapse>
+                    : null
+                    }
                     <br />
                 </Col>
             )
@@ -132,7 +174,23 @@ class About extends React.Component{
             number++;
             return( 
                 <Col key={person._id} sm="4">
+                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {'    '}
+                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
                     <Affiliated person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete member={person} toggle={"del_toggler_" + number} category={"affiliated"}/>
+                        </UncontrolledCollapse>
+                    : null
+                    }
+
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <MemberForm member={person} />
+                        </UncontrolledCollapse>
+                    : null
+                    }
                     <br />
                 </Col>
             )
@@ -142,7 +200,23 @@ class About extends React.Component{
             number++;
             return( 
                 <Col key={person._id} sm="4">
+                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                    {'    '}
+                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
                     <Former person={person} image={person.image}/>
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete member={person} toggle={"del_toggler_" + number} category={"former"}/>
+                        </UncontrolledCollapse>
+                    : null
+                    }
+
+                    {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <MemberForm member={person} />
+                        </UncontrolledCollapse>
+                    : null
+                    }
                     <br />
                 </Col>
             )

@@ -53,20 +53,67 @@ class Delete extends Component {
             });
         }
 
-        /* I'LL LEAVE IT HERE FOR NOW!!!!!
         else if(this.state.member){
-            axios.delete(`/api/member/${this.state.member._id}`).then(res => {
-                if(res.data.success === true){
-                    console.log(`Delete of item ${id} Successful!`)
-                    this.props.history.push('/projects');
-                }
-                else{
-                    console.log("Delete Failed!")
-                    console.log(res)
-                }
-            });
+            if(this.props.category === "facultyCSU"){ 
+                axios.delete(`/api/facultyCSU/${id}`).then(res => {
+                    if(res.data.success === true){
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Delete Failed!")
+                        console.log(res)
+                    }
+                });
+            }
+
+            else if(this.props.category === "facultyFIU"){ 
+                axios.delete(`/api/facultyFIU/${id}`).then(res => {
+                    if(res.data.success === true){
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Delete Failed!")
+                        console.log(res)
+                    }
+                });
+            }
+
+            else if(this.props.category === "members"){ 
+                axios.delete(`/api/members/${id}`).then(res => {
+                    if(res.data.success === true){
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Delete Failed!")
+                        console.log(res)
+                    }
+                });
+            }
+
+            else if(this.props.category === "affiliated"){ 
+                axios.delete(`/api/affiliated/${id}`).then(res => {
+                    if(res.data.success === true){
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Delete Failed!")
+                        console.log(res)
+                    }
+                });
+            }
+
+            else if(this.props.category === "former"){ 
+                axios.delete(`/api/former/${id}`).then(res => {
+                    if(res.data.success === true){
+                        window.location.reload();
+                    }
+                    else{
+                        console.log("Delete Failed!")
+                        console.log(res)
+                    }
+                });
+            }
         }
-        */
     }
 
     render() {
@@ -75,7 +122,7 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Alert color="danger">You are about to permanently delete a Project from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.project._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
@@ -90,7 +137,7 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Alert color="danger">You are about to permanently delete a Publication from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.publication._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
@@ -105,8 +152,23 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Alert color="danger">You are about to permanently delete a Class from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.class._id)}}>YES</Button>{'      '}
+                            <Button color="success" id={this.props.toggle}>NO</Button>
+                        </Row>
+                        <br />
+                    </Container>
+                </div>
+            );
+        }
+
+        else if(this.state.member){
+            return (
+                <div>
+                    <Container>
+                        <Row>
+                            <Alert color="danger">You are about to permanently delete a Class from the Database. Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleDelete(this.props.member._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
                         <br />

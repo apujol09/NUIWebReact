@@ -95,7 +95,7 @@ class Teaching extends React.Component{
                                         (
                                         <Col md={{size: 1}}>
                                             <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x" /></Button>
-                                            <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x" /></Button>
+                                            <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x" /></Button>
                                         </Col>
                                         ) : null}
                                         
