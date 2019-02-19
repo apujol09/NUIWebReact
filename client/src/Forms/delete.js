@@ -42,7 +42,7 @@ class Delete extends Component {
         }
 
         else if(this.state.class){
-            axios.delete(`/api/projects/${id}`).then(res => {
+            axios.delete(`/api/teaching/${id}`).then(res => {
                 if(res.data.success === true){
                     window.location.reload();
                 }
@@ -78,8 +78,8 @@ class Delete extends Component {
                             <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.project._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
-                            <br />
                         </Row>
+                        <br />
                     </Container>
                 </div>
             );
@@ -93,8 +93,8 @@ class Delete extends Component {
                             <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.publication._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
-                            <br />
                         </Row>
+                        <br />
                     </Container>
                 </div>
             );
@@ -108,8 +108,8 @@ class Delete extends Component {
                             <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
                             <Button color="danger" onClick={() => {this.handleDelete(this.props.class._id)}}>YES</Button>{'      '}
                             <Button color="success" id={this.props.toggle}>NO</Button>
-                            <br />
                         </Row>
+                        <br />
                     </Container>
                 </div>
             );

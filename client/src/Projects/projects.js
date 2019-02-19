@@ -3,12 +3,12 @@ import './projects.css';
 import { Container, Row, Col, Jumbotron, CardImg, Button, UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 import Domain from '../Utils/misc';
+import Delete from '../Forms/delete';
 import ProjectForm from '../Forms/projects';
 import { NavLink, Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt} from '@fortawesome/fontawesome-free-solid';
 
-require('dotenv').config({path: '../../.env'})
 class Projects extends React.Component{
 
     constructor(props) {
@@ -69,12 +69,26 @@ class Projects extends React.Component{
                                     <Col>
                                         <Link to={`/projects/${project._id}`} project={project}><Button color="warning">More Info</Button></Link>
                                     </Col>
+                                    {this.state.isloggedIn ?
                                     <Col>
-                                        {this.state.isloggedIn ? <Button color="warning" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                                         <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> 
                                     </Col>
+                                    : null}
+                                    
+                                    {this.state.isloggedIn ?
+                                    <Col>
+                                         <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> 
+                                    </Col>
+                                    : null}
                                 </Row>
                             </Container>
                         </Jumbotron>
+                        {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                            <Delete project={project} toggle={"del_toggler_" + number}/>
+                        </UncontrolledCollapse>
+                        : null
+                        }
                         {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
                             <ProjectForm project={project} />

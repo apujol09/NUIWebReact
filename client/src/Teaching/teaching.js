@@ -4,8 +4,9 @@ import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse } from 're
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import TeachingForm from '../Forms/teaching';
+import Delete from '../Forms/delete';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/fontawesome-free-solid';
+import { faEdit, faTrashAlt } from '@fortawesome/fontawesome-free-solid';
 
 class Teaching extends React.Component{
     
@@ -78,6 +79,12 @@ class Teaching extends React.Component{
                                         <p className="course-description"><b>Description:</b> {course.description}</p>
                                         <a className="course-link" href={course.link}>{course.code} Website</a>
                                         {this.state.isloggedIn ? 
+                                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                                <Delete class={course} toggle={"del_toggler_" + number}/>
+                                            </UncontrolledCollapse>
+                                            : null
+                                        }
+                                        {this.state.isloggedIn ? 
                                             <UncontrolledCollapse toggler={"toggler_" + number}>
                                                 <TeachingForm teaching={course} />
                                             </UncontrolledCollapse>
@@ -87,7 +94,8 @@ class Teaching extends React.Component{
                                         {this.state.isloggedIn ?
                                         (
                                         <Col md={{size: 1}}>
-                                             <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x" /></Button>
+                                            <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x" /></Button>
+                                            <Button color="warning" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x" /></Button>
                                         </Col>
                                         ) : null}
                                         

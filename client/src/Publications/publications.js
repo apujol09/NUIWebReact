@@ -1,7 +1,7 @@
 import React from 'react';
 import './publications.css';
 import Domain from '../Utils/misc';
-import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse, Modal, ModalBody, ModalFooter, ModalHeader, Alert } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import PublicationForm from '../Forms/publication';
@@ -17,10 +17,8 @@ class Publications extends React.Component{
         this.state = {
             publications: [],
             isloggedIn: false,
-            modal: false
         }
         this.handleDelete = this.handleDelete.bind(this);
-        this.toggle = this.toggle.bind(this);
       }
 
     componentDidMount(){
@@ -52,9 +50,6 @@ class Publications extends React.Component{
         });
     }
 
-    toggle(){
-        this.setState({ modal: !this.state.modal });
-    }
 
     render(){
         let render = []
