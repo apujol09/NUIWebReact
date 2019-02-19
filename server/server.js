@@ -224,16 +224,6 @@ app.put('/api/facultyPHD/:id',auth,(req,res)=>{
     })
 })
 
-app.delete('/api/facultyPHD/:id',auth,(req,res)=>{
-    FacultyPHD.deleteOne({_id: req.params.id}, (err,doc)=>{
-        if(err) return res.json({success:false,err});
-        res.status(200).json({
-            success:true,
-            facultyPHD: doc
-        })
-    })
-})
-
 //=========================================
 //              FACULTY CSU
 //=========================================
