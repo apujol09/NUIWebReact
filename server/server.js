@@ -91,6 +91,16 @@ app.put('/api/members/:id',auth,(req,res)=>{
     })
 })
 
+app.delete('/api/members/:id',auth,(req,res)=>{
+    Members.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            members: doc
+        })
+    })
+})
+
 
 //=========================================
 //                AFFILIATED
@@ -118,6 +128,16 @@ app.get('/api/affiliated',(req,res)=>{
 
 app.put('/api/affiliated/:id',auth,(req,res)=>{
     Affiliated.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            affiliated: doc
+        })
+    })
+})
+
+app.delete('/api/affiliated/:id',auth,(req,res)=>{
+    Affiliated.deleteOne({_id: req.params.id}, (err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -160,6 +180,16 @@ app.put('/api/former/:id',auth,(req,res)=>{
     })
 })
 
+app.delete('/api/former/:id',auth,(req,res)=>{
+    Former.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            former: doc
+        })
+    })
+})
+
 //=========================================
 //              FACULTY PHD
 //=========================================
@@ -186,6 +216,16 @@ app.get('/api/facultyPHD',(req,res)=>{
 
 app.put('/api/facultyPHD/:id',auth,(req,res)=>{
     facultyPHD.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyPHD: doc
+        })
+    })
+})
+
+app.delete('/api/facultyPHD/:id',auth,(req,res)=>{
+    FacultyPHD.deleteOne({_id: req.params.id}, (err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -228,6 +268,16 @@ app.put('/api/facultyCSU/:id',auth,(req,res)=>{
     })
 })
 
+app.delete('/api/facultyCSU/:id',auth,(req,res)=>{
+    FacultyCSU.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyCSU: doc
+        })
+    })
+})
+
 //=========================================
 //              FACULTY FIU
 //=========================================
@@ -254,6 +304,16 @@ app.get('/api/facultyFIU',(req,res)=>{
 
 app.put('/api/facultyFIU/:id',auth,(req,res)=>{
     FacultyFIU.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyFIU: doc
+        })
+    })
+})
+
+app.delete('/api/facultyFIU/:id',auth,(req,res)=>{
+    FacultyFIU.deleteOne({_id: req.params.id}, (err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -302,6 +362,16 @@ app.put('/api/projects/:id',auth,(req,res)=>{
     })
 })
 
+app.delete('/api/projects/:id',auth,(req,res)=>{
+    Projects.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            projects: doc
+        })
+    })
+})
+
 //=========================================
 //              PUBLICATIONS
 //=========================================
@@ -328,6 +398,16 @@ app.get('/api/publications',(req,res)=>{
 
 app.put('/api/publications/:id',auth,(req,res)=>{
     Publications.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            publications: doc
+        })
+    })
+})
+
+app.delete('/api/publications/:id',auth,(req,res)=>{
+    Publications.deleteOne({_id: req.params.id}, (err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -363,6 +443,16 @@ app.get('/api/teaching',(req,res)=>{
 
 app.put('/api/teaching/:id',auth,(req,res)=>{
     Teaching.findOneAndUpdate({_id: req.params.id}, req.body, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            teaching: doc
+        })
+    })
+})
+
+app.delete('/api/teaching/:id',auth,(req,res)=>{
+    Teaching.deleteOne({_id: req.params.id}, (err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,

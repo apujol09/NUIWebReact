@@ -1,9 +1,12 @@
 import React from 'react';
 import './projects.css';
-import { Container, Row, Col, Jumbotron, CardImg, Button } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, CardImg, Button, UncontrolledCollapse } from 'reactstrap';
 import axios from 'axios';
 import Domain from '../Utils/misc';
+import ProjectForm from '../Forms/projects';
 import { NavLink, Link } from 'react-router-dom';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt} from '@fortawesome/fontawesome-free-solid';
 
 require('dotenv').config({path: '../../.env'})
 class Projects extends React.Component{
@@ -33,8 +36,7 @@ class Projects extends React.Component{
 
 
     render(){
-        
-        console.log(process.env.DOMAIN);
+        let number = 0
         let render = []
         let backgrounds = ["project-jumbotron-blue", "project-jumbotron-green", "project-jumbotron-red", "project-jumbotron-violet", "project-jumbotron-gray"]
         if(this.state.projects){
@@ -45,32 +47,44 @@ class Projects extends React.Component{
                 }
                 //const image = process.env.DOMAIN
                 render.push(
-                    <Jumbotron key={project._id} className={backgrounds[index]}>
-                        <Container>
-                            <Row>
-                                <Col sm="5">
-                                    <CardImg src={project.image} />
-                                </Col>
-                                <Col>
-                                    <p className="project-name">{project.name}</p>
-                                    <p className="project-status">{project.status}</p>
-                                    <p className="project-labs">{project.labs}</p>
-                                    <p className="project-description">{project.description}</p>                           
-                                </Col>
-                            </Row>
-                            <Row>
-                                {project.website ? (<Col><a href={project.website}><Button color="info">Website</Button></a></Col>) : null}
-                                {project.publication ? (<Col><a href={project.publication}><Button color="success">Publication</Button></a></Col>) : null}
-                                {project.paper ? (<Col><a href={project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
-                                {project.github ? (<Col><a href={project.github}><Button color="secondary">Github</Button></a></Col>) : null}
-                                <Col>
-                                    <Link to={`/projects/${project._id}`} project={project}><Button color="warning">More Info</Button></Link>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Jumbotron>
+                    <div>
+                        <Jumbotron key={project._id} className={backgrounds[index]}>
+                            <Container>
+                                <Row>
+                                    <Col sm="5">
+                                        <CardImg src={project.image} />
+                                    </Col>
+                                    <Col>
+                                        <p className="project-name">{project.name}</p>
+                                        <p className="project-status">{project.status}</p>
+                                        <p className="project-labs">{project.labs}</p>
+                                        <p className="project-description">{project.description}</p>                           
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    {project.website ? (<Col><a href={project.website}><Button color="info">Website</Button></a></Col>) : null}
+                                    {project.publication ? (<Col><a href={project.publication}><Button color="success">Publication</Button></a></Col>) : null}
+                                    {project.paper ? (<Col><a href={project.paper}><Button color="danger">Paper</Button></a></Col>) : null}
+                                    {project.github ? (<Col><a href={project.github}><Button color="secondary">Github</Button></a></Col>) : null}
+                                    <Col>
+                                        <Link to={`/projects/${project._id}`} project={project}><Button color="warning">More Info</Button></Link>
+                                    </Col>
+                                    <Col>
+                                        {this.state.isloggedIn ? <Button color="warning" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </Jumbotron>
+                        {this.state.isloggedIn ? 
+                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                            <ProjectForm project={project} />
+                        </UncontrolledCollapse>
+                        : null
+                        }
+                    </div>
                 )
                 index++;
+                number++;
             })
         }
         return(

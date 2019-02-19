@@ -30,7 +30,7 @@ class PublicationForm extends Component {
                 this.setState({ linksValue: text })
             }
             else{
-                this.setState({ linksValue: [] })
+                this.setState({ linksValue: "" })
             }
         }
     }
