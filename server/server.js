@@ -286,7 +286,7 @@ app.post('/api/facultyFIU',auth,(req,res)=>{
 
 
 app.get('/api/facultyFIU',(req,res)=>{
-    FacultyFIU.find({},(err,faculty)=>{
+    FacultyFIU.find({}, (err,faculty)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(faculty);
     })
@@ -380,7 +380,7 @@ app.post('/api/publications',auth,(req,res)=>{
 
 
 app.get('/api/publications',(req,res)=>{
-    Publications.find({},(err,publications)=>{
+    Publications.find({}, null, { sort: { 'created_at': -1 } }, (err,publications)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(publications);
     })
