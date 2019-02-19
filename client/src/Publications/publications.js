@@ -1,7 +1,7 @@
 import React from 'react';
 import './publications.css';
 import Domain from '../Utils/misc';
-import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Container, Row, Col, Jumbotron, Button, UncontrolledCollapse, Modal, ModalBody, ModalFooter, ModalHeader, Alert } from 'reactstrap';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import PublicationForm from '../Forms/publication';
@@ -61,7 +61,6 @@ class Publications extends React.Component{
         let publicationTypes = []
         let IDs = []
         let number = 1
-        let a = 0
 
         this.state.publications.map(publication =>{
             if(!publicationTypes.includes(publication.category)){
@@ -122,21 +121,9 @@ class Publications extends React.Component{
                                         {this.state.isloggedIn ? 
                                         <Row>
                                             <Col md={{size: 2, offset: 11}}>
-                                                <Button color="danger" onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>
+                                                <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>
                                             </Col>
                                         </Row> : null}
-                                        {this.state.isloggedIn ? 
-                                            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                                                <ModalHeader toggle={this.toggle}>WARNING!</ModalHeader>
-                                                    <ModalBody>
-                                                        You are about to permanently delete an item from the Database. Are you sure you want to do this?
-                                                    </ModalBody>
-                                                <ModalFooter>
-                                                    <Button color="danger" onClick={() => {this.handleDelete(IDs[(number-1)].id)}} id={IDs[number-1].id}>YES</Button>{' '}
-                                                    <Button color="secondary" onClick={this.toggle}>NO</Button>
-                                                </ModalFooter>
-                                            </Modal>
-                                        : null}
                                         <Row md={{size: 12}}>
                                             <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
                                         </Row>
@@ -151,17 +138,20 @@ class Publications extends React.Component{
                                     </Container>
                                 </Jumbotron>
                                 {this.state.isloggedIn ? 
-                                <UncontrolledCollapse toggler={"toggler_" + number}>
-                                    <PublicationForm publication={publication} />
-                                </UncontrolledCollapse>
-                                :null
-                                }
+                                    <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                        <Delete publication={publication} toggle={"del_toggler_" + number}/>
+                                    </UncontrolledCollapse>
+                                : null}
+
+                                {this.state.isloggedIn ? 
+                                    <UncontrolledCollapse toggler={"toggler_" + number}>
+                                        <PublicationForm publication={publication} />
+                                    </UncontrolledCollapse>
+                                : null}
                                 
                             </div>
                         )
                         number++;
-                        a++;
-                        console.log(a)
                     }
                 })
             })

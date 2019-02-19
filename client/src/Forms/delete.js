@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Container, Row, Button, Modal, ModalBody, ModalFooter, ModalHeader, Alert } from 'reactstrap';
 import axios from 'axios';
 
 class Delete extends Component {
@@ -7,7 +7,7 @@ class Delete extends Component {
     constructor(props){
         super(props)
         this.state={
-            modal: this.props.modal ? true : false,
+            modal: this.props.modal ? this.props.modal : null,
             project: this.props.project ? true : false,
             publication: this.props.publication ? true : false,
             class: this.props.class ? true : false,
@@ -18,10 +18,9 @@ class Delete extends Component {
 
     handleDelete(id){
         if(this.state.project){
-            axios.delete(`/api/projects/${this.state.project._id}`).then(res => {
+            axios.delete(`/api/projects/${id}`).then(res => {
                 if(res.data.success === true){
-                    console.log(`Delete of Project ${id} Successful!`)
-                    this.props.history.push('/projects');
+                    window.location.reload();
                 }
                 else{
                     console.log("Delete Failed!")
@@ -31,10 +30,9 @@ class Delete extends Component {
         }
 
         else if(this.state.publication){
-            axios.delete(`/api/publications/${this.state.publication._id}`).then(res => {
+            axios.delete(`/api/publications/${id}`).then(res => {
                 if(res.data.success === true){
-                    console.log(`Delete of Publication ${id} Successful!`)
-                    this.props.history.push('/publications');
+                    window.location.reload();
                 }
                 else{
                     console.log("Delete Failed!")
@@ -44,10 +42,9 @@ class Delete extends Component {
         }
 
         else if(this.state.class){
-            axios.delete(`/api/projects/${this.state.class._id}`).then(res => {
+            axios.delete(`/api/projects/${id}`).then(res => {
                 if(res.data.success === true){
-                    console.log(`Delete of Class ${id} Successful!`)
-                    this.props.history.push('/projects');
+                    window.location.reload();
                 }
                 else{
                     console.log("Delete Failed!")
@@ -72,26 +69,16 @@ class Delete extends Component {
         */
     }
 
-    toggle(){
-        this.setState({ modal: !this.state.modal })
-    }
-
     render() {
         if(this.state.project){
             return (
                 <div>
                     <Container>
                         <Row>
-                            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                                <ModalHeader toggle={this.toggle}>WARNING!</ModalHeader>
-                                    <ModalBody>
-                                        You are about to permanently delete an item from the Database. Are you sure you want to do this?
-                                    </ModalBody>
-                                <ModalFooter>
-                                    <Button color="danger" onClick={() => {this.handleDelete(this.props.project._id)}}>YES</Button>{' '}
-                                    <Button color="secondary" onClick={this.toggle}>NO</Button>
-                                </ModalFooter>
-                            </Modal>
+                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleDelete(this.props.project._id)}}>YES</Button>{'      '}
+                            <Button color="success" id={this.props.toggle}>NO</Button>
+                            <br />
                         </Row>
                     </Container>
                 </div>
@@ -103,16 +90,10 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                                <ModalHeader toggle={this.toggle}>WARNING!</ModalHeader>
-                                    <ModalBody>
-                                        You are about to permanently delete an item from the Database. Are you sure you want to do this?
-                                    </ModalBody>
-                                <ModalFooter>
-                                    <Button color="danger" onClick={() => {this.handleDelete(this.props.publication._id)}}>YES</Button>{' '}
-                                    <Button color="secondary" onClick={this.toggle}>NO</Button>
-                                </ModalFooter>
-                            </Modal>
+                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleDelete(this.props.publication._id)}}>YES</Button>{'      '}
+                            <Button color="success" id={this.props.toggle}>NO</Button>
+                            <br />
                         </Row>
                     </Container>
                 </div>
@@ -124,16 +105,10 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                                <ModalHeader toggle={this.toggle}>WARNING!</ModalHeader>
-                                    <ModalBody>
-                                        You are about to permanently delete an item from the Database. Are you sure you want to do this?
-                                    </ModalBody>
-                                <ModalFooter>
-                                    <Button color="danger" onClick={() => {this.handleDelete(this.props.class._id)}}>YES</Button>{' '}
-                                    <Button color="secondary" onClick={this.toggle}>NO</Button>
-                                </ModalFooter>
-                            </Modal>
+                            <Alert color="danger">You are about to permanently delete an item from the Database. Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleDelete(this.props.class._id)}}>YES</Button>{'      '}
+                            <Button color="success" id={this.props.toggle}>NO</Button>
+                            <br />
                         </Row>
                     </Container>
                 </div>
