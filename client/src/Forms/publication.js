@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './member.css';
 import { AvForm, AvGroup, AvInput, AvFeedback } from 'availity-reactstrap-validation';
-import { Container, Row, Col, Button, Label, FormText, Jumbotron } from 'reactstrap';
+import { Container, Row, Col, Button, Label, FormText, Jumbotron, CustomInput } from 'reactstrap';
 import axios from 'axios';
 
 
@@ -14,12 +14,18 @@ class PublicationForm extends Component {
             publicationCategory: this.props.publication ? this.props.publication.category : "",
             citationValue: this.props.publication ? this.props.publication.name : null,
             linksValue: null,
-            categoryValue: this.props.publication ? this.props.publication.category : null
+            categoryValue: this.props.publication ? this.props.publication.category : null,
+            publications: []
         }
 
       }
 
     componentDidMount(){
+        axios.get(`/api/publications`)
+        .then(res =>{
+            this.setState({ publications: res.data })
+        })
+
         if(this.props.publication){
             let links = this.props.publication.links.map(link =>{
                 return link.from + ";" + link.url
@@ -103,6 +109,12 @@ class PublicationForm extends Component {
 
 
     render() {
+        let categories = []
+        this.state.publications.map(publication =>{
+            if(!categories.includes(publication.category)){
+                categories.push(publication.category)
+            }
+        })
         return (
             <div>
                 <Container>
@@ -139,7 +151,11 @@ class PublicationForm extends Component {
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberPosition">Category *</Label>
-                                        <AvInput name="category" id="category" value={this.state.categoryValue} placeholder="Enter Publication Category here" required onChange={this.categoryChange}/>
+                                        <CustomInput className="dropdown-input" type="select" id="exampleCustomSelect" name="customSelect" bsSize="lg" onChange={this.categoryChange} required>
+                                            {categories.map(category =>(
+                                                <option className="dropdown-option">{category}</option>
+                                            ))}
+                                        </CustomInput>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Categories are the different sections in the Publiactions Page. This is required! 
