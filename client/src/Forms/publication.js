@@ -11,7 +11,7 @@ class PublicationForm extends Component {
         this.state = {
             publicationCitation: this.props.publication ? this.props.publication.name : "",
             publicationLinks: [],
-            publicationCategory: this.props.publication ? this.props.publication.category : "",
+            publicationCategory: this.props.publication ? this.props.publication.category : "Refereed Journals",
             citationValue: this.props.publication ? this.props.publication.name : null,
             linksValue: null,
             categoryValue: this.props.publication ? this.props.publication.category : null,
@@ -151,7 +151,7 @@ class PublicationForm extends Component {
                                     </AvGroup>
                                     <AvGroup>
                                         <Label className="form-label" for="memberPosition">Category *</Label>
-                                        <CustomInput className="dropdown-input" type="select" id="exampleCustomSelect" name="customSelect" bsSize="lg" onChange={this.categoryChange} required>
+                                        <CustomInput className="dropdown-input" type="select" name="customSelect" bsSize="lg" onChange={this.categoryChange} required>
                                             {categories.map(category =>(
                                                 <option className="dropdown-option">{category}</option>
                                             ))}

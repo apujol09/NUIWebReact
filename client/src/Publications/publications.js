@@ -68,7 +68,7 @@ class Publications extends React.Component{
                 render.push(
                     <Row>
                         <Col>
-                            <h2>{type}</h2>
+                            <h2 className="category-title">{type}</h2>
                             <br />
                         </Col>
                     </Row>
