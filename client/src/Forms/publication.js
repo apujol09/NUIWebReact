@@ -131,7 +131,7 @@ class PublicationForm extends Component {
                                 <AvForm onSubmit={this.props.publication ? this.handleUpdate : this.handleSubmit}>
                                     <AvGroup>
                                         <Label className="form-label" for="example">Citation for Publication *</Label>
-                                        <AvInput name="citation" id="citation" value={this.state.citationValue} placeholder="Enter Publication Citation Here" required onChange={this.citationChange}/>
+                                        <AvInput name="citation" id="citation" style={{height: "200px"}} type="textarea" value={this.state.citationValue} placeholder="Enter Publication Citation Here" required onChange={this.citationChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Please be careful which citation you use for this field. Whatever you 

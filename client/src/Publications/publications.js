@@ -95,16 +95,12 @@ class Publications extends React.Component{
                         publication.links.forEach(link =>{
                             if(link.from === "PDF"){
                                 publicationLinks.push(
-                                    <Col>
-                                        <p className="links">[<a className="publication-link" href={Domain + link.url}>{link.from}</a>]</p>
-                                    </Col>
+                                    <p className="links">[<a className="publication-link" href={Domain + link.url}>{link.from}</a>]  </p>
                                 )
                             }
                             else{
                                 publicationLinks.push(
-                                    <Col>
-                                        <p className="links">[<a className="publication-link" href={link.url}>{link.from}</a>]</p>
-                                    </Col>
+                                    <p className="links">[<a className="publication-link" href={link.url}>{link.from}</a>]  </p>
                                 )
                             }
                             
@@ -121,8 +117,6 @@ class Publications extends React.Component{
                                         </Row> : null}
                                         <Row md={{size: 12}}>
                                             <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
-                                        </Row>
-                                        <Row className="links-row">
                                             {publicationLinks}
                                         </Row>
                                         <Row>
