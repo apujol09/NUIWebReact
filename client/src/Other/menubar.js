@@ -1,6 +1,8 @@
 import React from 'react';
 import './menubar.css';
+import Domain from '../Utils/misc';
 import { NavLink } from 'react-router-dom';
+import { Row, Col, CardImg } from 'reactstrap';
 import axios from 'axios';
 
 
@@ -51,7 +53,14 @@ class MenuBar extends React.Component {
                 <div className="container">
                     <div className="left">
                         <div className="logo">
-                            <NavLink className="nui-big" to="/">NUI LAB</NavLink>
+                            <Row>
+                                <Col md={{size:2, offset: -2}}>
+                                    <CardImg className="nui-logo" src={Domain + "assets/images/general/openhid-logo.png"} />
+                                </Col>
+                                <Col>
+                                    <NavLink className="nui-big" to="/">NUI LAB</NavLink>
+                                </Col>
+                            </Row>
                         </div>
                     </div>
                     <div className="right">

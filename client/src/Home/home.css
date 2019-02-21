@@ -49,27 +49,6 @@ h3{
     max-height: 500px;
 }
 
-.nui-logo {
-    position: absolute;
-    top: 30%;
-    left: 44%;
-    width: 200px;
-    height: 200px;
-    z-index: 1;
-    animation-name: spin;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-duration: 20s;
-}
-
-@keyframes spin {
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(359deg);
-    }
-}
 
 .fullscreen-video {
     position: fixed;
