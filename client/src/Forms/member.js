@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './member.css';
-import { AvForm, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
+import { AvForm, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvField } from 'availity-reactstrap-validation';
 import { Container, Row, Col, Button, FormGroup, Label, Input, FormText, Jumbotron, CardImg } from 'reactstrap';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faFileImage } from '@fortawesome/fontawesome-free-solid';
@@ -11,25 +11,15 @@ class MemberForm extends Component {
     constructor(props){
         super(props)
         this.state={
-            memberName: this.props.member ? this.props.member.name : "",
-            nameValue: this.props.member ? this.props.member.name : null,
-            memberEmail: this.props.member ? this.props.member.email : "",
-            emailValue: this.props.member ? this.props.member.email : null,
-            memberPosition: this.props.member ? this.props.member.position : "",
-            positionValue: this.props.member ? this.props.member.position : null,
-            memberUniversity: this.props.member ? this.props.member.university : "",
-            universityValue: this.props.member ? this.props.member.university : null,
-            memberMajor: this.props.member ? this.props.member.major : "",
-            majorValue: this.props.member ? this.props.member.major : null,
-            memberEducation: this.props.member ? this.props.member.education : "",
-            educationValue: this.props.member ? this.props.member.education : null,
-            memberWebsite: this.props.member ? this.props.member.website : "",
-            websiteValue: this.props.member ? this.props.member.website : null,
-            memberDescription: this.props.member ? this.props.member.description : "",
-            descriptionValue: this.props.member ? this.props.member.description : null,
-            memberCategory: this.props.member ? this.props.member.category : "",
-            categoryValue: this.props.member ? this.props.member.category : null,
-            memberCategoryChecked: this.props.category ? this.props.category : "",
+            memberName: this.props.member ? this.props.member.name : null,
+            memberEmail: this.props.member ? this.props.member.email : null,
+            memberPosition: this.props.member ? this.props.member.position : null,
+            memberUniversity: this.props.member ? this.props.member.university : null,
+            memberMajor: this.props.member ? this.props.member.major : null,
+            memberEducation: this.props.member ? this.props.member.education : null,
+            memberWebsite: this.props.member ? this.props.member.website : null,
+            memberDescription: this.props.member ? this.props.member.description : null,
+            memberCategory: this.props.member ? this.props.member.category : "facultyCSU",
             selectedImage: null
         }
     }
@@ -75,6 +65,11 @@ class MemberForm extends Component {
         this.setState({ memberDescription: event.target.value });
     }
 
+    categoryChange = event =>{
+        event.persist();
+        this.setState({ memberCategory: event.target.value });
+    }
+
     fileInputChange = event =>{
         this.setState({ selectedImage: URL.createObjectURL(event.target.files[0]) });
         console.log(this.state.selectedImage);
@@ -87,7 +82,7 @@ class MemberForm extends Component {
     handleSubmit = event =>{
         event.persist();
 
-        axios.post(`/api/${this.state.memberCategoryChecked}`, { 
+        axios.post(`/api/${this.state.memberCategory}`, { 
             name: this.state.memberName,
             education: this.state.memberEducation,
             major: this.state.memberMajor,
@@ -113,7 +108,7 @@ class MemberForm extends Component {
     handleUpdate = event =>{
         event.persist();
 
-        axios.post(`/api/${this.state.memberCategoryChecked}/${this.props.member._id}`, { 
+        axios.post(`/api/${this.state.memberCategory}/${this.props.member._id}`, { 
             name: this.state.memberName,
             education: this.state.memberEducation,
             major: this.state.memberMajor,
@@ -200,18 +195,13 @@ class MemberForm extends Component {
                                         <AvInput style={{height: "200px"}} type="textarea" value={this.state.descriptionValue} name="description" placeholder="Enter Member Description here" required onChange={this.descriptionChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
-                                    <AvRadioGroup className="av-radio-group" name="memberCategoryRadioGroup" label="Member Category *" required>
-                                        <AvRadio className="form-radio-div" customInput label="Faculty from Colorado State University" value="facultyCSU" 
-                                            onChange={() => this.setState({ memberCategoryChecked: "facultyCSU" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Faculty from Florida International University" value="facultyFIU" 
-                                            onChange={() => this.setState({ memberCategoryChecked: "facultyFIU" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Current Member" value="current" 
-                                            onChange={() => this.setState({ memberCategoryChecked: "current" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Affiliated Member" value="affiliated" 
-                                            onChange={() => this.setState({ memberCategoryChecked: "affiliated" })}/>
-                                        <AvRadio className="form-radio-div" customInput label="Former Member" value="former" 
-                                            onChange={() => this.setState({ memberCategoryChecked: "former" })}/>
-                                    </AvRadioGroup>
+                                    <AvField type="select" name="select" label="Option" helpMessage="Please Select one of these categories to put the new member in!" required onChange={this.categoryChange}>
+                                        <option value="facultyCSU">Faculty from Colorado State University</option>
+                                        <option value="facultyFIU">Faculty from Florida International University</option>
+                                        <option value="members">Current Member</option>
+                                        <option value="affiliated">Affiliated Member</option>
+                                        <option value="former">Former Member</option>
+                                    </AvField>
                                     <FormGroup>
                                         <Label className="form-label" for="memberImage">Member Image</Label>
                                         <br />

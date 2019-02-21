@@ -99,7 +99,7 @@ class About extends React.Component{
 
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} />
+                            <MemberForm member={person} category="members" />
                         </UncontrolledCollapse>
                     : null
                     }
@@ -135,7 +135,7 @@ class About extends React.Component{
 
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} />
+                            <MemberForm member={person} category="facultyCSU"/>
                         </UncontrolledCollapse>
                     : null
                     }
@@ -161,7 +161,7 @@ class About extends React.Component{
 
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} />
+                            <MemberForm member={person} category="facultyFIU"/>
                         </UncontrolledCollapse>
                     : null
                     }
@@ -187,7 +187,7 @@ class About extends React.Component{
 
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} />
+                            <MemberForm member={person} category="affiliated"/>
                         </UncontrolledCollapse>
                     : null
                     }
@@ -213,7 +213,7 @@ class About extends React.Component{
 
                     {this.state.isloggedIn ? 
                         <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} />
+                            <MemberForm member={person} category="former"/>
                         </UncontrolledCollapse>
                     : null
                     }
