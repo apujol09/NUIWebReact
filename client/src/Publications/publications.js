@@ -17,6 +17,7 @@ class Publications extends React.Component{
         super(props)
         this.state = {
             publications: [],
+            publicationCategories: [],
             isloggedIn: false,
         }
       }
@@ -24,6 +25,11 @@ class Publications extends React.Component{
     componentDidMount(){
         axios.get(`/api/publications`).then(res => {
             this.setState({ publications: res.data });
+        });
+
+        axios.get(`/api/publications/categories`).then(res => {
+            this.setState({ publicationCategories: res.data });
+
         });
 
         axios.get(`/api/auth`).then(res => {
@@ -43,17 +49,21 @@ class Publications extends React.Component{
         let number = 1
 
         if(!this.state.isloggedIn){
-            this.state.publications.map(publication =>{
-                if(!publicationTypes.includes(publication.category) && !publication.markAsDeleted){
-                    publicationTypes.push(publication.category);
-                }
+            this.state.publicationCategories.map(category =>{
+                this.state.publications.map(publication =>{
+                    if(!publicationTypes.includes(category.name) && publication.category === category.name && !publication.markAsDeleted){
+                        publicationTypes.push(category.name);
+                    }
+                })
             })
         }
         else{
-            this.state.publications.map(publication =>{
-                if(!publicationTypes.includes(publication.category)){
-                    publicationTypes.push(publication.category);
-                }
+            this.state.publicationCategories.map(category =>{
+                this.state.publications.map(publication =>{
+                    if(!publicationTypes.includes(category.name) && publication.category === category.name){
+                        publicationTypes.push(category.name);
+                    }
+                })
             })
         }
         

@@ -23,6 +23,7 @@ const { FacultyPHD } = require('./models/facultyPHD');
 const { FacultyCSU } = require('./models/facultyCSU');
 const { FacultyFIU } = require('./models/facultyFIU');
 const { Publications } = require('./models/publications');
+const { PublicationCategories } = require('./models/publicationCategories');
 const { Projects } = require('./models/projects');
 const { Teaching } = require('./models/teaching');
 const { Events } = require('./models/events');
@@ -471,6 +472,41 @@ app.put('/api/publications/mark/:id',auth,(req,res)=>{
         res.status(200).json({
             success:true,
             publications: doc
+        })
+    })
+})
+
+
+//=========================================
+//          PUBLICATION CATEGORIES
+//=========================================
+
+app.post('/api/publications/categories',auth,(req,res)=>{
+    const categories = new PublicationCategories(req.body);
+
+    categories.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            categories: doc
+        })
+    })
+})
+
+
+app.get('/api/publications/categories',(req,res)=>{
+    PublicationCategories.find({}, null, { sort: { 'priority': -1 } }, (err,categories)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(categories);
+    })
+})
+
+app.delete('/api/publications/categories/:id',auth,(req,res)=>{
+    PublicationCategories.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            categories: doc
         })
     })
 })
