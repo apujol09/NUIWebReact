@@ -28,7 +28,11 @@ const teachingsSchema = mongoose.Schema({
     time:{
         type: String,
         default: "TBA"
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 });
 
 const Teaching = mongoose.model('Teaching', teachingsSchema, 'teaching');

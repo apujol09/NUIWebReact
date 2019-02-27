@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Button, Alert } from 'reactstrap';
 import axios from 'axios';
 
-class Delete extends Component {
+class UnmarkAsDeleted extends Component {
 
     constructor(props){
         super(props)
@@ -13,41 +13,50 @@ class Delete extends Component {
             class: this.props.class ? true : false,
             member: this.props.member ? true : false,
         }
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleUnmark = this.handleUnmark.bind(this);
     }
 
-    handleDelete(id){
+    handleUnmark(id){
         if(this.state.project){
-            axios.delete(`/api/projects/${id}`).then(res => {
+            axios.put(`/api/projects/mark/${id}`, { 
+                markAsDeleted: false
+                })
+                .then(res => {
                 if(res.data.success === true){
                     window.location.reload();
                 }
                 else{
-                    console.log("Delete Failed!")
+                    console.log("Mark Delete Failed!")
                     console.log(res)
                 }
             });
         }
 
         else if(this.state.publication){
-            axios.delete(`/api/publications/${id}`).then(res => {
+            axios.put(`/api/publications/mark/${id}`, { 
+                markAsDeleted: false
+                })
+                .then(res => {
                 if(res.data.success === true){
                     window.location.reload();
                 }
                 else{
-                    console.log("Delete Failed!")
+                    console.log("Mark Delete Failed!")
                     console.log(res)
                 }
             });
         }
 
         else if(this.state.class){
-            axios.delete(`/api/teaching/${id}`).then(res => {
+            axios.put(`/api/teaching/mark/${id}`, { 
+                markAsDeleted: false
+                })
+                .then(res => {
                 if(res.data.success === true){
                     window.location.reload();
                 }
                 else{
-                    console.log("Delete Failed!")
+                    console.log("Mark Delete Failed!")
                     console.log(res)
                 }
             });
@@ -55,60 +64,75 @@ class Delete extends Component {
 
         else if(this.state.member){
             if(this.props.category === "facultyCSU"){ 
-                axios.delete(`/api/facultyCSU/${id}`).then(res => {
+                axios.put(`/api/facultyCSU/mark/${id}`, { 
+                    markAsDeleted: false
+                    })
+                    .then(res => {
                     if(res.data.success === true){
                         window.location.reload();
                     }
                     else{
-                        console.log("Delete Failed!")
+                        console.log("Mark Delete Failed!")
                         console.log(res)
                     }
                 });
             }
 
             else if(this.props.category === "facultyFIU"){ 
-                axios.delete(`/api/facultyFIU/${id}`).then(res => {
+                axios.put(`/api/facultyFIU/mark/${id}`, { 
+                    markAsDeleted: false
+                    })
+                    .then(res => {
                     if(res.data.success === true){
                         window.location.reload();
                     }
                     else{
-                        console.log("Delete Failed!")
+                        console.log("Mark Delete Failed!")
                         console.log(res)
                     }
                 });
             }
 
             else if(this.props.category === "members"){ 
-                axios.delete(`/api/members/${id}`).then(res => {
+                axios.put(`/api/members/mark/${id}`, { 
+                    markAsDeleted: false
+                    })
+                    .then(res => {
                     if(res.data.success === true){
                         window.location.reload();
                     }
                     else{
-                        console.log("Delete Failed!")
+                        console.log("Mark Delete Failed!")
                         console.log(res)
                     }
                 });
             }
 
             else if(this.props.category === "affiliated"){ 
-                axios.delete(`/api/affiliated/${id}`).then(res => {
+                axios.put(`/api/affiliated/mark/${id}`, { 
+                    markAsDeleted: false
+                    })
+                    .then(res => {
                     if(res.data.success === true){
                         window.location.reload();
                     }
                     else{
-                        console.log("Delete Failed!")
+                        console.log("Mark Delete Failed!")
                         console.log(res)
                     }
                 });
             }
 
             else if(this.props.category === "former"){ 
-                axios.delete(`/api/former/${id}`).then(res => {
+                axios.put(`/api/former/mark/${id}`, { 
+                    markAsDeleted: false
+                    })
+                    .then(res => {
                     if(res.data.success === true){
                         window.location.reload();
                     }
                     else{
-                        console.log("Delete Failed!")
+                        console.log("Mark Delete Failed!")
                         console.log(res)
                     }
                 });
@@ -122,8 +146,9 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete a Project from the Database. Are you sure you want to do this?</Alert>
-                            <Button color="danger" onClick={() => {this.handleDelete(this.props.project._id)}}>YES</Button>&nbsp;
+                            <Alert color="danger">You are about to unmark this project as deleted. This project will now show up in non-administrative mode.
+                            Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleUnmark(this.props.project._id)}}>YES</Button>&nbsp;
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
                         <br />
@@ -137,8 +162,9 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete a Publication from the Database. Are you sure you want to do this?</Alert>
-                            <Button color="danger" onClick={() => {this.handleDelete(this.props.publication._id)}}>YES</Button>&nbsp;
+                            <Alert color="danger">You are about to unmark this publication as deleted. This publication will now show up in non-administrative mode.
+                            Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleUnmark(this.props.publication._id)}}>YES</Button>&nbsp;
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
                         <br />
@@ -152,8 +178,9 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete a Class from the Database. Are you sure you want to do this?</Alert>
-                            <Button color="danger" onClick={() => {this.handleDelete(this.props.class._id)}}>YES</Button>&nbsp;
+                            <Alert color="danger">You are about to unmark this class as deleted. This class will now show up in non-administrative mode.
+                            Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleUnmark(this.props.class._id)}}>YES</Button>&nbsp;
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
                         <br />
@@ -167,8 +194,9 @@ class Delete extends Component {
                 <div>
                     <Container>
                         <Row>
-                            <Alert color="danger">You are about to permanently delete a Member from the Database. Are you sure you want to do this?</Alert>
-                            <Button color="danger" onClick={() => {this.handleDelete(this.props.member._id)}}>YES</Button>&nbsp;
+                            <Alert color="danger">You are about to unmark this member as deleted. This member will now show up in non-administrative mode.
+                            Are you sure you want to do this?</Alert>
+                            <Button color="danger" onClick={() => {this.handleUnmark(this.props.member._id)}}>YES</Button>&nbsp;
                             <Button color="success" id={this.props.toggle}>NO</Button>
                         </Row>
                         <br />
@@ -179,4 +207,4 @@ class Delete extends Component {
     }
 }
 
-export default Delete;
+export default UnmarkAsDeleted;

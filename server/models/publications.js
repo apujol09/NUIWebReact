@@ -19,7 +19,11 @@ const publicationsSchema = mongoose.Schema({
         type: Date, 
         required: true, 
         default: Date.now 
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 });
 
 const Publications = mongoose.model('Publications',publicationsSchema);

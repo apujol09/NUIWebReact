@@ -129,8 +129,8 @@ class TeachingForm extends Component {
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                     </AvGroup>
                                     <AvGroup>
-                                        <Label className="form-label" for="memberPosition">Class Link *</Label>
-                                        <AvInput name="link" value={this.state.linkValue} placeholder="Enter Class Link here" required onChange={this.linkChange}/>
+                                        <Label className="form-label" for="memberPosition">Class Link</Label>
+                                        <AvInput name="link" value={this.state.linkValue} placeholder="Enter Class Link here" onChange={this.linkChange}/>
                                         <AvFeedback className="av-feedback">This Field is Required!</AvFeedback>
                                         <FormText className="form-text" color="muted">
                                             Only type a URL for this field. This is not required for all classes.

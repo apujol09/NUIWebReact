@@ -6,10 +6,11 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import PublicationForm from '../Forms/publication';
 import Delete from '../Forms/delete';
+import MarkAsDeleted from '../Forms/markAsDeleted';
+import UnmarkAsDeleted from '../Forms/unmarkAsDeleted';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/fontawesome-free-solid';
+import { faEdit, faTrashAlt, faEye, faEyeSlash } from '@fortawesome/fontawesome-free-solid';
 
-var mongoose = require("mongoose")
 class Publications extends React.Component{
 
     constructor(props) {
@@ -18,7 +19,6 @@ class Publications extends React.Component{
             publications: [],
             isloggedIn: false,
         }
-        this.handleDelete = this.handleDelete.bind(this);
       }
 
     componentDidMount(){
@@ -37,31 +37,26 @@ class Publications extends React.Component{
 
     }
 
-    handleDelete(e){
-        axios.delete(`/api/publications/${e.target.id}`).then(res => {
-            if(res.data.success === true){
-                console.log(`Delete of item ${e.target.id} Successful!`)
-                window.location.reload();
-            }
-            else{
-                console.log("Delete Failed!")
-                console.log(res)
-            }
-        });
-    }
-
-
     render(){
         let render = []
         let publicationTypes = []
-        let IDs = []
         let number = 1
 
-        this.state.publications.map(publication =>{
-            if(!publicationTypes.includes(publication.category)){
-                publicationTypes.push(publication.category);
-            }
-        })
+        if(!this.state.isloggedIn){
+            this.state.publications.map(publication =>{
+                if(!publicationTypes.includes(publication.category) && !publication.markAsDeleted){
+                    publicationTypes.push(publication.category);
+                }
+            })
+        }
+        else{
+            this.state.publications.map(publication =>{
+                if(!publicationTypes.includes(publication.category)){
+                    publicationTypes.push(publication.category);
+                }
+            })
+        }
+        
 
         if(publicationTypes !== []){
             publicationTypes.forEach(type =>{
@@ -90,57 +85,138 @@ class Publications extends React.Component{
                         number++;
                     }
                     else if(publication.category === type && publication.links !== []){
-                        IDs.push({id: publication._id})
                         let publicationLinks = []
                         publication.links.forEach(link =>{
                             if(link.from === "PDF"){
                                 publicationLinks.push(
-                                    <p className="links">[<a className="publication-link" href={Domain + link.url}>{link.from}</a>]  </p>
+                                    <p className="links">[<a className="publication-link" href={Domain + link.url}>{link.from}</a>]&nbsp;&nbsp;</p>
                                 )
                             }
                             else{
                                 publicationLinks.push(
-                                    <p className="links">[<a className="publication-link" href={link.url}>{link.from}</a>]  </p>
+                                    <p className="links">[<a className="publication-link" href={link.url}>{link.from}</a>]&nbsp;&nbsp;</p>
                                 )
                             }
                             
                         })
-                        render.push(
-                            <div key={publication._id}>
-                                <Jumbotron className="publication-jumbotron">
-                                    <Container>
+                        if(!this.state.isloggedIn){
+                            if(!publication.markAsDeleted){                        
+                                render.push(
+                                    <div key={publication._id}>
+                                        <Jumbotron className="publication-jumbotron">
+                                            <Container>
+                                                {this.state.isloggedIn && !publication.markAsDeleted ? 
+                                                <Row>
+                                                    <Col md={{size: 3, offset: 10}}>
+                                                        <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>{'  '}
+                                                        <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button>
+                                                    </Col>
+                                                </Row> : null}
+                                                {this.state.isloggedIn && publication.markAsDeleted ? 
+                                                <Row>
+                                                    <Col md={{size: 3, offset: 10}}>
+                                                        <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>{'  '}
+                                                        <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button>
+                                                    </Col>
+                                                </Row> : null}
+                                                <Row md={{size: 12}}>
+                                                    <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name}}></p>
+                                                    {publicationLinks}
+                                                </Row>
+                                                <Row>
+                                                    <Col md={{size: 2, offset: 11}}>
+                                                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        </Jumbotron>
                                         {this.state.isloggedIn ? 
-                                        <Row>
-                                            <Col md={{size: 2, offset: 11}}>
-                                                <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>
-                                            </Col>
-                                        </Row> : null}
-                                        <Row md={{size: 12}}>
-                                            <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name }}></p>
-                                            {publicationLinks}
-                                        </Row>
-                                        <Row>
-                                            <Col md={{size: 2, offset: 11}}>
-                                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </Jumbotron>
-                                {this.state.isloggedIn ? 
-                                    <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                                        <Delete publication={publication} toggle={"del_toggler_" + number}/>
-                                    </UncontrolledCollapse>
-                                : null}
+                                        <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                            <UnmarkAsDeleted publication={publication} toggle={"unmark_toggler_" + number} />
+                                        </UncontrolledCollapse>
+                                        : null
+                                        }
+                                        {this.state.isloggedIn ? 
+                                        <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                            <MarkAsDeleted publication={publication} toggle={"mark_toggler_" + number} />
+                                        </UncontrolledCollapse>
+                                        : null
+                                        }
+                                        {this.state.isloggedIn ? 
+                                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                                <Delete publication={publication} toggle={"del_toggler_" + number}/>
+                                            </UncontrolledCollapse>
+                                        : null}
 
-                                {this.state.isloggedIn ? 
-                                    <UncontrolledCollapse toggler={"toggler_" + number}>
-                                        <PublicationForm publication={publication} />
+                                        {this.state.isloggedIn ? 
+                                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                                <PublicationForm publication={publication} />
+                                            </UncontrolledCollapse>
+                                        : null}
+                                        
+                                    </div>
+                                )
+                                number++;
+                            }
+                        }
+                        else{
+                            render.push(
+                                <div key={publication._id}>
+                                    <Jumbotron className="publication-jumbotron">
+                                        <Container>
+                                            {this.state.isloggedIn && !publication.markAsDeleted ? 
+                                            <Row>
+                                                <Col md={{size: 3, offset: 10}}>
+                                                    <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>{'  '}
+                                                    <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button>
+                                                </Col>
+                                            </Row> : null}
+                                            {this.state.isloggedIn && publication.markAsDeleted ? 
+                                            <Row>
+                                                <Col md={{size: 3, offset: 10}}>
+                                                    <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button>{'  '}
+                                                    <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button>
+                                                </Col>
+                                            </Row> : null}
+                                            <Row md={{size: 12}}>
+                                                <p className="publication-text" dangerouslySetInnerHTML={{ __html: number + ". " + publication.name}}></p>
+                                                {publicationLinks}
+                                            </Row>
+                                            <Row>
+                                                <Col md={{size: 2, offset: 11}}>
+                                                {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                    </Jumbotron>
+                                    {this.state.isloggedIn ? 
+                                    <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                        <UnmarkAsDeleted publication={publication} toggle={"unmark_toggler_" + number} />
                                     </UncontrolledCollapse>
-                                : null}
-                                
-                            </div>
-                        )
-                        number++;
+                                    : null
+                                    }
+                                    {this.state.isloggedIn ? 
+                                    <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                        <MarkAsDeleted publication={publication} toggle={"mark_toggler_" + number} />
+                                    </UncontrolledCollapse>
+                                    : null
+                                    }
+                                    {this.state.isloggedIn ? 
+                                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                            <Delete publication={publication} toggle={"del_toggler_" + number}/>
+                                        </UncontrolledCollapse>
+                                    : null}
+
+                                    {this.state.isloggedIn ? 
+                                        <UncontrolledCollapse toggler={"toggler_" + number}>
+                                            <PublicationForm publication={publication} />
+                                        </UncontrolledCollapse>
+                                    : null}
+                                    
+                                </div>
+                            )
+                            number++;
+                        }
                     }
                 })
             })

@@ -40,7 +40,11 @@ const formerSchema = mongoose.Schema({
     description:{
         type: String,
         required: true
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 })
 
 const Former = mongoose.model('Former', formerSchema);

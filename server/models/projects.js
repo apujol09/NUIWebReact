@@ -37,6 +37,9 @@ const projectsSchema = mongoose.Schema({
     },
     image:{
         type: String
+    },
+    markAsDeleted:{
+        type: Boolean
     }
 
 });

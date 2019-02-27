@@ -41,7 +41,7 @@ class Logout extends Component {
                         <Modal isOpen={this.state.modal} toggle={this.toggle}>
                             <ModalHeader toggle={this.toggle}>Logout Success!</ModalHeader>
                             <ModalBody>
-                                You have been successfully Logged Out! You will be redirected now to the Home Page!
+                                You have been successfully Logged Out! {/*You will be redirected now to the Home Page!*/}
                             </ModalBody>
                             <ModalFooter>
                                 <Button color="primary" onClick={this.toggle}>Close</Button>

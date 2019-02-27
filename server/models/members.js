@@ -40,7 +40,11 @@ const memberSchema = mongoose.Schema({
     description:{
         type: String,
         required: true
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 })
 
 const Members = mongoose.model('Members', memberSchema);

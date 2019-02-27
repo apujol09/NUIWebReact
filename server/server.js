@@ -101,6 +101,15 @@ app.delete('/api/members/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/members/mark/:id',auth,(req,res)=>{
+    Members.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            members: doc
+        })
+    })
+})
 
 //=========================================
 //                AFFILIATED
@@ -146,6 +155,16 @@ app.delete('/api/affiliated/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/affiliated/mark/:id',auth,(req,res)=>{
+    Affiliated.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            affiliated: doc
+        })
+    })
+})
+
 //=========================================
 //                FORMER
 //=========================================
@@ -182,6 +201,16 @@ app.put('/api/former/:id',auth,(req,res)=>{
 
 app.delete('/api/former/:id',auth,(req,res)=>{
     Former.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            former: doc
+        })
+    })
+})
+
+app.put('/api/former/mark/:id',auth,(req,res)=>{
+    Former.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -268,6 +297,16 @@ app.delete('/api/facultyCSU/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/facultyCSU/mark/:id',auth,(req,res)=>{
+    FacultyCSU.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyCSU: doc
+        })
+    })
+})
+
 //=========================================
 //              FACULTY FIU
 //=========================================
@@ -304,6 +343,16 @@ app.put('/api/facultyFIU/:id',auth,(req,res)=>{
 
 app.delete('/api/facultyFIU/:id',auth,(req,res)=>{
     FacultyFIU.deleteOne({_id: req.params.id}, (err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            facultyFIU: doc
+        })
+    })
+})
+
+app.put('/api/facultyFIU/mark/:id',auth,(req,res)=>{
+    FacultyFIU.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
@@ -362,6 +411,16 @@ app.delete('/api/projects/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/projects/mark/:id',auth,(req,res)=>{
+    Projects.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            projects: doc
+        })
+    })
+})
+
 //=========================================
 //              PUBLICATIONS
 //=========================================
@@ -406,6 +465,15 @@ app.delete('/api/publications/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/publications/mark/:id',auth,(req,res)=>{
+    Publications.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            publications: doc
+        })
+    })
+})
 
 //=========================================
 //              TEACHING
@@ -451,6 +519,15 @@ app.delete('/api/teaching/:id',auth,(req,res)=>{
     })
 })
 
+app.put('/api/teaching/mark/:id',auth,(req,res)=>{
+    Teaching.findOneAndUpdate({_id: req.params.id}, {$set: {"markAsDeleted": req.body.markAsDeleted}}, {new:true},(err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success:true,
+            teaching: doc
+        })
+    })
+})
 
 //=========================================
 //                EVENTS

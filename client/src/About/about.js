@@ -11,8 +11,10 @@ import Carousel from './carousel';
 import Domain from '../Utils/misc';
 import MemberForm from '../Forms/member';
 import Delete from '../Forms/delete';
+import MarkAsDeleted from '../Forms/markAsDeleted';
+import UnmarkAsDeleted from '../Forms/unmarkAsDeleted';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/fontawesome-free-solid';
+import { faEdit, faTrashAlt, faEye, faEyeSlash } from '@fortawesome/fontawesome-free-solid';
 import { Container, Row, Col, Button, CardImg, UncontrolledCollapse } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -83,29 +85,97 @@ class About extends React.Component{
     render(){
         let number = 0;
         let memberCards = this.state.members.map(person =>{
-            number++;
-            return( 
-                <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                    {'    '}
-                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
-                    <Members person={person} image={person.image}/>
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                            <Delete member={person} toggle={"del_toggler_" + number} category={"members"}/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
+            if(!this.state.isloggedIn){
+                if(!person.markAsDeleted){
+                    number++;
+                    return( 
+                        <Col key={person._id} sm="4">
+                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                            {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
 
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} category="members" />
-                        </UncontrolledCollapse>
-                    : null
-                    }
-                    <br />
-                </Col>
-            )
+
+                            <Members person={person} image={person.image}/>
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                    <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="members"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                    <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="members"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                    <Delete member={person} toggle={"del_toggler_" + number} category="members"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <MemberForm member={person} category="members" />
+                                </UncontrolledCollapse>
+                            : null
+                            }
+                            <br />
+                        </Col>
+                    )
+                }
+            }
+            else{
+                number++;
+                return( 
+                    <Col key={person._id} sm="4">
+                        {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                        {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
+
+
+                        <Members person={person} image={person.image}/>
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="members"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="members"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                <Delete member={person} toggle={"del_toggler_" + number} category="members"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                <MemberForm member={person} category="members" />
+                            </UncontrolledCollapse>
+                        : null
+                        }
+                        <br />
+                    </Col>
+                )
+            }
+            
         })
 
         let facultyPHDCard = this.state.facultyPHD.map(person =>{
@@ -120,106 +190,378 @@ class About extends React.Component{
 
         let facultyCSUCards = this.state.facultyCSU.map(person =>{
             number++;
-            return( 
-                <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                    {'    '}
-                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
-                    <FacultyCSU person={person} image={person.image}/>
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                            <Delete member={person} toggle={"del_toggler_" + number} category={"facultyCSU"}/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
+            if(!this.state.isloggedIn){
+                if(!person.markAsDeleted){
+                    number++;
+                    return( 
+                        <Col key={person._id} sm="4">
+                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                            {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
 
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} category="facultyCSU"/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
-                    <br />
-                </Col>
-            )
+
+                            <FacultyCSU person={person} image={person.image}/>
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                    <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="facultyCSU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                    <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="facultyCSU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                    <Delete member={person} toggle={"del_toggler_" + number} category="facultyCSU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <MemberForm member={person} category="facultyCSU" />
+                                </UncontrolledCollapse>
+                            : null
+                            }
+                            <br />
+                        </Col>
+                    )
+                }
+            }
+            else{
+                number++;
+                return( 
+                    <Col key={person._id} sm="4">
+                        {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                        {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
+
+
+                        <FacultyCSU person={person} image={person.image}/>
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="facultyCSU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="facultyCSU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                <Delete member={person} toggle={"del_toggler_" + number} category="facultyCSU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                <MemberForm member={person} category="facultyCSU" />
+                            </UncontrolledCollapse>
+                        : null
+                        }
+                        <br />
+                    </Col>
+                )
+            }
         })
 
         let facultyFIUCards = this.state.facultyFIU.map(person =>{
             number++;
-            return( 
-                <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                    {'    '}
-                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
-                    <FacultyFIU person={person} image={person.image}/>
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                            <Delete member={person} toggle={"del_toggler_" + number} category={"facultyFIU"}/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
+            if(!this.state.isloggedIn){
+                if(!person.markAsDeleted){
+                    number++;
+                    return( 
+                        <Col key={person._id} sm="4">
+                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                            {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
 
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} category="facultyFIU"/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
-                    <br />
-                </Col>
-            )
+
+                            <FacultyFIU person={person} image={person.image}/>
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                    <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="facultyFIU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                    <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="facultyFIU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                    <Delete member={person} toggle={"del_toggler_" + number} category="facultyFIU"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <MemberForm member={person} category="facultyFIU" />
+                                </UncontrolledCollapse>
+                            : null
+                            }
+                            <br />
+                        </Col>
+                    )
+                }
+            }
+            else{
+                number++;
+                return( 
+                    <Col key={person._id} sm="4">
+                        {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                        {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
+
+
+                        <FacultyFIU person={person} image={person.image}/>
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="facultyFIU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="facultyFIU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                <Delete member={person} toggle={"del_toggler_" + number} category="facultyFIU"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                <MemberForm member={person} category="facultyFIU" />
+                            </UncontrolledCollapse>
+                        : null
+                        }
+                        <br />
+                    </Col>
+                )
+            }
         })
 
         let affiliatedCards = this.state.affiliated.map(person =>{
             number++;
-            return( 
-                <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                    {'    '}
-                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
-                    <Affiliated person={person} image={person.image}/>
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                            <Delete member={person} toggle={"del_toggler_" + number} category={"affiliated"}/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
+            if(!this.state.isloggedIn){
+                if(!person.markAsDeleted){
+                    number++;
+                    return( 
+                        <Col key={person._id} sm="4">
+                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                            {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
 
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} category="affiliated"/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
-                    <br />
-                </Col>
-            )
+
+                            <Affiliated person={person} image={person.image}/>
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                    <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="affiliated"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                    <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="affiliated"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                    <Delete member={person} toggle={"del_toggler_" + number} category="affiliated"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <MemberForm member={person} category="affiliated" />
+                                </UncontrolledCollapse>
+                            : null
+                            }
+                            <br />
+                        </Col>
+                    )
+                }
+            }
+            else{
+                number++;
+                return( 
+                    <Col key={person._id} sm="4">
+                        {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                        {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
+
+
+                        <Affiliated person={person} image={person.image}/>
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="affiliated"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="affiliated"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                <Delete member={person} toggle={"del_toggler_" + number} category="affiliated"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                <MemberForm member={person} category="affiliated" />
+                            </UncontrolledCollapse>
+                        : null
+                        }
+                        <br />
+                    </Col>
+                )
+            }
         })
 
         let formerCards = this.state.former.map(person =>{
             number++;
-            return( 
-                <Col key={person._id} sm="4">
-                    {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
-                    {'    '}
-                    {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number} onClick={this.toggle}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
-                    <Former person={person} image={person.image}/>
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"del_toggler_" + number}>
-                            <Delete member={person} toggle={"del_toggler_" + number} category={"former"}/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
+            if(!this.state.isloggedIn){
+                if(!person.markAsDeleted){
+                    number++;
+                    return( 
+                        <Col key={person._id} sm="4">
+                            {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                            {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                            {'    '}
+                            {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
 
-                    {this.state.isloggedIn ? 
-                        <UncontrolledCollapse toggler={"toggler_" + number}>
-                            <MemberForm member={person} category="former"/>
-                        </UncontrolledCollapse>
-                    : null
-                    }
-                    <br />
-                </Col>
-            )
+
+                            <Former person={person} image={person.image}/>
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                    <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="former"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                    <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="former"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                    <Delete member={person} toggle={"del_toggler_" + number} category="former"/>
+                                </UncontrolledCollapse>
+                            : null
+                            }
+
+                            {this.state.isloggedIn ? 
+                                <UncontrolledCollapse toggler={"toggler_" + number}>
+                                    <MemberForm member={person} category="former" />
+                                </UncontrolledCollapse>
+                            : null
+                            }
+                            <br />
+                        </Col>
+                    )
+                }
+            }
+            else{
+                number++;
+                return( 
+                    <Col key={person._id} sm="4">
+                        {this.state.isloggedIn ? <Button color="primary" id={"toggler_" + number}><FontAwesomeIcon icon={faEdit} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn && !person.markAsDeleted ? <Button color="warning" id={"mark_toggler_" + number}><FontAwesomeIcon icon={faEyeSlash} size="2x"/></Button> : null}
+                        {this.state.isloggedIn && person.markAsDeleted ? <Button color="warning" id={"unmark_toggler_" + number}><FontAwesomeIcon icon={faEye} size="2x"/></Button> : null}
+                        {'    '}
+                        {this.state.isloggedIn ? <Button color="danger" id={"del_toggler_" + number}><FontAwesomeIcon icon={faTrashAlt} size="2x"/></Button> : null}
+
+
+                        <Former person={person} image={person.image}/>
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"unmark_toggler_" + number}>
+                                <UnmarkAsDeleted member={person} toggle={"unmark_toggler_" + number} category="former"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"mark_toggler_" + number}>
+                                <MarkAsDeleted member={person} toggle={"mark_toggler_" + number} category="former"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"del_toggler_" + number}>
+                                <Delete member={person} toggle={"del_toggler_" + number} category="former"/>
+                            </UncontrolledCollapse>
+                        : null
+                        }
+
+                        {this.state.isloggedIn ? 
+                            <UncontrolledCollapse toggler={"toggler_" + number}>
+                                <MemberForm member={person} category="former" />
+                            </UncontrolledCollapse>
+                        : null
+                        }
+                        <br />
+                    </Col>
+                )
+            }
         })
         
         return(

@@ -40,7 +40,11 @@ const affiliatedSchema = mongoose.Schema({
     description:{
         type: String,
         required: true
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 })
 
 const Affiliated = mongoose.model('Affiliated', affiliatedSchema, 'affiliated');

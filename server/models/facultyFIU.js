@@ -42,7 +42,11 @@ const facultyFIUSchema = mongoose.Schema({
     description:{
         type: String,
         required: true
+    },
+    markAsDeleted:{
+        type: Boolean
     }
+
 })
 
 const FacultyFIU = mongoose.model('FacultyFIU', facultyFIUSchema, 'FacultyFIU');
